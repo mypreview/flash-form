@@ -57,10 +57,12 @@
 		"phpcompatibility/phpcompatibility-wp": "^2.1",
 		"phpunit/phpunit": "^9",
 		"squizlabs/php_codesniffer": "3.6.2",
+		"szepeviktor/phpstan-wordpress": "1.0.2",
 		"wp-cli/i18n-command": "^2.2.6",
 		"wp-coding-standards/wpcs": "^2.3.0"
 	},
 	"scripts": {
+		"analyze": "@php ./vendor/bin/phpstan analyze",
 		"lint:wpcbf": "phpcbf --extensions=php -p --runtime-set testVersion 7.4-",
 		"lint:wpcs": "phpcs --extensions=php -s -p --runtime-set testVersion 7.4-",
 		"make-pot": "wp i18n make-pot . languages/flash-form.pot --exclude=build"
