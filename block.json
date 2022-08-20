@@ -1,0 +1,71 @@
+{
+	"apiVersion": 2,
+	"attributes": {
+		"action": {
+			"type": "string"
+		},
+		"customThankyou": {
+			"default": "",
+			"type": "string"
+		},
+		"customThankyouMessage": {
+			"type": "string"
+		},
+		"customThankyouRedirect": {
+			"type": "string"
+		},
+		"formId": {
+			"type": "string"
+		},
+		"isAjax": {
+			"default": false,
+			"type": "boolean"
+		},
+		"isNewTab": {
+			"default": false,
+			"type": "boolean"
+		},
+		"method": {
+			"default": "post",
+			"type": "string"
+		},
+		"noLabels": {
+			"default": false,
+			"type": "boolean"
+		},
+		"subject": {
+			"type": "string"
+		},
+		"to": {
+			"type": "string"
+		}
+	},
+	"category": "widgets",
+	"description": "......",
+	"editorScript": "file:./build/index.js",
+	"keywords": [ "contact form", "custom form", "email", "feedback", "form", "mail integration", "submit", "survey" ],
+	"name": "flash-form/form",
+	"providesContext": {
+		"formId": "formId",
+		"noLabels": "noLabels"
+	},
+	"script": "file:./build/script.js",
+	"style": "file:./build/style-index.css",
+	"supports": {
+		"anchor": true,
+		"html": false,
+		"reusable": false,
+		"spacing": {
+			"__experimentalDefaultControls": {
+				"blockGap": true
+			},
+			"__experimentalSkipSerialization": [ "blockGap" ],
+			"blockGap": true,
+			"margin": true,
+			"padding": true,
+			"units": [ "px", "em", "rem" ]
+		}
+	},
+	"textdomain": "flash-form",
+	"title": "Flash Form"
+}
