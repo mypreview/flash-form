@@ -13,16 +13,23 @@ import { registerBlockType } from '@wordpress/blocks';
 import './style.scss';
 
 /**
- * Register child-blocks.
- */
-// import './fields';
-
-/**
  * Internal dependencies
  */
 import Edit from './Edit';
 import save from './save';
 import variations from './variations';
+import { collections, registerBlockCollections } from './utils';
+import './utils/setCategories';
+
+/**
+ * Group all blocks registered from this plugin.
+ */
+registerBlockCollections( collections );
+
+/**
+ * Register child-blocks.
+ */
+import './fields';
 
 /**
  * Block registration API.
