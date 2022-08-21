@@ -1,0 +1,19 @@
+@import "~freezeui/freeze-ui";
+@import "~@mypreview/unicorn-style-utils/src/mixins/flexbox";
+
+.wp-block-mypreview-flash-form {
+    --gap: 20px;
+    --required: #ff3737;
+    --border-color: #228ae6;
+
+    &__fieldset {
+
+        @include box(wrap, space-between);
+        gap: var(--gap);
+
+        &#{&}>* {
+            width: 100%;
+            margin: 0;
+        }
+    }
+}
