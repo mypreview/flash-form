@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { insertAtIndex, stringify } from '@mypreview/unicorn-js-utils';
+import { Icon } from '@mypreview/unicorn-react-components';
 import { get, map, nth } from 'lodash';
 
 /**
@@ -14,7 +15,6 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import icons from './assets/icons.json';
-import { Icon } from './components';
 
 /**
  * List of block variations with a set of predefined initial attributes.
