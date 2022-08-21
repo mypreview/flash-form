@@ -36,6 +36,6 @@ export default ( clientId, { attributes, setAttributes } ) => {
 	}, [ authorEmail, siteTitle, postTitle ] );
 
 	useEffect( () => {
-		setAttributes( { id: clientId } );
+		setAttributes( { formId: clientId } );
 	}, [ clientId ] );
 };
