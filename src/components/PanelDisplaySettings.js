@@ -13,18 +13,18 @@ import { __ } from '@wordpress/i18n';
  * @return    {JSX.Element}                        Panel control components to render.
  */
 function PanelDisplaySettings( { attributes, onChange } ) {
-	const { noLabels } = attributes;
+	const { noLabel } = attributes;
 
 	return (
 		<PanelBody initialOpen={ false } title={ __( 'Display Settings', 'flash-form' ) }>
 			<ToggleControl
-				checked={ Boolean( noLabels ) }
+				checked={ Boolean( noLabel ) }
 				help={ __(
 					'Enabling this option will visually hide labels. The labels are still visible to screen readers. This option can be overridden for each input field individually.',
 					'flash-form'
 				) }
 				label={ __( 'Hide labels from view?', 'flash-form' ) }
-				onChange={ () => onChange( { noLabels: ! noLabels } ) }
+				onChange={ () => onChange( { noLabel: ! noLabel } ) }
 			/>
 		</PanelBody>
 	);
