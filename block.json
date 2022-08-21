@@ -15,7 +15,7 @@
 		"customThankyouRedirect": {
 			"type": "string"
 		},
-		"id": {
+		"formId": {
 			"type": "string"
 		},
 		"isAjax": {
@@ -30,7 +30,7 @@
 			"default": "post",
 			"type": "string"
 		},
-		"noLabels": {
+		"noLabel": {
 			"default": false,
 			"type": "boolean"
 		},
@@ -47,8 +47,8 @@
 	"keywords": [ "contact form", "custom form", "email", "feedback", "form", "mail integration", "submit", "survey" ],
 	"name": "mypreview/flash-form",
 	"providesContext": {
-		"id": "id",
-		"noLabels": "noLabels"
+		"formId": "formId",
+		"noLabel": "noLabel"
 	},
 	"script": "file:./build/script.js",
 	"style": "file:./build/style-index.css",
