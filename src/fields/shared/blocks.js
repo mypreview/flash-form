@@ -83,7 +83,6 @@ export default applyFilters(
 				description: __( 'The best way to set a date. Add a date picker.', 'flash-form' ),
 				extraProps: {
 					className: 'datepicker',
-					type: 'text',
 				},
 				keywords: [ __( 'calendar', 'flash-form' ), __( 'date month year', 'flash-form' ) ],
 				name: 'date',
