@@ -22,7 +22,7 @@ import { isURL, getQueryArgs, removeQueryArgs } from '@wordpress/url';
  * @return    {JSX.Element} 					   Form element to render.
  */
 function save( { attributes } ) {
-	const { action, id, isAjax, isNewTab, method } = attributes;
+	const { action, formId, isAjax, isNewTab, method } = attributes;
 	const blockProps = useBlockProps.save();
 	const className = blockClassName( blockProps?.className );
 	const queryArgs = getQueryArgs( action );
@@ -34,7 +34,7 @@ function save( { attributes } ) {
 				action={ hasGetUrl ? removeQueryArgs( action, ...keys( queryArgs ) ) : '#' }
 				className={ classnames( 'contact-form', `${ className }__fieldset`, { 'is-ajax': isAjax } ) }
 				encType="application/x-www-form-urlencoded"
-				id={ id }
+				id={ formId }
 				method={ method }
 				style={ { '--gap': attributes.style?.spacing?.blockGap } }
 				target={ hasGetUrl && isNewTab ? '_blank' : undefined }
