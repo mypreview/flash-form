@@ -6,7 +6,7 @@ import { defaultTo, find, isEqual } from 'lodash';
 /**
  * Internal dependencies
  */
-import blocks from '../blocks';
+import { blocks } from '../shared';
 
 /**
  * Iterates over blocks of collection.
