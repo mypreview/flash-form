@@ -47,12 +47,21 @@
 	"keywords": [ "contact form", "custom form", "email", "feedback", "form", "mail integration", "submit", "survey" ],
 	"name": "mypreview/flash-form",
 	"providesContext": {
+		"borderColor": "borderColor",
 		"formId": "formId",
-		"noLabel": "noLabel"
+		"noLabel": "noLabel",
+		"style": "style"
 	},
 	"script": "file:./build/script.js",
 	"style": "file:./build/style-index.css",
 	"supports": {
+		"__experimentalBorder": {
+			"__experimentalSkipSerialization": true,
+			"color": true,
+			"radius": true,
+			"style": true,
+			"width": true
+		},
 		"anchor": true,
 		"html": false,
 		"reusable": false,
