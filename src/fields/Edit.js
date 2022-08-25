@@ -4,7 +4,7 @@
 import { blockClassName, slugify } from '@mypreview/unicorn-js-utils';
 import { IsRequiredToolbarControl } from '@mypreview/unicorn-react-components';
 import classnames from 'classnames';
-import { isString, isUndefined } from 'lodash';
+import { defaultTo, isString, isUndefined } from 'lodash';
 
 /**
  * WordPress dependencies
@@ -16,7 +16,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { InputControl, Inspector, LabelControl } from './components';
-import { usePrepareInputProps, useSyncContextValues } from './hooks';
+import { usePrepareInputProps, useSyncBorderStyles, useSyncContextValues } from './hooks';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -33,12 +33,13 @@ import { usePrepareInputProps, useSyncContextValues } from './hooks';
  */
 function Edit( { attributes, clientId, context, isSelected, setAttributes } ) {
 	useSyncContextValues( context, setAttributes );
+	useSyncBorderStyles( attributes, context, setAttributes );
 	const { inputClassName, InputComponent, inputIdentifier, inputProps, inputType, inputWrapperClassName } = usePrepareInputProps( clientId, setAttributes );
 	const borderProps = useBorderProps( attributes );
 	const colorProps = useColorProps( attributes );
 	const { defaultValue, formId, isRequired, label, noLabel, placeholder, width } = attributes;
 	const blockProps = useBlockProps( {
-		className: classnames( 'has-custom-width', `has-custom-width--${ width || 100 }`, 'form-field', {
+		className: classnames( 'has-custom-width', `has-custom-width--${ defaultTo( width, 100 ) }`, 'form-field', {
 			[ `form-field--${ slugify( inputIdentifier ) }` ]: inputIdentifier,
 		} ),
 	} );
@@ -76,7 +77,7 @@ function Edit( { attributes, clientId, context, isSelected, setAttributes } ) {
 					...colorProps.style,
 					...borderProps.style,
 				} }
-				type={ inputType || inputIdentifier }
+				type={ defaultTo( inputType, inputIdentifier ) }
 				value={ defaultValue || placeholder || '' }
 				wrapperClassName={ classnames( `${ className }__input`, inputWrapperClassName ) }
 				{ ...inputProps }
