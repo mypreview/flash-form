@@ -2,7 +2,7 @@ const { resolve } = require( 'path' );
 const defaultConfig = require( './node_modules/@wordpress/scripts/config/webpack.config.js' );
 const WebpackRTLPlugin = require( 'webpack-rtl-plugin' );
 const WebpackNotifierPlugin = require( 'webpack-notifier' );
-const LicenseCheckerWebpackPlugin = require( 'license-checker-webpack-plugin' );
+const LicenseWebpackPlugin = require( 'license-webpack-plugin' ).LicenseWebpackPlugin;
 const getWebpackEntryPoints = defaultConfig.entry();
 
 module.exports = {
@@ -16,8 +16,13 @@ module.exports = {
 		new WebpackRTLPlugin( {
 			filename: '[name]-rtl.css',
 		} ),
-		new LicenseCheckerWebpackPlugin( {
+		new LicenseWebpackPlugin( {
 			outputFilename: '../credits.txt',
+			preferredLicenseTypes: [ 'GPL', 'MIT', 'ISC' ],
+			stats: {
+				warnings: false,
+				errors: true,
+			},
 		} ),
 		new WebpackNotifierPlugin( {
 			title: 'Flash Form',
