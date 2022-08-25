@@ -78,6 +78,7 @@
                 <element value="flash_form" />
                 <element value="Flash_Form" />
                 <element value="FLASH_FORM" />
+                <element value="mypreview_flash_form" />
             </property>
         </properties>
     </rule>
