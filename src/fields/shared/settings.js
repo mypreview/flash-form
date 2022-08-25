@@ -41,5 +41,5 @@ export default {
 		},
 	},
 	textdomain: 'flash-form',
-	usesContext: [ 'formId', 'noLabel' ],
+	usesContext: [ 'borderColor', 'formId', 'noLabel', 'style' ],
 };
