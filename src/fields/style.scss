@@ -7,7 +7,7 @@
 	.form-field {
 		$i: 25;
 
-		&.custom-width {
+		&.has-custom-width {
 
 			@while $i <= 100 {
 				&--#{$i} {
