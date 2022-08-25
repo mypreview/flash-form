@@ -68,7 +68,7 @@ function Edit( { clientId, ...otherProps } ) {
 				<BlockVariationPicker
 					allowSkip
 					icon={ <BlockIcon icon={ get( icon, 'src' ) } /> }
-					instructions={ __( 'Select a variation to start with or create your own using the skip option.', 'flash-form' ) }
+					instructions={ __( 'Select a variation to start with or create your own using the skip link below.', 'flash-form' ) }
 					label={ title }
 					onSelect={ handleOnSelect }
 					variations={ variations }
