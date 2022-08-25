@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-08-25T21:10:44+00:00\n"
+"POT-Creation-Date: 2022-08-25T21:45:53+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: flash-form\n"
@@ -239,7 +239,7 @@ msgid "Ajaxify form submission"
 msgstr ""
 
 #: src/Edit.js:71
-msgid "Select a variation to start with or create your own using the skip option."
+msgid "Select a variation to start with or create your own using the skip link below."
 msgstr ""
 
 #: src/fields/components/Inspector.js:28
