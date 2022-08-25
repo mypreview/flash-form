@@ -1,14 +1,9 @@
 /**
  * External dependencies
  */
-import { normalizeJsonify, slugify } from '@mypreview/unicorn-js-utils';
+import { formattedContent, normalizeJsonify, slugify } from '@mypreview/unicorn-js-utils';
 import map from 'lodash/map';
 import PropTypes from 'prop-types';
-
-/**
- * WordPress dependencies
- */
-import { decodeEntities } from '@wordpress/html-entities';
 
 /**
  * Outputs a list of repeatable fieldset for the save function.
@@ -30,7 +25,7 @@ function PrintChoices( { className, id, required, style, value } ) {
 		return (
 			<div key={ fieldId }>
 				<input className={ className } id={ fieldId } name={ `${ id }[]` } required={ required } style={ style } type="checkbox" value={ choice } />
-				<label htmlFor={ fieldId }>{ decodeEntities( choice ) }</label>
+				<label htmlFor={ fieldId }>{ formattedContent( choice ) }</label>
 			</div>
 		);
 	} );
