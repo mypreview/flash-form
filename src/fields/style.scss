@@ -1,0 +1,96 @@
+@use "sass:math";
+@import "~@mypreview/unicorn-style-utils/src/mixins/hidden";
+@import "~@mypreview/unicorn-style-utils/src/mixins/flexbox";
+
+.wp-block-mypreview-flash-form {
+
+	.form-field {
+		$i: 25;
+
+		&.custom-width {
+
+			@while $i <= 100 {
+				&--#{$i} {
+
+					@if ($i == 100) {
+						width: math.percentage(math.div($i, 100));
+					} @else {
+						width:
+							calc(#{$i}% - #{calc(var(--gap) * #{math.div((math.div(100, $i) - 1), math.div(100, $i))})
+						});
+					}
+				}
+
+				$i: $i + 25;
+			}
+		}
+
+		>[class$="__label"] {
+
+			@include box(horizontal, middle);
+			margin-bottom: 5px;
+
+			label {
+				display: inline-block;
+				margin-right: 5px;
+			}
+
+			.required {
+				cursor: help;
+				color: var(--required);
+				text-decoration: none;
+			}
+		}
+
+		>[class$="__input"] {
+			display: block;
+
+			select {
+				max-width: none;
+				width: auto;
+			}
+
+			@each $type in text,
+				date,
+				email,
+		number,
+		tel,
+		textarea,
+		time,
+		url {
+				[type="#{$type}"] {
+					width: 100%;
+				}
+			}
+		}
+
+		&--checkbox {
+
+			@include box(horizontal, bottom, wrap);
+
+			>[class$="__label"] {
+				margin-bottom: 0;
+				margin-left: 10px;
+			}
+
+			>[class$="__input"] {
+				margin: 0;
+				order: -1;
+				position: relative;
+			}
+		}
+
+		.button {
+			width: auto;
+		}
+
+		.g-recaptcha {
+			margin-bottom: var(--gap);
+		}
+	}
+
+	.visually-hidden {
+
+		@include hidden(visually);
+	}
+}
