@@ -22,7 +22,7 @@ import Constants from '../constants';
  *
  * @param 	  {Object}  	   props               		 Component properties.
  * @param 	  {string}  	   props.className 	   		 Component specific CSS class names.
- * @param 	  {boolean}  	   props.noLabel 	   		 The label will only be visible to screen readers.
+ * @param 	  {boolean}  	   props.noLabel 	   		 Whether the label should only be visible to screen readers.
  * @param 	  {string}  	   props.id 	       		 Field id.
  * @param 	  {boolean}  	   props.isRequired    		 Whether the field is required to be filled out.
  * @param 	  {boolean}  	   props.isSelected    		 Whether or not the block item is currently selected.
