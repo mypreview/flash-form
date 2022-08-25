@@ -1,0 +1,713 @@
+# Copyright (C) 2022 Mahdi Yazdani
+# This file is distributed under the GPL-3.0+.
+msgid ""
+msgstr ""
+"Project-Id-Version: Flash Form 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/flash-form\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-08-25T21:10:44+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.6.0\n"
+"X-Domain: flash-form\n"
+
+#. Plugin Name of the plugin
+msgid "Flash Form"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://mypreview.github.io/flash-form"
+msgstr ""
+
+#. Description of the plugin
+msgid "....."
+msgstr ""
+
+#. Author of the plugin
+msgid "Mahdi Yazdani"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://www.mahdiyazdani.com"
+msgstr ""
+
+#. translators: 1: Open anchor tag, 2: Close anchor tag.
+#: flash-form.php:180
+msgctxt "plugin link"
+msgid "%1$sCommunity support%2$s"
+msgstr ""
+
+#. translators: 1: Open anchor tag, 2: Close anchor tag.
+#: flash-form.php:182
+msgctxt "plugin link"
+msgid "%1$sDonate%2$s"
+msgstr ""
+
+#. translators: 1: Open anchor tag, 2: Close anchor tag.
+#: flash-form.php:182
+msgid "Donate to support this plugin"
+msgstr ""
+
+#: includes/class-send-email.php:50
+#: includes/class-send-email.php:260
+msgid "Unlabeled"
+msgstr ""
+
+#: includes/class-send-email.php:59
+msgid "Time:"
+msgstr ""
+
+#: includes/class-send-email.php:60
+msgid "IP Address:"
+msgstr ""
+
+#: includes/class-send-email.php:61
+msgid "Contact Form URL:"
+msgstr ""
+
+#. translators: %s: Current website’s name.
+#: includes/class-send-email.php:69
+msgid "Sent by a verified %s user."
+msgstr ""
+
+#: includes/class-send-email.php:75
+msgid "Sent by an unverified visitor to your site."
+msgstr ""
+
+#. translators: 1: "date_format" placeholder, 2: "time_format" placeholder.
+#: includes/class-send-email.php:214
+msgctxt "{$date_format} \\a\\t {$time_format}"
+msgid "%1$s \\a\\t %2$s"
+msgstr ""
+
+#. translators: 1: Open heading tag, 2: Open anchor tag, 3: Close anchor and heading tags.
+#: includes/class-send-email.php:255
+msgid "%1$sMessage sent! %2$s(go back)%3$s"
+msgstr ""
+
+#: src/components/GetMethodSettings.js:75
+msgid "Action"
+msgstr ""
+
+#. translators: %s: HTML filled circle symbol.
+#: src/components/GetMethodSettings.js:80
+msgid "Query Arguments%s"
+msgstr ""
+
+#: src/components/GetMethodSettings.js:90
+msgid "The URL that processes the form submission."
+msgstr ""
+
+#: src/components/GetMethodSettings.js:91
+msgid "URL"
+msgstr ""
+
+#: src/components/GetMethodSettings.js:96
+msgid "Enter a valid URL to processes the form submission."
+msgstr ""
+
+#: src/components/GetMethodSettings.js:100
+msgid "Indicates whether to load the response after submitting the form into a new unnamed browsing context."
+msgstr ""
+
+#: src/components/GetMethodSettings.js:104
+msgid "Open response in a new tab?"
+msgstr ""
+
+#: src/components/GetMethodSettings.js:111
+msgid "You can optionally append arguments as querystring to the provided URL."
+msgstr ""
+
+#: src/components/GetMethodSettings.js:112
+msgid "Arguments"
+msgstr ""
+
+#: src/components/GetMethodSettings.js:118
+msgid "Add query argument"
+msgstr ""
+
+#: src/components/GetMethodSettings.js:120
+msgid "Key"
+msgstr ""
+
+#: src/components/GetMethodSettings.js:123
+msgid "Delete"
+msgstr ""
+
+#: src/components/GetMethodSettings.js:126
+msgid "Value"
+msgstr ""
+
+#: src/components/GetMethodSettings.js:132
+msgid "To specify query arguments you need to enter a valid URL."
+msgstr ""
+
+#: src/components/PanelDisplaySettings.js:19
+msgid "Display Settings"
+msgstr ""
+
+#: src/components/PanelDisplaySettings.js:22
+msgid "Enabling this option will visually hide labels. The labels are still visible to screen readers. This option can be overridden for each input field individually."
+msgstr ""
+
+#: src/components/PanelDisplaySettings.js:26
+msgid "Hide labels from view?"
+msgstr ""
+
+#: src/components/PanelFormSettings.js:34
+msgid "Form Settings"
+msgstr ""
+
+#: src/components/PanelFormSettings.js:35
+msgid "The HTTP method to submit the form with."
+msgstr ""
+
+#: src/components/PanelFormSettings.js:35
+msgid "Method"
+msgstr ""
+
+#: src/components/PanelFormSettings.js:52
+msgid "GET"
+msgstr ""
+
+#: src/components/PanelFormSettings.js:55
+msgid "POST"
+msgstr ""
+
+#. translators: %s: Post author email address.
+#: src/components/PostMethodSettings.js:40
+msgid "Enter recipients (comma separated) for this form. Defaults to %s."
+msgstr ""
+
+#: src/components/PostMethodSettings.js:44
+msgid "Recipient(s)"
+msgstr ""
+
+#: src/components/PostMethodSettings.js:46
+msgid "name@example.com"
+msgstr ""
+
+#: src/components/PostMethodSettings.js:51
+msgid "Subject"
+msgstr ""
+
+#: src/components/PostMethodSettings.js:52
+msgid "Choose a subject line that you recognize as an email from your website."
+msgstr ""
+
+#: src/components/PostMethodSettings.js:54
+msgid "Enter a subject line"
+msgstr ""
+
+#: src/components/PostMethodSettings.js:58
+msgid "On Submission"
+msgstr ""
+
+#: src/components/PostMethodSettings.js:61
+msgid "Show a summary of submitted fields"
+msgstr ""
+
+#: src/components/PostMethodSettings.js:62
+msgid "Show a custom text message"
+msgstr ""
+
+#: src/components/PostMethodSettings.js:63
+msgid "Redirect to another webpage"
+msgstr ""
+
+#: src/components/PostMethodSettings.js:69
+msgid "Message Text"
+msgstr ""
+
+#: src/components/PostMethodSettings.js:71
+msgid "Thank you for your submission!"
+msgstr ""
+
+#: src/components/PostMethodSettings.js:87
+msgid "Redirect address"
+msgstr ""
+
+#: src/components/PostMethodSettings.js:94
+msgid "This option allows you to send data in the background, eliminating the need to reload the page to see the confirmation."
+msgstr ""
+
+#: src/components/PostMethodSettings.js:98
+msgid "Ajaxify form submission"
+msgstr ""
+
+#: src/Edit.js:71
+msgid "Select a variation to start with or create your own using the skip option."
+msgstr ""
+
+#: src/fields/components/Inspector.js:28
+msgid "Adjust the width of the field to include multiple fields on a single line."
+msgstr ""
+
+#: src/fields/components/Inspector.js:30
+msgid "Width settings"
+msgstr ""
+
+#: src/fields/components/LabelControl.js:51
+msgid "(required)"
+msgstr ""
+
+#. translators: Require field symbol.
+#: src/fields/components/LabelControl.js:54
+msgctxt "required symbol"
+msgid "*"
+msgstr ""
+
+#: src/fields/components/LabelControl.js:64
+msgid "Hide?"
+msgstr ""
+
+#: src/fields/components/SortableChoices.js:80
+msgid "Add choice"
+msgstr ""
+
+#: src/fields/Edit.js:87
+msgid "Required?"
+msgstr ""
+
+#: src/fields/shared/blocks.js:49
+msgid "Add a button and allow form to be submitted."
+msgstr ""
+
+#: src/fields/shared/blocks.js:55
+msgid "submit"
+msgstr ""
+
+#: src/fields/shared/blocks.js:55
+msgid "send"
+msgstr ""
+
+#: src/fields/shared/blocks.js:60
+msgid "Button"
+msgstr ""
+
+#: src/fields/shared/blocks.js:63
+msgid "Add a single checkbox."
+msgstr ""
+
+#: src/fields/shared/blocks.js:67
+msgid "confirm"
+msgstr ""
+
+#: src/fields/shared/blocks.js:67
+msgid "accept"
+msgstr ""
+
+#: src/fields/shared/blocks.js:69
+msgid "Checkbox"
+msgstr ""
+
+#: src/fields/shared/blocks.js:73
+msgid "Add several checkbox items. People love options!"
+msgstr ""
+
+#: src/fields/shared/blocks.js:78
+#: src/fields/shared/blocks.js:144
+msgid "choose"
+msgstr ""
+
+#: src/fields/shared/blocks.js:78
+#: src/fields/shared/blocks.js:144
+#: src/fields/shared/blocks.js:153
+msgid "option"
+msgstr ""
+
+#: src/fields/shared/blocks.js:78
+msgid "multiple"
+msgstr ""
+
+#: src/fields/shared/blocks.js:80
+msgid "Checkbox Group"
+msgstr ""
+
+#: src/fields/shared/blocks.js:83
+msgid "The best way to set a date. Add a date picker."
+msgstr ""
+
+#: src/fields/shared/blocks.js:87
+msgid "calendar"
+msgstr ""
+
+#: src/fields/shared/blocks.js:87
+msgid "date month year"
+msgstr ""
+
+#: src/fields/shared/blocks.js:89
+msgid "Date Picker"
+msgstr ""
+
+#: src/fields/shared/blocks.js:92
+msgid "Want to reply to folks? Add an email address input."
+msgstr ""
+
+#: src/fields/shared/blocks.js:96
+msgid "e-mail"
+msgstr ""
+
+#: src/fields/shared/blocks.js:96
+msgid "mail"
+msgstr ""
+
+#: src/fields/shared/blocks.js:98
+#: src/variations.js:30
+#: src/variations.js:42
+#: src/variations.js:62
+#: src/variations.js:89
+#: src/variations.js:111
+msgid "Email"
+msgstr ""
+
+#: src/fields/shared/blocks.js:101
+msgid "Let folks speak their mind. This text box is great for longer responses."
+msgstr ""
+
+#: src/fields/shared/blocks.js:107
+msgid "textarea"
+msgstr ""
+
+#: src/fields/shared/blocks.js:107
+msgid "multiline text"
+msgstr ""
+
+#: src/fields/shared/blocks.js:109
+#: src/variations.js:31
+msgid "Message"
+msgstr ""
+
+#: src/fields/shared/blocks.js:112
+msgid "Introductions are important. Add an input for folks to add their name."
+msgstr ""
+
+#: src/fields/shared/blocks.js:117
+msgid "first name"
+msgstr ""
+
+#: src/fields/shared/blocks.js:117
+msgid "last name"
+msgstr ""
+
+#: src/fields/shared/blocks.js:119
+#: src/variations.js:29
+#: src/variations.js:41
+#: src/variations.js:61
+#: src/variations.js:88
+#: src/variations.js:110
+msgid "Name"
+msgstr ""
+
+#: src/fields/shared/blocks.js:122
+msgid "Numeric input element used to let the user enter a number."
+msgstr ""
+
+#: src/fields/shared/blocks.js:126
+msgid "integer"
+msgstr ""
+
+#: src/fields/shared/blocks.js:126
+msgid "numeric"
+msgstr ""
+
+#: src/fields/shared/blocks.js:128
+msgid "Number"
+msgstr ""
+
+#: src/fields/shared/blocks.js:131
+msgid "Add a phone number input."
+msgstr ""
+
+#: src/fields/shared/blocks.js:135
+msgid "phone"
+msgstr ""
+
+#: src/fields/shared/blocks.js:135
+msgid "cellular"
+msgstr ""
+
+#: src/fields/shared/blocks.js:135
+msgid "mobile"
+msgstr ""
+
+#: src/fields/shared/blocks.js:137
+msgid "Phone Number"
+msgstr ""
+
+#: src/fields/shared/blocks.js:140
+msgid "Add several radio button items. Only one radio item can be selected at a time."
+msgstr ""
+
+#: src/fields/shared/blocks.js:144
+#: src/fields/shared/blocks.js:153
+msgid "select"
+msgstr ""
+
+#: src/fields/shared/blocks.js:146
+#: src/variations.js:71
+msgid "Radio"
+msgstr ""
+
+#: src/fields/shared/blocks.js:149
+msgid "Compact, but powerful. Add a select box with several items."
+msgstr ""
+
+#: src/fields/shared/blocks.js:153
+msgid "dropdown"
+msgstr ""
+
+#: src/fields/shared/blocks.js:155
+msgid "Select"
+msgstr ""
+
+#: src/fields/shared/blocks.js:158
+msgid "When you need just a small amount of text, add a text input."
+msgstr ""
+
+#: src/fields/shared/blocks.js:159
+msgid "input"
+msgstr ""
+
+#: src/fields/shared/blocks.js:159
+msgid "generic"
+msgstr ""
+
+#: src/fields/shared/blocks.js:161
+msgid "Text"
+msgstr ""
+
+#: src/fields/shared/blocks.js:164
+msgid "Add an address input for a website."
+msgstr ""
+
+#: src/fields/shared/blocks.js:168
+msgid "url"
+msgstr ""
+
+#: src/fields/shared/blocks.js:168
+msgid "internet page"
+msgstr ""
+
+#: src/fields/shared/blocks.js:170
+msgid "Website"
+msgstr ""
+
+#: src/script.js:43
+msgid "Please wait"
+msgstr ""
+
+#. translators: %s: Error message returned from the API response.
+#: src/script.js:61
+msgid "The form cannot be submitted because of an error. %s"
+msgstr ""
+
+#: src/utils/collections.js:12
+msgctxt "block collection"
+msgid "Flash Form"
+msgstr ""
+
+#: src/utils/setCategories.js:13
+msgctxt "block category"
+msgid "Flash Form"
+msgstr ""
+
+#: src/variations.js:27
+msgid "Add a contact form to your page."
+msgstr ""
+
+#: src/variations.js:32
+msgid "Contact us"
+msgstr ""
+
+#: src/variations.js:36
+msgid "Contact"
+msgstr ""
+
+#: src/variations.js:39
+msgid "Add a RSVP form to your page."
+msgstr ""
+
+#: src/variations.js:46
+msgid "Yes"
+msgstr ""
+
+#: src/variations.js:46
+msgid "No"
+msgstr ""
+
+#: src/variations.js:48
+msgid "Attending?"
+msgstr ""
+
+#: src/variations.js:51
+#: src/variations.js:78
+msgid "Other Details"
+msgstr ""
+
+#: src/variations.js:52
+msgid "Send RSVP"
+msgstr ""
+
+#: src/variations.js:56
+msgid "RSVP"
+msgstr ""
+
+#: src/variations.js:59
+msgid "Add a registration form to your page."
+msgstr ""
+
+#: src/variations.js:63
+#: src/variations.js:90
+msgid "Phone"
+msgstr ""
+
+#: src/variations.js:68
+msgid "Search Engine"
+msgstr ""
+
+#: src/variations.js:69
+msgid "Social Media"
+msgstr ""
+
+#: src/variations.js:70
+msgid "TV"
+msgstr ""
+
+#: src/variations.js:72
+msgid "Friend of Family"
+msgstr ""
+
+#: src/variations.js:75
+msgid "How did you hear about us?"
+msgstr ""
+
+#: src/variations.js:79
+msgid "Register"
+msgstr ""
+
+#: src/variations.js:83
+msgid "Registration"
+msgstr ""
+
+#: src/variations.js:86
+#: src/variations.js:108
+msgid "Add an appointment booking form to your page."
+msgstr ""
+
+#: src/variations.js:91
+msgid "Date"
+msgstr ""
+
+#: src/variations.js:95
+msgid "Morning"
+msgstr ""
+
+#: src/variations.js:95
+msgid "Afternoon"
+msgstr ""
+
+#: src/variations.js:97
+msgid "Time?"
+msgstr ""
+
+#: src/variations.js:100
+msgid "Notes"
+msgstr ""
+
+#: src/variations.js:101
+msgid "Book Appointment"
+msgstr ""
+
+#: src/variations.js:105
+msgid "Appointment"
+msgstr ""
+
+#: src/variations.js:116
+msgid "1- Very Bad"
+msgstr ""
+
+#: src/variations.js:117
+msgid "2- Poor"
+msgstr ""
+
+#: src/variations.js:118
+msgid "3- Average"
+msgstr ""
+
+#: src/variations.js:119
+msgid "4- Good"
+msgstr ""
+
+#: src/variations.js:120
+msgid "5- Excellent"
+msgstr ""
+
+#: src/variations.js:123
+msgid "Please rate our website?"
+msgstr ""
+
+#: src/variations.js:126
+msgid "How could we improve?"
+msgstr ""
+
+#: src/variations.js:127
+msgid "Send Feedback"
+msgstr ""
+
+#: src/variations.js:131
+msgid "Feedback"
+msgstr ""
+
+#: block.json
+msgctxt "block description"
+msgid "......"
+msgstr ""
+
+#: block.json
+msgctxt "block keyword"
+msgid "contact form"
+msgstr ""
+
+#: block.json
+msgctxt "block keyword"
+msgid "custom form"
+msgstr ""
+
+#: block.json
+msgctxt "block keyword"
+msgid "email"
+msgstr ""
+
+#: block.json
+msgctxt "block keyword"
+msgid "feedback"
+msgstr ""
+
+#: block.json
+msgctxt "block keyword"
+msgid "form"
+msgstr ""
+
+#: block.json
+msgctxt "block keyword"
+msgid "mail integration"
+msgstr ""
+
+#: block.json
+msgctxt "block keyword"
+msgid "submit"
+msgstr ""
+
+#: block.json
+msgctxt "block keyword"
+msgid "survey"
+msgstr ""
+
+#: block.json
+msgctxt "block title"
+msgid "Flash Form"
+msgstr ""
