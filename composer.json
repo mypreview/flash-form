@@ -12,6 +12,7 @@
 			"package.json",
 			"package-lock.json",
 			"phpcs.xml.dist",
+			"phpstan.neon.dist",
 			"README.md",
 			"node_modules",
 			"vendor",
