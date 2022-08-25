@@ -1,9 +1,8 @@
-/* global mypreviewFlashFormLocalizedData */
+/* global FormData, mypreviewFlashFormLocalizedData */
 
 /**
  * External dependencies
  */
-import { Serialize } from '@kieranbarker/serialize/dist/serialize.es';
 import forEach from 'lodash/forEach';
 import { fetch } from 'whatwg-fetch';
 import '../node_modules/freezeui/freeze-ui';
@@ -39,14 +38,15 @@ const flashFormBlock = {
 	async handleOnSubmit( event ) {
 		event.preventDefault();
 		const $form = event.target;
-		const serialized = new Serialize( $form );
+		const formData = new FormData( $form );
+		const serialized = new URLSearchParams( formData ).toString();
 		window.FreezeUI( { text: __( 'Please wait', 'flash-form' ) } );
 
 		try {
 			await fetch( mypreviewFlashFormLocalizedData?.ajaxurl, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: serialized.string(),
+				body: serialized,
 			} )
 				.then( ( res ) => res.json() )
 				.then( ( { data } ) => {
