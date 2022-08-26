@@ -3,7 +3,7 @@
  */
 import { jsonify, stringify } from '@mypreview/unicorn-js-utils';
 import { ErrorMessage, HtmlAttrs } from '@mypreview/unicorn-react-components';
-import { isEqual, keys, map, nth, reduce, size, toPairs } from 'lodash';
+import { defaultTo, isEqual, keys, map, nth, reduce, size, toPairs } from 'lodash';
 import PropTypes from 'prop-types';
 
 /**
@@ -32,21 +32,20 @@ import { baseClassName } from '../utils';
 function GetMethodSettings( { isNewTab, onChange, value: action } ) {
 	const instanceId = useInstanceId( GetMethodSettings, `${ baseClassName }-get-method-settings` );
 	const [ showError, setError ] = useState( false );
-	const { args, hasQueryArgs, isUrl, url } = useMemo( () => {
+	const { args, hasQueryArgs, url } = useMemo( () => {
 		const _args = getQueryArgs( action );
 		const _url = ! action ? '' : removeQueryArgs( action, ...keys( _args ) );
 
 		return {
 			args: stringify( map( toPairs( _args ), ( arg ) => ( { name: nth( arg ), value: nth( arg, 1 ) } ) ) ),
 			hasQueryArgs: size( _args ),
-			isUrl: isURL( _url ),
 			url: _url,
 		};
 	}, [ action ] );
 	const handleOnChange = useCallback(
 		( newQueryArgs ) => {
 			const _newQueryArgs = reduce(
-				map( jsonify( newQueryArgs ), ( { name, value } ) => ( { [ name ]: value } ) ),
+				map( jsonify( newQueryArgs ), ( { name, value } ) => ( { [ defaultTo( name, '' ) ]: defaultTo( value, '' ) } ) ),
 				( acc, cur ) => ( { ...acc, ...cur } )
 			);
 			onChange( {
@@ -86,7 +85,7 @@ function GetMethodSettings( { isNewTab, onChange, value: action } ) {
 					<>
 						<TextControl
 							autoComplete="off"
-							onBlur={ () => setError( ! isUrl ) }
+							onBlur={ () => setError( ! isURL( url ) ) }
 							help={ __( 'The URL that processes the form submission.', 'flash-form' ) }
 							label={ __( 'URL', 'flash-form' ) }
 							onChange={ ( newValue ) => onChange( { action: newValue } ) }
@@ -94,7 +93,7 @@ function GetMethodSettings( { isNewTab, onChange, value: action } ) {
 							value={ url }
 						/>
 						<ErrorMessage doRender={ showError }>{ __( 'Enter a valid URL to processes the form submission.', 'flash-form' ) }</ErrorMessage>
-						{ isUrl && (
+						{ ! showError && (
 							<ToggleControl
 								checked={ Boolean( isNewTab ) }
 								help={ __(
@@ -112,7 +111,7 @@ function GetMethodSettings( { isNewTab, onChange, value: action } ) {
 						label={ __( 'Arguments', 'flash-form' ) }
 						id={ `${ instanceId }-action` }
 					>
-						{ isUrl && (
+						{ ! showError && (
 							<HtmlAttrs
 								onChange={ handleOnChange }
 								otherAddButtonProps={ { onClick: handleOnClickAddButton, text: __( 'Add query argument', 'flash-form' ) } }
@@ -128,7 +127,7 @@ function GetMethodSettings( { isNewTab, onChange, value: action } ) {
 								value={ args }
 							/>
 						) }
-						<ErrorMessage doRender={ ! isUrl } status="warning">
+						<ErrorMessage doRender={ showError } status="warning">
 							{ __( 'To specify query arguments you need to enter a valid URL.', 'flash-form' ) }
 						</ErrorMessage>
 					</BaseControl>
