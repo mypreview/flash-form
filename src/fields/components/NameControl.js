@@ -24,8 +24,11 @@ function NameControl( { onChange, value } ) {
 	return (
 		<TextControl
 			autoComplete="off"
-			help={ __( 'Name of the form control. Submitted with the form as part of a name/value pair.', 'flash-form' ) }
-			label={ __( 'Name', 'flash-form' ) }
+			help={ __(
+				'The name attribute is used to reference elements in JavaScript, or to reference form data after the form is submitted. ',
+				'flash-form'
+			) }
+			label={ __( 'Name (Optional)', 'flash-form' ) }
 			onChange={ ( newValue ) => onChange( sanitizeSlug( newValue ) ) }
 			value={ value }
 		/>
