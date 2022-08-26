@@ -26,6 +26,7 @@ export default {
 			__experimentalSkipSerialization: true,
 		},
 		html: false,
+		lock: true,
 		reusable: false,
 		spacing: {
 			margin: [ 'left', 'right' ],
