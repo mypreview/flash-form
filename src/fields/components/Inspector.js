@@ -30,7 +30,7 @@ function Inspector( { attributes, setAttributes } ) {
 
 	return (
 		<InspectorControls>
-			<PanelBody>
+			<PanelBody css={ { '&:empty': { padding: 0 } } }>
 				<NameControl onChange={ ( value ) => setAttributes( { name: value } ) } value={ name } />
 			</PanelBody>
 			<WidthPanel
