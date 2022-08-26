@@ -8,7 +8,13 @@ import PropTypes from 'prop-types';
  * WordPress dependencies
  */
 import { InspectorControls } from '@wordpress/block-editor';
+import { PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+
+/**
+ * Internal dependencies
+ */
+import { NameControl } from '.';
 
 /**
  * Inspector Controls appear in the post settings sidebar when a block is being edited.
@@ -20,10 +26,13 @@ import { __ } from '@wordpress/i18n';
  * @return    {JSX.Element} 						  Inspector element to render.
  */
 function Inspector( { attributes, setAttributes } ) {
-	const { width } = attributes;
+	const { name, width } = attributes;
 
 	return (
 		<InspectorControls>
+			<PanelBody>
+				<NameControl onChange={ ( value ) => setAttributes( { name: value } ) } value={ name } />
+			</PanelBody>
 			<WidthPanel
 				help={ __( 'Adjust the width of the field to include multiple fields on a single line.', 'flash-form' ) }
 				onChange={ ( value ) => setAttributes( { width: value } ) }
