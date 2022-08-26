@@ -71,12 +71,14 @@ add_action( 'wp_ajax_nopriv_mypreview_flash_form_submit', __NAMESPACE__ . '\form
  * @return    string
  */
 function nonce_layer( string $content, array $attributes ): string {
-	$form_id  = $attributes['formId'] ?? '';
-	$nonce    = get_nonce_key( $form_id );
-	$content .= wp_nonce_field( PLUGIN['nonce'], $nonce, true, false );
-	$content .= '<input type="hidden" name="action" value="mypreview_flash_form_submit" />';
-	$content .= '<input type="hidden" name="form_id" value="' . esc_html( $form_id ) . '" />';
-	$content .= '<input type="hidden" name="timestamp" value="' . strtotime( 'now' ) . '" />';
+	// Only print-out additional fields when the submission method set to be "POST".
+	if ( 'post' === $attributes['method'] ?? 'post' && apply_filters( 'mypreview_flash_form_post_method_nonce_layer', true ) ) {
+		$form_id  = $attributes['formId'] ?? '';
+		$nonce    = get_nonce_key( $form_id );
+		$content .= wp_nonce_field( PLUGIN['nonce'], $nonce, true, false );
+		$content .= '<input type="hidden" name="form_id" value="' . esc_html( $form_id ) . '" />';
+		$content .= '<input type="hidden" name="timestamp" value="' . strtotime( 'now' ) . '" />';
+	}
 
 	return apply_filters( 'mypreview_flash_form_nonce_layer', $content, $attributes );
 }
