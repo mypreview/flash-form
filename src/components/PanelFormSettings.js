@@ -43,7 +43,7 @@ function PanelFormSettings( { attributes, onChange } ) {
 									customThankyouMessage: undefined,
 									customThankyouRedirect: undefined,
 									isAjax: false,
-									inNewTab: false,
+									isNewTab: false,
 									method: 'get',
 								} )
 							}
@@ -51,7 +51,11 @@ function PanelFormSettings( { attributes, onChange } ) {
 						>
 							{ __( 'GET', 'flash-form' ) }
 						</Button>
-						<Button isPrimary={ isEqual( 'post', method ) } onClick={ () => onChange( { action: undefined, method: 'post' } ) } value="post">
+						<Button
+							isPrimary={ isEqual( 'post', method ) }
+							onClick={ () => onChange( { action: undefined, isNewTab: false, method: 'post' } ) }
+							value="post"
+						>
 							{ __( 'POST', 'flash-form' ) }
 						</Button>
 					</ButtonGroup>
