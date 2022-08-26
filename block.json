@@ -64,7 +64,8 @@
 		},
 		"anchor": true,
 		"html": false,
-		"reusable": false,
+		"lock": true,
+		"reusable": true,
 		"spacing": {
 			"__experimentalSkipSerialization": [ "blockGap" ],
 			"blockGap": true,
