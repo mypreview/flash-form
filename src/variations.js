@@ -24,7 +24,8 @@ export default applyFilters(
 	map(
 		[
 			{
-				description: __( 'Add a contact form to your page.', 'flash-form' ),
+				description: __( 'Add a contact form', 'flash-form' ),
+				isDefault: true,
 				innerBlocks: [
 					[ 'name', { isRequired: true, label: __( 'Name', 'flash-form' ) } ],
 					[ 'email', { isRequired: true, label: __( 'Email', 'flash-form' ) } ],
@@ -36,7 +37,7 @@ export default applyFilters(
 				title: __( 'Contact', 'flash-form' ),
 			},
 			{
-				description: __( 'Add a RSVP form to your page.', 'flash-form' ),
+				description: __( 'Add a RSVP form', 'flash-form' ),
 				innerBlocks: [
 					[ 'name', { isRequired: true, label: __( 'Name', 'flash-form' ) } ],
 					[ 'email', { isRequired: true, label: __( 'Email', 'flash-form' ) } ],
@@ -56,7 +57,7 @@ export default applyFilters(
 				title: __( 'RSVP', 'flash-form' ),
 			},
 			{
-				description: __( 'Add a registration form to your page.', 'flash-form' ),
+				description: __( 'Add a registration form', 'flash-form' ),
 				innerBlocks: [
 					[ 'name', { isRequired: true, label: __( 'Name', 'flash-form' ) } ],
 					[ 'email', { isRequired: true, label: __( 'Email', 'flash-form' ) } ],
@@ -83,7 +84,7 @@ export default applyFilters(
 				title: __( 'Registration', 'flash-form' ),
 			},
 			{
-				description: __( 'Add an appointment booking form to your page.', 'flash-form' ),
+				description: __( 'Add an appointment booking form', 'flash-form' ),
 				innerBlocks: [
 					[ 'name', { isRequired: true, label: __( 'Name', 'flash-form' ) } ],
 					[ 'email', { isRequired: true, label: __( 'Email', 'flash-form' ) } ],
@@ -105,7 +106,7 @@ export default applyFilters(
 				title: __( 'Appointment', 'flash-form' ),
 			},
 			{
-				description: __( 'Add an appointment booking form to your page.', 'flash-form' ),
+				description: __( 'Add a feedback form', 'flash-form' ),
 				innerBlocks: [
 					[ 'name', { isRequired: true, label: __( 'Name', 'flash-form' ) } ],
 					[ 'email', { isRequired: true, label: __( 'Email', 'flash-form' ) } ],
