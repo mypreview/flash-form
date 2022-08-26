@@ -39,6 +39,7 @@ const flashFormBlock = {
 		event.preventDefault();
 		const $form = event.target;
 		const formData = new FormData( $form );
+		formData.append( 'action', 'mypreview_flash_form_submit' );
 		const serialized = new URLSearchParams( formData ).toString();
 		window.FreezeUI( { text: __( 'Please wait', 'flash-form' ) } );
 
