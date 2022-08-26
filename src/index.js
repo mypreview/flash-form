@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { Icon } from '@mypreview/unicorn-react-components';
+
+/**
  * WordPress dependencies
  */
 import { registerBlockType } from '@wordpress/blocks';
@@ -18,6 +23,7 @@ import './style.scss';
 import Edit from './Edit';
 import save from './save';
 import variations from './variations';
+import icons from './assets/icons.json';
 import { collections, registerBlockCollections } from './utils';
 import './utils/setCategories';
 
@@ -37,6 +43,10 @@ import './fields';
  * @see    https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
 registerBlockType( 'mypreview/flash-form', {
+	/**
+	 * @see    ./assets/icons.json
+	 */
+	icon: <Icon d={ icons?.block } />,
 	/**
 	 * @see    ./Edit.js
 	 */
