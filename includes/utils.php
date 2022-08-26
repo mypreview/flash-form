@@ -55,7 +55,7 @@ if ( ! function_exists( 'form_submit' ) ) :
 			// conditional statement is not meant to be displayed on the page.
 			if ( is_null( $response ) ) {
 				// Remove security specific key/values.
-				$unset_fields = apply_filters( 'mypreview_flash_form_submit_unset_fields', array( '_wp_http_referer', 'action', 'form_id', 'timestamp', $nonce ), $attributes, $form_id );
+				$unset_fields = apply_filters( 'mypreview_flash_form_submit_unset_fields', array( '_wp_http_referer', 'form_id', 'timestamp', $nonce ), $attributes, $form_id );
 				foreach ( $unset_fields as $unset_field ) {
 					unset( $data[ $unset_field ] );
 				}
