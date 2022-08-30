@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-08-26T14:41:11+00:00\n"
+"POT-Creation-Date: 2022-08-30T14:02:25+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: flash-form\n"
@@ -23,7 +23,7 @@ msgid "https://mypreview.github.io/flash-form"
 msgstr ""
 
 #. Description of the plugin
-msgid "....."
+msgid "Build a form to be limitless, in a flash ⚡"
 msgstr ""
 
 #. Author of the plugin
@@ -173,7 +173,7 @@ msgstr ""
 msgid "GET"
 msgstr ""
 
-#: src/components/PanelFormSettings.js:55
+#: src/components/PanelFormSettings.js:59
 msgid "POST"
 msgstr ""
 
@@ -265,17 +265,11 @@ msgid "Hide?"
 msgstr ""
 
 #: src/fields/components/NameControl.js:27
-msgid "Name of the form control. Submitted with the form as part of a name/value pair."
+msgid "The name attribute is used to reference elements in JavaScript, or to reference form data after the form is submitted. "
 msgstr ""
 
-#: src/fields/components/NameControl.js:28
-#: src/fields/shared/blocks.js:119
-#: src/variations.js:30
-#: src/variations.js:42
-#: src/variations.js:62
-#: src/variations.js:89
-#: src/variations.js:111
-msgid "Name"
+#: src/fields/components/NameControl.js:31
+msgid "Name (Optional)"
 msgstr ""
 
 #: src/fields/components/SortableChoices.js:80
@@ -299,7 +293,7 @@ msgid "send"
 msgstr ""
 
 #: src/fields/shared/blocks.js:60
-msgid "Button"
+msgid "Submit"
 msgstr ""
 
 #: src/fields/shared/blocks.js:63
@@ -370,11 +364,11 @@ msgid "mail"
 msgstr ""
 
 #: src/fields/shared/blocks.js:98
-#: src/variations.js:31
-#: src/variations.js:43
-#: src/variations.js:63
-#: src/variations.js:90
-#: src/variations.js:112
+#: src/variations.js:32
+#: src/variations.js:44
+#: src/variations.js:64
+#: src/variations.js:91
+#: src/variations.js:113
 msgid "Email"
 msgstr ""
 
@@ -391,7 +385,7 @@ msgid "multiline text"
 msgstr ""
 
 #: src/fields/shared/blocks.js:109
-#: src/variations.js:32
+#: src/variations.js:33
 msgid "Message"
 msgstr ""
 
@@ -405,6 +399,15 @@ msgstr ""
 
 #: src/fields/shared/blocks.js:117
 msgid "last name"
+msgstr ""
+
+#: src/fields/shared/blocks.js:119
+#: src/variations.js:31
+#: src/variations.js:43
+#: src/variations.js:63
+#: src/variations.js:90
+#: src/variations.js:112
+msgid "Name"
 msgstr ""
 
 #: src/fields/shared/blocks.js:122
@@ -453,7 +456,7 @@ msgid "select"
 msgstr ""
 
 #: src/fields/shared/blocks.js:146
-#: src/variations.js:72
+#: src/variations.js:73
 msgid "Radio"
 msgstr ""
 
@@ -515,158 +518,158 @@ msgctxt "block collection"
 msgid "Flash Form"
 msgstr ""
 
-#: src/utils/setCategories.js:13
+#: src/utils/setCategories.js:23
 msgctxt "block category"
 msgid "Flash Form"
 msgstr ""
 
-#: src/variations.js:27
+#: src/variations.js:28
 msgid "Add a contact form"
 msgstr ""
 
-#: src/variations.js:33
+#: src/variations.js:34
 msgid "Contact us"
 msgstr ""
 
-#: src/variations.js:37
+#: src/variations.js:38
 msgid "Contact"
 msgstr ""
 
-#: src/variations.js:40
+#: src/variations.js:41
 msgid "Add a RSVP form"
 msgstr ""
 
-#: src/variations.js:47
+#: src/variations.js:48
 msgid "Yes"
 msgstr ""
 
-#: src/variations.js:47
+#: src/variations.js:48
 msgid "No"
 msgstr ""
 
-#: src/variations.js:49
+#: src/variations.js:50
 msgid "Attending?"
 msgstr ""
 
-#: src/variations.js:52
-#: src/variations.js:79
+#: src/variations.js:53
+#: src/variations.js:80
 msgid "Other Details"
 msgstr ""
 
-#: src/variations.js:53
+#: src/variations.js:54
 msgid "Send RSVP"
 msgstr ""
 
-#: src/variations.js:57
+#: src/variations.js:58
 msgid "RSVP"
 msgstr ""
 
-#: src/variations.js:60
+#: src/variations.js:61
 msgid "Add a registration form"
 msgstr ""
 
-#: src/variations.js:64
-#: src/variations.js:91
+#: src/variations.js:65
+#: src/variations.js:92
 msgid "Phone"
 msgstr ""
 
-#: src/variations.js:69
+#: src/variations.js:70
 msgid "Search Engine"
 msgstr ""
 
-#: src/variations.js:70
+#: src/variations.js:71
 msgid "Social Media"
 msgstr ""
 
-#: src/variations.js:71
+#: src/variations.js:72
 msgid "TV"
 msgstr ""
 
-#: src/variations.js:73
+#: src/variations.js:74
 msgid "Friend of Family"
 msgstr ""
 
-#: src/variations.js:76
+#: src/variations.js:77
 msgid "How did you hear about us?"
 msgstr ""
 
-#: src/variations.js:80
+#: src/variations.js:81
 msgid "Register"
 msgstr ""
 
-#: src/variations.js:84
+#: src/variations.js:85
 msgid "Registration"
 msgstr ""
 
-#: src/variations.js:87
+#: src/variations.js:88
 msgid "Add an appointment booking form"
 msgstr ""
 
-#: src/variations.js:92
+#: src/variations.js:93
 msgid "Date"
 msgstr ""
 
-#: src/variations.js:96
+#: src/variations.js:97
 msgid "Morning"
 msgstr ""
 
-#: src/variations.js:96
+#: src/variations.js:97
 msgid "Afternoon"
 msgstr ""
 
-#: src/variations.js:98
+#: src/variations.js:99
 msgid "Time?"
 msgstr ""
 
-#: src/variations.js:101
+#: src/variations.js:102
 msgid "Notes"
 msgstr ""
 
-#: src/variations.js:102
+#: src/variations.js:103
 msgid "Book Appointment"
 msgstr ""
 
-#: src/variations.js:106
+#: src/variations.js:107
 msgid "Appointment"
 msgstr ""
 
-#: src/variations.js:109
+#: src/variations.js:110
 msgid "Add a feedback form"
 msgstr ""
 
-#: src/variations.js:117
+#: src/variations.js:118
 msgid "1- Very Bad"
 msgstr ""
 
-#: src/variations.js:118
+#: src/variations.js:119
 msgid "2- Poor"
 msgstr ""
 
-#: src/variations.js:119
+#: src/variations.js:120
 msgid "3- Average"
 msgstr ""
 
-#: src/variations.js:120
+#: src/variations.js:121
 msgid "4- Good"
 msgstr ""
 
-#: src/variations.js:121
+#: src/variations.js:122
 msgid "5- Excellent"
 msgstr ""
 
-#: src/variations.js:124
+#: src/variations.js:125
 msgid "Please rate our website?"
 msgstr ""
 
-#: src/variations.js:127
+#: src/variations.js:128
 msgid "How could we improve?"
 msgstr ""
 
-#: src/variations.js:128
+#: src/variations.js:129
 msgid "Send Feedback"
 msgstr ""
 
-#: src/variations.js:132
+#: src/variations.js:133
 msgid "Feedback"
 msgstr ""
 
