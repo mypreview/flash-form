@@ -45,7 +45,7 @@ export default applyFilters(
 	map(
 		[
 			{
-				attributes: omit( attributes, [ 'label', 'isRequired', 'name', 'width' ] ),
+				attributes: omit( attributes, [ 'label', 'isRequired', 'name' ] ),
 				description: __( 'Add a button and allow form to be submitted.', 'flash-form' ),
 				extraProps: {
 					className: 'button wp-block-button__link',
@@ -57,7 +57,7 @@ export default applyFilters(
 				supports: {
 					multiple: false,
 				},
-				title: __( 'Button', 'flash-form' ),
+				title: __( 'Submit', 'flash-form' ),
 			},
 			{
 				description: __( 'Add a single checkbox.', 'flash-form' ),
@@ -172,7 +172,7 @@ export default applyFilters(
 		],
 		( block ) => {
 			const identifier = block.name;
-			block.icon = <Icon d={ get( icons, identifier ) } />;
+			block.icon = { src: <Icon d={ get( icons, identifier ) } /> };
 			block.name = `mypreview/flash-form-field-${ identifier }`;
 
 			if ( ! has( block, [ 'attributes' ] ) ) {

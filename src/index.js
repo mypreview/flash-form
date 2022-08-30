@@ -36,6 +36,7 @@ registerBlockCollections( collections );
  * Register child-blocks.
  */
 import './fields';
+import { settings } from './fields/shared';
 
 /**
  * Block registration API.
@@ -46,7 +47,7 @@ registerBlockType( 'mypreview/flash-form', {
 	/**
 	 * @see    ./assets/icons.json
 	 */
-	icon: <Icon d={ icons?.block } />,
+	icon: { ...settings.icon, src: <Icon d={ icons?.block } /> },
 	/**
 	 * @see    ./Edit.js
 	 */

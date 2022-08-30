@@ -13,6 +13,10 @@ export default {
 	apiVersion: 2,
 	category: 'flash-form',
 	edit: Edit,
+	icon: {
+		background: '#EEF0F3',
+		foreground: '#DE6360',
+	},
 	parent: [ 'mypreview/flash-form' ],
 	save,
 	supports: {
