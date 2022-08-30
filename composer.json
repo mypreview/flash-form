@@ -41,7 +41,7 @@
 			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
 	},
-	"description": "......",
+	"description": "Build a form to be limitless, in a flash ⚡",
 	"homepage": "https://wordpress.org/support/plugin/flash-form",
 	"keywords": [
 		"WordPress",

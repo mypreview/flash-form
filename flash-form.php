@@ -22,7 +22,7 @@
  * @wordpress-plugin
  * Plugin Name:         Flash Form
  * Plugin URI:          https://mypreview.github.io/flash-form
- * Description:         .....
+ * Description:         Build a form to be limitless, in a flash ⚡
  * Version:             1.0.0
  * Requires at least:   5.5
  * Requires PHP:        7.4
