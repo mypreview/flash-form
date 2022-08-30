@@ -27,7 +27,7 @@
 
 		>[class$="__label"] {
 
-			@include box(horizontal, middle);
+			@include box(middle);
 			margin-bottom: 5px;
 
 			label {
@@ -49,15 +49,9 @@
 				max-width: none;
 				width: auto;
 			}
+			$types:text, date, email, number, tel, textarea, time, url;
 
-			@each $type in text,
-				date,
-				email,
-		number,
-		tel,
-		textarea,
-		time,
-		url {
+			@each $type in $types {
 				[type="#{$type}"] {
 					width: 100%;
 				}
@@ -66,26 +60,22 @@
 
 		&--checkbox {
 
-			@include box(horizontal, bottom, wrap);
+			@include box(bottom, wrap);
 
 			>[class$="__label"] {
-				margin-bottom: 0;
-				margin-left: 10px;
+				margin: {
+					bottom: 0;
+					left: 10px;
+				}
 			}
 
 			>[class$="__input"] {
-				margin: 0;
 				order: -1;
-				position: relative;
 			}
 		}
 
 		.button {
-			width: auto;
-		}
-
-		.g-recaptcha {
-			margin-bottom: var(--gap);
+			width: 100%;
 		}
 	}
 
