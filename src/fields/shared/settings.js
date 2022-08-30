@@ -3,6 +3,7 @@
  */
 import Edit from '../Edit';
 import save from '../save';
+import Constants from '../../constants';
 
 /**
  * A field-block requires a few properties to be specified
@@ -13,10 +14,7 @@ export default {
 	apiVersion: 2,
 	category: 'flash-form',
 	edit: Edit,
-	icon: {
-		background: '#EEF0F3',
-		foreground: '#DE6360',
-	},
+	icon: Constants.ICON,
 	parent: [ 'mypreview/flash-form' ],
 	save,
 	supports: {

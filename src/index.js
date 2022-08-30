@@ -22,6 +22,7 @@ import './style.scss';
  */
 import Edit from './Edit';
 import save from './save';
+import Constants from './constants';
 import variations from './variations';
 import icons from './assets/icons.json';
 import { collections, registerBlockCollections } from './utils';
@@ -36,7 +37,6 @@ registerBlockCollections( collections );
  * Register child-blocks.
  */
 import './fields';
-import { settings } from './fields/shared';
 
 /**
  * Block registration API.
@@ -47,7 +47,7 @@ registerBlockType( 'mypreview/flash-form', {
 	/**
 	 * @see    ./assets/icons.json
 	 */
-	icon: { ...settings.icon, src: <Icon d={ icons?.block } /> },
+	icon: { ...Constants.ICON, src: <Icon d={ icons?.block } /> },
 	/**
 	 * @see    ./Edit.js
 	 */

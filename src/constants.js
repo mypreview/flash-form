@@ -23,4 +23,8 @@ export default Object.freeze( {
 		'core/verse',
 		'core/video',
 	],
+	ICON: {
+		background: '#EEF0F3',
+		foreground: '#DE6360',
+	},
 } );
