@@ -5,7 +5,6 @@
  */
 import forEach from 'lodash/forEach';
 import { fetch } from 'whatwg-fetch';
-import '../node_modules/freezeui/freeze-ui';
 
 /**
  * WordPress dependencies
@@ -14,13 +13,23 @@ import { __, sprintf } from '@wordpress/i18n';
 import domReady from '@wordpress/dom-ready';
 
 /**
+ * Internal dependencies
+ */
+import { FreezeUI } from './classes';
+import icons from './assets/icons.json';
+import { baseClassName } from './utils';
+
+/**
  * Initialize form submission enhancements on the front-end.
  */
-const flashFormBlock = {
+const flashForm = {
 	cache() {
 		this.vars = {};
 		this.els = {};
-		this.vars.block = 'wp-block-mypreview-flash-form';
+		this.vars.block = baseClassName;
+		this.vars.delay = 4000;
+		this.vars.action = 'mypreview_flash_form_submit';
+		this.vars.$loading = `<svg height="24" viewBox="0 0 24 24" width="24"><path d="${ icons.block }" /></svg>`;
 		this.els.$ajaxForms = document.querySelectorAll( `.${ this.vars.block } form.is-ajax` );
 	},
 	ready() {
@@ -38,10 +47,12 @@ const flashFormBlock = {
 	async handleOnSubmit( event ) {
 		event.preventDefault();
 		const $form = event.target;
+		const $button = $form.querySelector( '[type="submit"]' );
 		const formData = new FormData( $form );
-		formData.append( 'action', 'mypreview_flash_form_submit' );
+		$button.disabled = true;
+		formData.append( 'action', flashForm.vars.action );
 		const serialized = new URLSearchParams( formData ).toString();
-		window.FreezeUI( { text: __( 'Please wait', 'flash-form' ) } );
+		const freezed = new FreezeUI( { innerHTML: flashForm.vars.$loading } );
 
 		try {
 			await fetch( mypreviewFlashFormLocalizedData?.ajaxurl, {
@@ -51,13 +62,15 @@ const flashFormBlock = {
 			} )
 				.then( ( res ) => res.json() )
 				.then( ( { data } ) => {
-					window.UnFreezeUI();
 					const response = document.createElement( 'div' );
 					response.innerHTML = data;
-					$form.parentNode.replaceWith( response );
+					freezed.unfreeze( flashForm.vars.delay, () => {
+						$form.parentNode.replaceWith( response );
+					} );
 				} );
 		} catch ( { message } ) {
-			window.UnFreezeUI();
+			freezed.unfreeze( flashForm.vars.delay );
+			$button.disabled = false;
 			/* translators: %s: Error message returned from the API response. */
 			throw new Error( sprintf( __( 'The form cannot be submitted because of an error. %s', 'flash-form' ), message ) );
 		}
@@ -66,5 +79,5 @@ const flashFormBlock = {
 
 // Initialize after DOM loads.
 domReady( () => {
-	flashFormBlock.ready();
+	flashForm.ready();
 } );
