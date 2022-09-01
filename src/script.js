@@ -27,9 +27,9 @@ const flashForm = {
 		this.vars = {};
 		this.els = {};
 		this.vars.block = baseClassName;
-		this.vars.delay = 4000;
+		this.vars.delay = 3500;
 		this.vars.action = 'mypreview_flash_form_submit';
-		this.vars.$loading = `<svg height="24" viewBox="0 0 24 24" width="24"><path d="${ icons.block }" /></svg>`;
+		this.vars.$loading = `<svg height="24" viewBox="0 0 24 24" width="24"><path d="${ icons.loading }" /></svg>`;
 		this.els.$ajaxForms = document.querySelectorAll( `.${ this.vars.block } form.is-ajax` );
 	},
 	ready() {
