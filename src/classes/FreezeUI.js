@@ -32,7 +32,7 @@ class FreezeUI {
 	constructor( options = {} ) {
 		this.freeze( {
 			innerHTML: '',
-			message: __( 'Loading', 'flash-form' ),
+			message: __( 'Please wait…', 'flash-form' ),
 			target: document.body,
 			...options,
 		} );
@@ -46,7 +46,7 @@ class FreezeUI {
 		$container.innerHTML = innerHTML;
 
 		if ( target ) {
-			$container.style.position = 'absolute';
+			$container.style.position = 'fixed';
 		}
 
 		$parent.appendChild( $container );
