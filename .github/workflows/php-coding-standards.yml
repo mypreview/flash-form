@@ -57,4 +57,4 @@ jobs:
                   echo "${PWD}/vendor/bin" >> $GITHUB_PATH
 
             - name: Run WPCS on all files
-              run: composer lint:wpcs -q -n --report=checkstyle
+              run: composer lint:wpcs -q -n --report=checkstyle | cs2pr
