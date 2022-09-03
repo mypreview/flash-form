@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-08-30T14:02:25+00:00\n"
+"POT-Creation-Date: 2022-09-01T09:24:08+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: flash-form\n"
@@ -86,6 +86,10 @@ msgstr ""
 #. translators: 1: Open heading tag, 2: Open anchor tag, 3: Close anchor and heading tags.
 #: includes/class-send-email.php:255
 msgid "%1$sMessage sent! %2$s(go back)%3$s"
+msgstr ""
+
+#: src/classes/FreezeUI.js:35
+msgid "Please wait…"
 msgstr ""
 
 #: src/components/GetMethodSettings.js:74
@@ -504,12 +508,8 @@ msgstr ""
 msgid "Website"
 msgstr ""
 
-#: src/script.js:44
-msgid "Please wait"
-msgstr ""
-
 #. translators: %s: Error message returned from the API response.
-#: src/script.js:62
+#: src/script.js:75
 msgid "The form cannot be submitted because of an error. %s"
 msgstr ""
 

@@ -42,7 +42,7 @@
 		}
 	},
 	"category": "widgets",
-	"description": "......",
+	"description": "Create a form as easily as editing a block!",
 	"editorScript": "file:./build/index.js",
 	"keywords": [ "contact form", "custom form", "email", "feedback", "form", "mail integration", "submit", "survey" ],
 	"name": "mypreview/flash-form",
