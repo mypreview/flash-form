@@ -41,7 +41,7 @@
 			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
 	},
-	"description": "Build a form to be limitless, in a flash ⚡",
+	"description": "Create a form as easily as editing a block!",
 	"extra": {
 		"scripts-description": {
 			"lint:wpcbf": "Fix coding standards warnings/errors automatically with PHP Code Beautifier",
