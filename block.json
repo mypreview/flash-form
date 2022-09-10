@@ -18,6 +18,18 @@
 		"formId": {
 			"type": "string"
 		},
+		"honeypot": {
+			"default": {
+				"a11yMessage": "",
+				"a11yNoLabel": false,
+				"autoCompleteOff": false,
+				"enable": false,
+				"moveInlineCSS": false,
+				"placeholder": "",
+				"timeCheck": 10
+			},
+			"type": "object"
+		},
 		"isAjax": {
 			"default": false,
 			"type": "boolean"
