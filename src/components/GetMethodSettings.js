@@ -26,8 +26,8 @@ import { baseClassName } from '../utils';
  * @param 	  {Object}  	   props             Component properties.
  * @param 	  {boolean}  	   props.isNewTab    Whether to open form response in a new tab.
  * @param 	  {Function}  	   props.onChange    A callback function invoked when any of the values change.
- * @param 	  {string}  	   props.value       The current value of the action
- * @return    {JSX.Element}                      Panel control components to render.
+ * @param 	  {string}  	   props.value       The current URL value of the action.
+ * @return    {JSX.Element}                      Component to render.
  */
 function GetMethodSettings( { isNewTab, onChange, value: action } ) {
 	const instanceId = useInstanceId( GetMethodSettings, `${ baseClassName }-get-method-settings` );

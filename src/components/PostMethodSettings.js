@@ -20,7 +20,7 @@ import { __, sprintf } from '@wordpress/i18n';
  * @param 	  {Object}  	   props               Component properties.
  * @param 	  {string}  	   props.attributes    Available block attributes and their corresponding values.
  * @param 	  {Function}  	   props.onChange      A callback function invoked when any of the values change.
- * @return    {JSX.Element}                        Panel control components to render.
+ * @return    {JSX.Element}                        Component to render.
  */
 function PostMethodSettings( { attributes, onChange } ) {
 	const { authorEmail } = useGetAuthorData();

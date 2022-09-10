@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import PropTypes from 'prop-types';
+
+/**
  * WordPress dependencies
  */
 import { PanelBody, ToggleControl } from '@wordpress/components';
@@ -7,14 +12,13 @@ import { __ } from '@wordpress/i18n';
 /**
  * Component that renders setting controls specific to `Display` adjustments.
  *
- * @param 	  {Object}  	   props               Component properties.
- * @param 	  {Object}  	   props.attributes    Available block attributes and their corresponding values.
- * @param 	  {Function}  	   props.onChange	   A callback function invoked when any of the values change.
- * @return    {JSX.Element}                        Panel control components to render.
+ * @param 	  {Object}  	   props               		   Component properties.
+ * @param 	  {Object}  	   props.attributes    		   Available block attributes and their corresponding values.
+ * @param 	  {boolean}  	   props.attributes.noLabel    Current status of the fieldset label visibility.
+ * @param 	  {Function}  	   props.onChange	   		   A callback function invoked when any of the values change.
+ * @return    {JSX.Element}                        		   Component to render.
  */
-function PanelDisplaySettings( { attributes, onChange } ) {
-	const { noLabel } = attributes;
-
+function PanelDisplaySettings( { attributes: { noLabel }, onChange } ) {
 	return (
 		<PanelBody initialOpen={ false } title={ __( 'Display Settings', 'flash-form' ) }>
 			<ToggleControl
@@ -29,5 +33,17 @@ function PanelDisplaySettings( { attributes, onChange } ) {
 		</PanelBody>
 	);
 }
+
+PanelDisplaySettings.propTypes = {
+	attributes: PropTypes.object,
+	noLabel: PropTypes.bool,
+	setAttributes: PropTypes.func,
+};
+
+PanelDisplaySettings.defaultProps = {
+	attributes: {},
+	noLabel: {},
+	setAttributes: () => {},
+};
 
 export default PanelDisplaySettings;

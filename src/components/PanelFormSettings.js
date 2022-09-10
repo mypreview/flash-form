@@ -24,7 +24,7 @@ import { baseClassName } from '../utils';
  * @param 	  {Object}  	   props               Component properties.
  * @param 	  {Object}  	   props.attributes    Available block attributes and their corresponding values.
  * @param 	  {Function}  	   props.onChange	   A callback function invoked when any of the values change.
- * @return    {JSX.Element}                        Panel controls element to render.
+ * @return    {JSX.Element}                        Component to render.
  */
 function PanelFormSettings( { attributes, onChange } ) {
 	const { action, isNewTab, method } = attributes;
