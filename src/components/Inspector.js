@@ -12,7 +12,7 @@ import { InspectorControls } from '@wordpress/block-editor';
 /**
  * Internal dependencies
  */
-import { PanelDisplaySettings, PanelFormSettings } from '.';
+import { PanelDisplaySettings, PanelFormSettings, PanelHoneypotSettings } from '.';
 
 /**
  * Inspector Controls appear in the post settings sidebar when a block is being edited.
@@ -21,13 +21,14 @@ import { PanelDisplaySettings, PanelFormSettings } from '.';
  * @param 	  {Object} 	       props 				  Component properties.
  * @param 	  {Object} 	       props.attributes 	  Available block attributes and their corresponding values.
  * @param     {Function}       props.setAttributes    Function to update individual attributes based on user interactions.
- * @return    {JSX.Element} 						  Inspector component to render.
+ * @return    {JSX.Element} 						  Component to render.
  */
 function Inspector( { attributes, setAttributes } ) {
 	return (
 		<InspectorControls>
 			<PanelFormSettings attributes={ attributes } onChange={ ( value ) => setAttributes( { ...value } ) } />
 			<PanelDisplaySettings attributes={ attributes } onChange={ ( value ) => setAttributes( { ...value } ) } />
+			<PanelHoneypotSettings attributes={ attributes } onChange={ ( value ) => setAttributes( { ...value } ) } />
 			<PanelUpsell pluginSlug="flash-form" />
 		</InspectorControls>
 	);
