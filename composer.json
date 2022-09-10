@@ -4,6 +4,8 @@
 			"!/build",
 			"!/languages",
 			"/src",
+			"/vendor",
+			"node_modules",
 			"CONTRIBUTING.md",
 			"CODE_OF_CONDUCT.md",
 			"babel.config.js",
@@ -14,20 +16,8 @@
 			"phpcs.xml.dist",
 			"phpstan.neon.dist",
 			"README.md",
-			"node_modules",
-			"vendor",
-			".husky",
-			".editorconfig",
-			".gitattributes",
-			".gitignore",
-			".github",
-			".wordpress-org",
-			".browserslistrc",
-			".eslintrc.js",
-			".prettierrc.js",
-			".wp-env.json",
 			"webpack.config.js",
-			".*"
+			"/.*"
 		]
 	},
 	"authors": [
@@ -36,6 +26,15 @@
 			"name": "Mahdi Yazdani"
 		}
 	],
+	"autoload": {
+		"classmap": [
+			"includes"
+		],
+		"files": [
+			"includes/core.php",
+			"includes/utils.php"
+		]
+	},
 	"config": {
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true
