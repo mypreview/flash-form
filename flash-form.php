@@ -53,29 +53,12 @@ define(
 );
 
 /**
- * When WP has loaded all plugins, trigger the "mypreview_flash_form_loaded" hook.
- *
- * This ensures "mypreview_flash_form_loaded" is called only after all other plugins
- * are loaded, to avoid issues caused by plugin directory naming changing the load order.
+ * Loads the PSR-4 autoloader implementation.
  *
  * @since     1.0.0
  * @return    void
  */
-function on_plugins_loaded(): void {
-	$files = glob( PLUGIN['dir_path'] . '/includes/*.php' );
-
-	foreach ( $files as $file ) {
-		if ( is_readable( $file ) ) {
-			require_once $file;
-		}
-	}
-
-	/**
-	 * Action to signal that the plugin has finished loading.
-	 */
-	do_action( 'mypreview_flash_form_loaded' );
-}
-add_action( 'plugins_loaded', __NAMESPACE__ . '\on_plugins_loaded' );
+require_once PLUGIN['dir_path'] . '/vendor/autoload.php';
 
 /**
  * Load the plugin text domain for translation.
