@@ -32,7 +32,7 @@ class FreezeUI {
 	constructor( options = {} ) {
 		this.freeze( {
 			innerHTML: '',
-			message: __( 'Please wait…', 'flash-form' ),
+			message: __( 'Hang on…', 'flash-form' ),
 			target: document.body,
 			...options,
 		} );
