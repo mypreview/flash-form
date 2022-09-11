@@ -55,7 +55,7 @@ if ( ! class_exists( 'Honeypot' ) ) :
 			$honeypot   = $attributes['honeypot'] ?? array();
 			$time_check = $honeypot['timeCheck'] ?? false;
 
-			if ( $time_check && is_numeric( $time_check ) ) {
+			if ( self::is_enabled( $honeypot ) && $time_check && is_numeric( $time_check ) ) {
 				$time_check_field = '<input type="hidden" name="time_check" value="' . $time_check . '" />';
 				$return          .= $time_check_field;
 			}
@@ -76,7 +76,7 @@ if ( ! class_exists( 'Honeypot' ) ) :
 			$honeypot      = $attributes['honeypot'] ?? array();
 			$is_inline_css = $honeypot['moveInlineCSS'] ?? false;
 
-			if ( $is_inline_css ) {
+			if ( self::is_enabled( $honeypot ) && $is_inline_css ) {
 				$form_id = $attributes['formId'] ?? '';
 				$style   = '<style>[id="' . $form_id . '"] .form-field--hp{display:none;visibility:hidden;}</style>';
 				$return .= $style;
@@ -96,9 +96,8 @@ if ( ! class_exists( 'Honeypot' ) ) :
 		 */
 		public function unset( array $fields, array $attributes, string $form_id ): array {
 			$honeypot   = $attributes['honeypot'] ?? array();
-			$is_enabled = $honeypot['enable'] ?? false;
 
-			if ( $is_enabled ) {
+			if ( self::is_enabled( $honeypot ) ) {
 				$fields[]   = 'hp-' . $form_id;
 				$time_check = $honeypot['timeCheck'] ?? false;
 
@@ -123,7 +122,7 @@ if ( ! class_exists( 'Honeypot' ) ) :
 			$honeypot = $attributes['honeypot'] ?? '';
 
 			// Ensure honeypot is enabled.
-			if ( is_array( $honeypot ) && isset( $honeypot['enable'] ) && true === $honeypot['enable'] ) {
+			if ( self::is_enabled( $honeypot ) ) {
 				$form_id    = $attributes['formId'] ?? '';
 				$timestamp  = $data['timestamp'] ?? '';
 				$value      = $data[ 'hp-' . $form_id ] ?? '';
@@ -151,6 +150,17 @@ if ( ! class_exists( 'Honeypot' ) ) :
 			$response = sprintf( '%s<blockquote><p>%s</p></blockquote>', $heading, $message );
 
 			return apply_filters( 'mypreview_flash_form_email_submit_summary', $response );
+		}
+
+		/**
+		 * Whether the honeypot trap is enabled.
+		 *
+		 * @since     1.0.0
+		 * @param     array $honeypot    Attributes associated with "Honeypot".
+		 * @return    bool
+		 */
+		public static function is_enabled( array $honeypot ): bool {
+			return is_array( $honeypot ) && isset( $honeypot['enable'] ) && true === $honeypot['enable'];
 		}
 	}
 endif;
