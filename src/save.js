@@ -12,6 +12,11 @@ import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import { isURL, getQueryArgs, removeQueryArgs } from '@wordpress/url';
 
 /**
+ * Internal dependencies
+ */
+import { HoneypotField } from './components';
+
+/**
  * The save function defines the way in which the different attributes should
  * be combined into the final markup, which is then serialized by the block
  * editor into `post_content`.
@@ -22,7 +27,7 @@ import { isURL, getQueryArgs, removeQueryArgs } from '@wordpress/url';
  * @return    {JSX.Element} 					   Form element to render.
  */
 function save( { attributes } ) {
-	const { action, formId, isAjax, isNewTab, method } = attributes;
+	const { action, formId, honeypot, isAjax, isNewTab, method } = attributes;
 	const blockProps = useBlockProps.save();
 	const className = blockClassName( blockProps?.className );
 	const queryArgs = getQueryArgs( action );
@@ -40,6 +45,7 @@ function save( { attributes } ) {
 				target={ hasGetUrl && isNewTab ? '_blank' : undefined }
 			>
 				<InnerBlocks.Content />
+				<HoneypotField doRender={ Boolean( honeypot?.enable ) } formId={ formId } value={ honeypot } />
 				{ hasGetUrl && map( toPairs( queryArgs ), ( arg ) => <input key={ nth( arg ) } name={ nth( arg ) } type="hidden" value={ nth( arg, 1 ) } /> ) }
 			</form>
 		</div>
