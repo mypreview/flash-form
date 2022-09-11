@@ -51,5 +51,27 @@ if ( ! class_exists( Core::class ) ) :
 			);
 		}
 
+		/**
+		 * Add additional helpful links to the plugin’s metadata.
+		 *
+		 * @since     1.0.0
+		 * @param     array  $links    An array of the plugin’s metadata.
+		 * @param     string $file     Path to the plugin file relative to the plugins directory.
+		 * @return    array
+		 */
+		public function add_meta_links( array $links, string $file ): array {
+			if ( PLUGIN['basename'] !== $file ) {
+				return $links;
+			}
+
+			$plugin_links = array();
+			/* translators: 1: Open anchor tag, 2: Close anchor tag. */
+			$plugin_links[] = \sprintf( _x( '%1$sCommunity support%2$s', 'plugin link', 'flash-form' ), \sprintf( '<a href="https://wordpress.org/support/plugin/%s" target="_blank" rel="noopener noreferrer nofollow">', PLUGIN['slug'] ), '</a>' );
+			/* translators: 1: Open anchor tag, 2: Close anchor tag. */
+			$plugin_links[] = \sprintf( _x( '%1$sDonate%2$s', 'plugin link', 'flash-form' ), \sprintf( '<a href="https://www.buymeacoffee.com/mahdiyazdani" class="button-link-delete" target="_blank" rel="noopener noreferrer nofollow" title="%s">☕ ', \esc_attr__( 'Donate to support this plugin', 'flash-form' ) ), '</a>' );
+
+			return array_merge( $links, $plugin_links );
+		}
+
 	}
 endif;
