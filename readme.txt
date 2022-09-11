@@ -14,11 +14,11 @@ Build a form to be limitless, in a flash &#9889;
 == Description ==
 Remember you used to waste your time trying to come up with a solution to have a simple form or survey on your website? It takes a support ticket, an engineer, and a few hours to just “replace a text input with a dropdown menu instead!” Huh?
 
-“Flash Form” offers an in-house form builder that’s fully integrated with the WordPress component library and design system. Everybody on your team can create, edit, and publish forms and surveys on your website regardless of their technical background.
+“Flash Form” offers an in-house form builder that’s fully integrated with the WordPress component library and design system. If you know WordPress and know a bit about forms, you already know “Flash Form”! Everybody on your team can create, edit, and publish forms and surveys on your website regardless of their technical background.
 
-“Flash Form” takes care of the repetitive and annoying stuff—keeping track of values/errors, orchestrating validation, and handling submission—so you don’t have to. This means you spend less time navigating back and forth from one admin screen to another and more time focusing on your data collection requirements.
+“Flash Form” takes care of the repetitive and annoying stuff—keeping track of values/errors, orchestrating basic validation, and handling submission—so you don’t have to. This means you spend less time navigating back and forth from one admin screen to another and more time focusing on your data collection requirements.
 
-If you know WordPress and know a bit about forms, you already know “Flash Form”! There is no fancy post-type registration or admin settings screen under the hood, just plain React-based WordPress Gutenberg block. “Flash Form” makes form creation a breeze by leveraging and staying within the core WordPress editor components and away from magic.
+There is no fancy post-type registration or admin settings screen under the hood, just plain React-based WordPress Gutenberg block. “Flash Form” makes form creation a breeze by leveraging and staying within the core WordPress editor components and away from magic.
 
 == Installation ==
 = Minimum Requirements =
