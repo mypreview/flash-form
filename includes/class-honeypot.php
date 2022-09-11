@@ -114,9 +114,9 @@ if ( ! class_exists( 'Honeypot' ) ) :
 		 * Validate honeypot trap being empty during the form submission.
 		 *
 		 * @since     1.0.0
-		 * @param     null|string $response    	 Form submission response.
-		 * @param     array  	  $attributes    The block attributes.
-		 * @param     array  	  $data    		 Set of key/value pairs representing form fields and their values.
+		 * @param     null|string $response      Form submission response.
+		 * @param     array       $attributes    The block attributes.
+		 * @param     array       $data          Set of key/value pairs representing form fields and their values.
 		 * @return    void
 		 */
 		public function validate( ?string $response, $attributes, $data ): void {
@@ -139,8 +139,8 @@ if ( ! class_exists( 'Honeypot' ) ) :
 		 * Outputs friendly message outlining that honeypot trap prevented form submission.
 		 *
 		 * @since     1.0.0
-		 * @param     null|string $data       Form submission response.
-		 * @param     string 	  $referer    Referer from the "_wp_http_referer".
+		 * @param     null|string $response   Form submission response.
+		 * @param     string      $referer    Referer from the "_wp_http_referer".
 		 * @return    string
 		 */
 		public function get_failed_summary( ?string $response, $referer ): string {
