@@ -264,7 +264,7 @@ if ( ! class_exists( Send_Email::class ) ) :
 
 			$return .= '</ul></blockquote>';
 
-			return apply_filters( 'mypreview_flash_form_email_submit_summary', $return );
+			return apply_filters( 'mypreview_flash_form_email_submit_summary', $return, $referer );
 		}
 	}
 endif;
