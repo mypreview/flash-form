@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-09-01T09:24:08+00:00\n"
+"POT-Creation-Date: 2022-09-11T22:29:13+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: flash-form\n"
@@ -23,7 +23,7 @@ msgid "https://mypreview.github.io/flash-form"
 msgstr ""
 
 #. Description of the plugin
-msgid "Build a form to be limitless, in a flash ⚡"
+msgid "Create a form as easily as editing a block."
 msgstr ""
 
 #. Author of the plugin
@@ -35,61 +35,70 @@ msgid "https://www.mahdiyazdani.com"
 msgstr ""
 
 #. translators: 1: Open anchor tag, 2: Close anchor tag.
-#: flash-form.php:180
+#: dashboard/class-core.php:69
 msgctxt "plugin link"
 msgid "%1$sCommunity support%2$s"
 msgstr ""
 
 #. translators: 1: Open anchor tag, 2: Close anchor tag.
-#: flash-form.php:182
+#: dashboard/class-core.php:71
 msgctxt "plugin link"
 msgid "%1$sDonate%2$s"
 msgstr ""
 
 #. translators: 1: Open anchor tag, 2: Close anchor tag.
-#: flash-form.php:182
+#: dashboard/class-core.php:71
 msgid "Donate to support this plugin"
 msgstr ""
 
-#: includes/class-send-email.php:50
-#: includes/class-send-email.php:260
+#: dashboard/class-send-email.php:50
+#: dashboard/class-send-email.php:260
 msgid "Unlabeled"
 msgstr ""
 
-#: includes/class-send-email.php:59
+#: dashboard/class-send-email.php:59
 msgid "Time:"
 msgstr ""
 
-#: includes/class-send-email.php:60
+#: dashboard/class-send-email.php:60
 msgid "IP Address:"
 msgstr ""
 
-#: includes/class-send-email.php:61
+#: dashboard/class-send-email.php:61
 msgid "Contact Form URL:"
 msgstr ""
 
 #. translators: %s: Current website’s name.
-#: includes/class-send-email.php:69
+#: dashboard/class-send-email.php:69
 msgid "Sent by a verified %s user."
 msgstr ""
 
-#: includes/class-send-email.php:75
+#: dashboard/class-send-email.php:75
 msgid "Sent by an unverified visitor to your site."
 msgstr ""
 
 #. translators: 1: "date_format" placeholder, 2: "time_format" placeholder.
-#: includes/class-send-email.php:214
+#: dashboard/class-send-email.php:214
 msgctxt "{$date_format} \\a\\t {$time_format}"
 msgid "%1$s \\a\\t %2$s"
 msgstr ""
 
 #. translators: 1: Open heading tag, 2: Open anchor tag, 3: Close anchor and heading tags.
-#: includes/class-send-email.php:255
+#: dashboard/class-send-email.php:255
 msgid "%1$sMessage sent! %2$s(go back)%3$s"
 msgstr ""
 
+#. translators: 1: Open heading tag, 2: Open anchor tag, 3: Close anchor and heading tags.
+#: frontend/class-honeypot.php:146
+msgid "%1$sSomething is stuck in the honey! %2$s(go back)%3$s"
+msgstr ""
+
+#: frontend/class-honeypot.php:147
+msgid "You filled out a form field that was created to stop spammers. Please go back and try again or contact the site administrator if you feel this was an error."
+msgstr ""
+
 #: src/classes/FreezeUI.js:35
-msgid "Please wait…"
+msgid "Hang on…"
 msgstr ""
 
 #: src/components/GetMethodSettings.js:74
@@ -149,15 +158,19 @@ msgstr ""
 msgid "To specify query arguments you need to enter a valid URL."
 msgstr ""
 
-#: src/components/PanelDisplaySettings.js:19
+#: src/components/HoneypotField.js:49
+msgid "Please leave this field empty."
+msgstr ""
+
+#: src/components/PanelDisplaySettings.js:23
 msgid "Display Settings"
 msgstr ""
 
-#: src/components/PanelDisplaySettings.js:22
+#: src/components/PanelDisplaySettings.js:26
 msgid "Enabling this option will visually hide labels. The labels are still visible to screen readers. This option can be overridden for each input field individually."
 msgstr ""
 
-#: src/components/PanelDisplaySettings.js:26
+#: src/components/PanelDisplaySettings.js:30
 msgid "Hide labels from view?"
 msgstr ""
 
@@ -179,6 +192,62 @@ msgstr ""
 
 #: src/components/PanelFormSettings.js:59
 msgid "POST"
+msgstr ""
+
+#: src/components/PanelHoneypotSettings.js:33
+msgid "Honeypot Settings"
+msgstr ""
+
+#: src/components/PanelHoneypotSettings.js:36
+msgid "A honeypot trap is a spam prevention technique designed to trick spam bots into revealing themselves by filling out a hidden input field."
+msgstr ""
+
+#: src/components/PanelHoneypotSettings.js:40
+msgid "Enable honeypot trap"
+msgstr ""
+
+#: src/components/PanelHoneypotSettings.js:46
+msgid "If you’re using placeholders on other fields, this can help the honeypot trap mimic a \"real\" field."
+msgstr ""
+
+#: src/components/PanelHoneypotSettings.js:47
+msgid "Placeholder"
+msgstr ""
+
+#: src/components/PanelHoneypotSettings.js:52
+msgid "You can customize the (hidden) accessibility message or keep the default value."
+msgstr ""
+
+#: src/components/PanelHoneypotSettings.js:53
+msgid "Accessibility message"
+msgstr ""
+
+#: src/components/PanelHoneypotSettings.js:63
+msgid "Use standard autocomplete value"
+msgstr ""
+
+#: src/components/PanelHoneypotSettings.js:68
+msgid "By default, the honeypot trap uses inline CSS on the honeypot field to hide it. Enabling this option moves that CSS to the footer of the page. It may help confuse bots."
+msgstr ""
+
+#: src/components/PanelHoneypotSettings.js:72
+msgid "Move inline CSS"
+msgstr ""
+
+#: src/components/PanelHoneypotSettings.js:77
+msgid "If checked, the accessibility label will not be generated."
+msgstr ""
+
+#: src/components/PanelHoneypotSettings.js:78
+msgid "Disable accessibility label"
+msgstr ""
+
+#: src/components/PanelHoneypotSettings.js:83
+msgid "If set, this will perform an additional check for spam bots by tracking the time it has taken to submit the form. Typically, bots submit forms much faster than humans. "
+msgstr ""
+
+#: src/components/PanelHoneypotSettings.js:87
+msgid "Time check threshold (seconds)"
 msgstr ""
 
 #. translators: %s: Post author email address.
@@ -675,7 +744,7 @@ msgstr ""
 
 #: block.json
 msgctxt "block description"
-msgid "......"
+msgid "Create a form as easily as editing a block!"
 msgstr ""
 
 #: block.json
