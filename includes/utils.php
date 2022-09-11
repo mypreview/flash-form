@@ -39,7 +39,7 @@ if ( ! function_exists( 'form_submit' ) ) :
 			$response                 = null;
 			$raw_data                 = is_null( $form_data ) ? wp_unslash( $_POST ) : wp_unslash( $form_data );
 			$data                     = stripslashes_from_strings_only( $raw_data );
-			$referer                  = isset( $data['_wp_http_referer'] ) ? set_url_scheme( wp_guess_url() . $data['_wp_http_referer'] ) : '';
+			$referer                  = get_referer( $data['_wp_http_referer'] ?? '' );
 			$to                       = isset( $attributes['to'] ) ? explode( ',', $attributes['to'] ) : array( sanitize_email( get_option( 'admin_email' ) ) );
 			$subject                  = isset( $attributes['subject'] ) ? $attributes['subject'] : sprintf( '[%s] %s', esc_html( get_bloginfo( 'name' ) ), wp_kses_post( get_the_title( $post ) ) );
 			$custom_thankyou          = $attributes['customThankyou'] ?? '';
@@ -49,7 +49,8 @@ if ( ! function_exists( 'form_submit' ) ) :
 			/**
 			 * Allow third-party resources to extend the block submission response.
 			 */
-			do_action( 'mypreview_flash_form_submit_response', $response, $attributes );
+			do_action( 'mypreview_flash_form_submit_before_response', $response, $attributes, $data );
+			$response = apply_filters( 'mypreview_flash_form_submit_raw_response', $response, $referer );
 
 			// Make sure that the response is null and nothing before this
 			// conditional statement is not meant to be displayed on the page.
@@ -97,11 +98,24 @@ if ( ! function_exists( 'get_nonce_key' ) ) :
 	 * Get the nonce key for the form.
 	 *
 	 * @since     1.0.0
-	 * @param     string $form_id    The form’s client id.
+	 * @param     null|string $form_id    The form’s client id.
 	 * @return    string
 	 */
 	function get_nonce_key( ?string $form_id ): string {
-		return '_wpnonce-' . $form_id;
+		return '_wpnonce-' . $form_id ?? '';
+	}
+endif;
+
+if ( ! function_exists( 'get_referer' ) ) :
+	/**
+	 * Retrieve referer from ‘_wp_http_referer’ or HTTP referer.
+	 *
+	 * @since     1.0.0
+	 * @param     null|string $referer    HTTP referer.
+	 * @return    string
+	 */
+	function get_referer( ?string $referer ): string {
+		return isset( $referer ) && ! empty( $referer ) ? set_url_scheme( wp_guess_url() . $referer ) : '';
 	}
 endif;
 
