@@ -3,8 +3,8 @@
 		"exclude": [
 			"!/build",
 			"!/languages",
+			"!vendor/*",
 			"/src",
-			"/vendor",
 			"node_modules",
 			"CONTRIBUTING.md",
 			"CODE_OF_CONDUCT.md",
@@ -14,6 +14,7 @@
 			"package.json",
 			"package-lock.json",
 			"phpcs.xml.dist",
+			"phpstan.neon.dist",
 			"README.md",
 			"webpack.config.js",
 			"/.*"
@@ -27,12 +28,9 @@
 	],
 	"autoload": {
 		"classmap": [
+			"dashboard",
+			"frontend",
 			"includes"
-		],
-		"files": [
-			"includes/core.php",
-			"includes/utils.php",
-			"includes/class-honeypot.php"
 		]
 	},
 	"config": {
