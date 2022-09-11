@@ -32,7 +32,8 @@
 		],
 		"files": [
 			"includes/core.php",
-			"includes/utils.php"
+			"includes/utils.php",
+			"includes/class-honeypot.php"
 		]
 	},
 	"config": {
