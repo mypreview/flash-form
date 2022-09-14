@@ -81,7 +81,9 @@ Professional engineer and independent creative technologist in tech · over 6 ye
 [Available for hire &#8594;](https://mahdiyazdani.com "Mahdi Yazdani’s personal website")
 
 == Screenshots ==
-1. Block interface.
+1. Form submission via HTTP "GET" method.
+2. Honeypot trap settings.
+3. Support form field types.
 
 == Changelog ==
 = 1.0.0 =
