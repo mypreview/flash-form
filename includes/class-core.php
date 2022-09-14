@@ -17,6 +17,7 @@
 
 namespace Flash_Form\Includes;
 
+use const Flash_Form\PLUGIN as PLUGIN;
 use Flash_Form\Dashboard\Core as Dashboard;
 use Flash_Form\Frontend\Core as Frontend;
 
@@ -89,6 +90,7 @@ if ( ! class_exists( 'Core' ) ) :
 			$plugin_dashboard = new Dashboard();
 
 			$this->loader->add_action( 'init', $plugin_dashboard, 'register_block' );
+			$this->loader->add_filter( 'plugin_action_links_' . PLUGIN['basename'], $plugin_dashboard, 'add_action_links' );
 			$this->loader->add_filter( 'plugin_row_meta', $plugin_dashboard, 'add_meta_links', 10, 2 );
 		}
 
