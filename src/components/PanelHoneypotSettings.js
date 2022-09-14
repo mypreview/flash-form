@@ -10,18 +10,23 @@ import PropTypes from 'prop-types';
  */
 import { PanelBody, RangeControl, TextControl, TextareaControl, ToggleControl } from '@wordpress/components';
 import { useReducer } from '@wordpress/element';
+import { ifCondition } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
+
+/**
+ * Internal dependencies
+ */
+import { getAttributes } from '../utils';
 
 /**
  * A set of settings that let users configure honeypot trap settings.
  *
- * @param 	  {Object}  	   props             			Component properties.
- * @param 	  {Object}  	   props.attributes    		    Available block attributes and their corresponding values.
- * @param 	  {Object}  	   props.attributes.honeypot    The current state of the honeypot settings.
- * @param 	  {Function}  	   props.onChange    			A function that receives the value of the input.
- * @return    {JSX.Element}                      			Component to render.
+ * @param 	  {Object}  	   props             Component properties.
+ * @param 	  {Function}  	   props.onChange    A function that receives the value of the input.
+ * @param 	  {Object}  	   props.value    	 The current state of the honeypot settings.
+ * @return    {JSX.Element}                      Component to render.
  */
-function PanelHoneypotSettings( { attributes: { honeypot }, onChange } ) {
+function PanelHoneypotSettings( { onChange, value: honeypot } ) {
 	const [ state, dispatch ] = useReducer( reducer, honeypot );
 	const { autoCompleteOff, a11yMessage, a11yNoLabel, enable, moveInlineCSS, placeholder, timeCheck } = state;
 
@@ -100,12 +105,20 @@ function PanelHoneypotSettings( { attributes: { honeypot }, onChange } ) {
 
 PanelHoneypotSettings.propTypes = {
 	onChange: PropTypes.func,
-	value: PropTypes.bool,
+	value: PropTypes.exact( {
+		a11yMessage: PropTypes.string,
+		a11yNoLabel: PropTypes.bool,
+		autoCompleteOff: PropTypes.bool,
+		enable: PropTypes.bool,
+		moveInlineCSS: PropTypes.bool,
+		placeholder: PropTypes.string,
+		timeCheck: PropTypes.number,
+	} ),
 };
 
 PanelHoneypotSettings.defaultProps = {
 	onChange: () => {},
-	value: false,
+	value: getAttributes( [ 'honeypot', 'default' ] ),
 };
 
-export default PanelHoneypotSettings;
+export default ifCondition( ( { doRender } ) => Boolean( doRender ) )( PanelHoneypotSettings );
