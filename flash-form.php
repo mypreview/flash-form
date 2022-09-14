@@ -40,14 +40,25 @@ use Flash_Form\Includes\Core as Core;
 
 define(
 	__NAMESPACE__ . '\PLUGIN',
-	array(
-		'basename'   => plugin_basename( __FILE__ ),
-		'block_name' => 'mypreview/flash-form',
-		'class_name' => 'wp-block-mypreview-flash-form',
-		'dir_path'   => untrailingslashit( plugin_dir_path( __FILE__ ) ),
-		'dir_url'    => untrailingslashit( plugin_dir_url( __FILE__ ) ),
-		'nonce'      => 'mypreview_flash_form_nonce',
-		'slug'       => 'flash-form',
+	array_merge(
+		array(
+			'basename'   => plugin_basename( __FILE__ ),
+			'block_name' => 'mypreview/flash-form',
+			'class_name' => 'wp-block-mypreview-flash-form',
+			'dir_path'   => untrailingslashit( plugin_dir_path( __FILE__ ) ),
+			'dir_url'    => untrailingslashit( plugin_dir_url( __FILE__ ) ),
+			'nonce'      => 'mypreview_flash_form_nonce',
+			'slug'       => 'flash-form',
+		),
+		get_file_data(
+			__FILE__,
+			array(
+				'plugin_uri' => 'Plugin URI',
+				'author_uri' => 'Author URI',
+				'version'    => 'Version',
+			),
+			'plugin'
+		)
 	)
 );
 
