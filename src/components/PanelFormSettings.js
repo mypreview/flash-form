@@ -15,7 +15,7 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { GetMethodSettings, PostMethodSettings } from '.';
-import { baseClassName } from '../utils';
+import { baseClassName, getAttributes } from '../utils';
 
 /**
  * PanelFormSettings component provides a set of fields to determine
@@ -42,6 +42,7 @@ function PanelFormSettings( { attributes, onChange } ) {
 									customThankyou: '',
 									customThankyouMessage: undefined,
 									customThankyouRedirect: undefined,
+									honeypot: getAttributes( [ 'honeypot', 'default' ] ) || {},
 									isAjax: false,
 									isNewTab: false,
 									method: 'get',
