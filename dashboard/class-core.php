@@ -62,7 +62,7 @@ if ( ! class_exists( Core::class ) ) :
 		public function add_action_links( array $links ): array {
 			$plugin_links = array();
 			/* translators: 1: Open anchor tag, 2: Close anchor tag. */
-			$plugin_links[] = sprintf( _x( '%1$sHire Me!%2$s', 'plugin link', 'flash-form' ), sprintf( '<a href="%s" class="button-link-delete" target="_blank" rel="noopener noreferrer nofollow" title="%s">', esc_url( PLUGIN['author_uri'] ), esc_attr_x( 'Looking for help? Hire Me!', 'flash-form' ) ), '</a>' );
+			$plugin_links[] = sprintf( _x( '%1$sHire Me!%2$s', 'plugin link', 'flash-form' ), sprintf( '<a href="%s" class="button-link-delete" target="_blank" rel="noopener noreferrer nofollow" title="%s">', esc_url( PLUGIN['author_uri'] ), esc_attr_x( 'Looking for help? Hire Me!', 'plugin link', 'flash-form' ) ), '</a>' );
 
 			return array_merge( $plugin_links, $links );
 		}
