@@ -12,13 +12,12 @@ import { __ } from '@wordpress/i18n';
 /**
  * Component that renders setting controls specific to `Display` adjustments.
  *
- * @param 	  {Object}  	   props               		   Component properties.
- * @param 	  {Object}  	   props.attributes    		   Available block attributes and their corresponding values.
- * @param 	  {boolean}  	   props.attributes.noLabel    Current status of the fieldset label visibility.
- * @param 	  {Function}  	   props.onChange	   		   A callback function invoked when any of the values change.
- * @return    {JSX.Element}                        		   Component to render.
+ * @param 	  {Object}  	   props             Component properties.
+ * @param 	  {Function}  	   props.onChange    A callback function invoked when any of the values change.
+ * @param 	  {boolean}  	   props.value       Current status of the fieldset label visibility.
+ * @return    {JSX.Element}                      Component to render.
  */
-function PanelDisplaySettings( { attributes: { noLabel }, onChange } ) {
+function PanelDisplaySettings( { onChange, value: noLabel } ) {
 	return (
 		<PanelBody initialOpen={ false } title={ __( 'Display Settings', 'flash-form' ) }>
 			<ToggleControl
