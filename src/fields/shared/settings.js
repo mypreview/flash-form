@@ -31,8 +31,7 @@ export default {
 		lock: true,
 		reusable: false,
 		spacing: {
-			margin: [ 'left', 'right' ],
-			padding: true,
+			margin: [ 'bottom', 'top' ],
 			units: [ 'px', 'em', 'rem' ],
 		},
 		__experimentalBorder: {
