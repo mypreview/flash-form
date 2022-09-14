@@ -3,18 +3,19 @@
  */
 import { blockClassName } from '@mypreview/unicorn-js-utils';
 import classnames from 'classnames';
-import { isEqual, keys, map, nth, toPairs } from 'lodash';
+import { keys, map, nth, toPairs } from 'lodash';
 
 /**
  * WordPress dependencies
  */
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
-import { isURL, getQueryArgs, removeQueryArgs } from '@wordpress/url';
+import { getQueryArgs, removeQueryArgs } from '@wordpress/url';
 
 /**
  * Internal dependencies
  */
 import { HoneypotField } from './components';
+import { hasGetUrl } from './utils';
 
 /**
  * The save function defines the way in which the different attributes should
@@ -31,22 +32,22 @@ function save( { attributes } ) {
 	const blockProps = useBlockProps.save();
 	const className = blockClassName( blockProps?.className );
 	const queryArgs = getQueryArgs( action );
-	const hasGetUrl = isURL( action ) && isEqual( 'get', method );
+	const _hasGetUrl = hasGetUrl( action );
 
 	return (
 		<div { ...blockProps }>
 			<form
-				action={ hasGetUrl ? removeQueryArgs( action, ...keys( queryArgs ) ) : '#' }
+				action={ _hasGetUrl ? removeQueryArgs( action, ...keys( queryArgs ) ) : '#' }
 				className={ classnames( 'contact-form', `${ className }__fieldset`, { 'is-ajax': isAjax } ) }
 				encType="application/x-www-form-urlencoded"
 				id={ formId }
 				method={ method }
 				style={ { '--gap': attributes.style?.spacing?.blockGap } }
-				target={ hasGetUrl && isNewTab ? '_blank' : undefined }
+				target={ _hasGetUrl && isNewTab ? '_blank' : undefined }
 			>
 				<InnerBlocks.Content />
-				<HoneypotField doRender={ Boolean( honeypot?.enable ) } formId={ formId } value={ honeypot } />
-				{ hasGetUrl && map( toPairs( queryArgs ), ( arg ) => <input key={ nth( arg ) } name={ nth( arg ) } type="hidden" value={ nth( arg, 1 ) } /> ) }
+				<HoneypotField doRender={ Boolean( honeypot?.enable ) && ! _hasGetUrl } formId={ formId } value={ honeypot } />
+				{ _hasGetUrl && map( toPairs( queryArgs ), ( arg ) => <input key={ nth( arg ) } name={ nth( arg ) } type="hidden" value={ nth( arg, 1 ) } /> ) }
 			</form>
 		</div>
 	);
