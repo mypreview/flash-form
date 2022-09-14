@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { PanelUpsell } from '@mypreview/unicorn-js-upsell';
+import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 
 /**
@@ -24,11 +25,13 @@ import { PanelDisplaySettings, PanelFormSettings, PanelHoneypotSettings } from '
  * @return    {JSX.Element} 						  Component to render.
  */
 function Inspector( { attributes, setAttributes } ) {
+	const { honeypot, method, noLabel } = attributes;
+
 	return (
 		<InspectorControls>
 			<PanelFormSettings attributes={ attributes } onChange={ ( value ) => setAttributes( { ...value } ) } />
-			<PanelDisplaySettings attributes={ attributes } onChange={ ( value ) => setAttributes( { ...value } ) } />
-			<PanelHoneypotSettings attributes={ attributes } onChange={ ( value ) => setAttributes( { ...value } ) } />
+			<PanelDisplaySettings onChange={ ( value ) => setAttributes( { ...value } ) } value={ noLabel } />
+			<PanelHoneypotSettings doRender={ isEqual( 'post', method ) } onChange={ ( value ) => setAttributes( { ...value } ) } value={ honeypot } />
 			<PanelUpsell pluginSlug="flash-form" />
 		</InspectorControls>
 	);
