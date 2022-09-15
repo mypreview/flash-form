@@ -28,4 +28,5 @@ export default Object.freeze( {
 		foreground: '#DE6360',
 	},
 	RECAPTCHA_ENDPOINT: '/mypreview-flash-form/v1/recaptcha',
+	RECAPTCHA_HELP_LINK: 'https://www.google.com/recaptcha/admin',
 } );
