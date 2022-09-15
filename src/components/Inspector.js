@@ -9,11 +9,12 @@ import PropTypes from 'prop-types';
  * WordPress dependencies
  */
 import { InspectorControls } from '@wordpress/block-editor';
+import { useMemo } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
-import { PanelDisplaySettings, PanelFormSettings, PanelHoneypotSettings } from '.';
+import { PanelDisplaySettings, PanelFormSettings, PanelHoneypotSettings, PanelReCaptchaSettings } from '.';
 
 /**
  * Inspector Controls appear in the post settings sidebar when a block is being edited.
@@ -25,13 +26,15 @@ import { PanelDisplaySettings, PanelFormSettings, PanelHoneypotSettings } from '
  * @return    {JSX.Element} 						  Component to render.
  */
 function Inspector( { attributes, setAttributes } ) {
-	const { honeypot, method, noLabel } = attributes;
+	const { honeypot, isCaptcha, method, noLabel } = attributes;
+	const isPostMethod = useMemo( () => isEqual( 'post', method ), [ method ] );
 
 	return (
 		<InspectorControls>
 			<PanelFormSettings attributes={ attributes } onChange={ ( value ) => setAttributes( { ...value } ) } />
 			<PanelDisplaySettings onChange={ ( value ) => setAttributes( { ...value } ) } value={ noLabel } />
-			<PanelHoneypotSettings doRender={ isEqual( 'post', method ) } onChange={ ( value ) => setAttributes( { ...value } ) } value={ honeypot } />
+			<PanelHoneypotSettings doRender={ isPostMethod } onChange={ ( value ) => setAttributes( { ...value } ) } value={ honeypot } />
+			<PanelReCaptchaSettings doRender={ isPostMethod } onChange={ () => setAttributes( { isCaptcha: ! isCaptcha } ) } value={ isCaptcha } />
 			<PanelUpsell pluginSlug="flash-form" />
 		</InspectorControls>
 	);
