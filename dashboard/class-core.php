@@ -4,7 +4,7 @@
  *
  * @link          https://mypreview.github.io/flash-form
  * @author        MyPreview (Github: @mahdiyazdani, @gooklani, @mypreview)
- * @since         1.0.0
+ * @since         1.1.0
  *
  * @package       flash-form
  * @subpackage    flash-form/dashboard
@@ -13,6 +13,7 @@
 namespace Flash_Form\Dashboard;
 
 use const Flash_Form\PLUGIN as PLUGIN;
+use Flash_Form\Dashboard\ReCaptcha as ReCaptcha;
 use Flash_Form\Includes\Utils as Utils;
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
@@ -49,6 +50,16 @@ if ( ! class_exists( Core::class ) ) :
 					'render_callback' => 'Flash_Form\Frontend\Render::callback',
 				)
 			);
+		}
+
+		/**
+		 * Extend REST-API endpoint and routes.
+		 *
+		 * @since     1.1.0
+		 * @return    void
+		 */
+		public function rest_api(): void {
+			new ReCaptcha(); // Registers defined REST API routes.
 		}
 
 		/**
