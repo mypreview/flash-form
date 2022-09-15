@@ -27,4 +27,5 @@ export default Object.freeze( {
 		background: '#EEF0F3',
 		foreground: '#DE6360',
 	},
+	RECAPTCHA_ENDPOINT: '/mypreview-flash-form/v1/recaptcha',
 } );
