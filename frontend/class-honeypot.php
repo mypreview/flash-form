@@ -127,7 +127,7 @@ if ( ! class_exists( Honeypot::class ) ) :
 				$time_check = $data['time_check'] ?? '';
 
 				if ( ! empty( $value ) || ( ! empty( $time_check ) && strtotime( '+' . strval( $time_check ) . ' seconds', $timestamp ) > strtotime( 'now' ) ) ) {
-					add_filter( 'mypreview_flash_form_submit_raw_response', array( $this, 'get_failed_summary' ), 99, 2 );
+					\add_filter( 'mypreview_flash_form_submit_raw_response', array( $this, 'get_failed_summary' ), 99, 2 );
 				}
 			}
 		}
