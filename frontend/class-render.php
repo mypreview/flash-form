@@ -75,7 +75,7 @@ if ( ! class_exists( Render::class ) ) :
 			/**
 			 * Allow third-party resources to extend the block content.
 			 */
-			\do_action( 'mypreview_flash_form_render_callback_content', $attributes );
+			\do_action( 'mypreview_flash_form_render_callback_before_content', $attributes );
 
 			return \apply_filters( 'mypreview_flash_form_render_callback_content', $content, $attributes );
 		}
