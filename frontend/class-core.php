@@ -20,7 +20,7 @@ use Flash_Form\Includes\Utils as Utils;
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-if ( ! class_exists( 'Core' ) ) :
+if ( ! class_exists( Core::class ) ) :
 
 	/**
 	 * The main public-specific class.

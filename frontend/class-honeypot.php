@@ -20,7 +20,7 @@ namespace Flash_Form\Frontend;
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
-if ( ! class_exists( 'Honeypot' ) ) :
+if ( ! class_exists( Honeypot::class ) ) :
 
 	/**
 	 * The honeypot trap class.
