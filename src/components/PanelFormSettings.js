@@ -44,6 +44,7 @@ function PanelFormSettings( { attributes, onChange } ) {
 									customThankyouRedirect: undefined,
 									honeypot: getAttributes( [ 'honeypot', 'default' ] ) || {},
 									isAjax: false,
+									isCaptcha: false,
 									isNewTab: false,
 									method: 'get',
 								} )
