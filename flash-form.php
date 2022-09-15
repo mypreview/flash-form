@@ -42,13 +42,14 @@ define(
 	__NAMESPACE__ . '\PLUGIN',
 	array_merge(
 		array(
-			'basename'   => plugin_basename( __FILE__ ),
-			'block_name' => 'mypreview/flash-form',
-			'class_name' => 'wp-block-mypreview-flash-form',
-			'dir_path'   => untrailingslashit( plugin_dir_path( __FILE__ ) ),
-			'dir_url'    => untrailingslashit( plugin_dir_url( __FILE__ ) ),
-			'nonce'      => 'mypreview_flash_form_nonce',
-			'slug'       => 'flash-form',
+			'basename'       => plugin_basename( __FILE__ ),
+			'block_name'     => 'mypreview/flash-form',
+			'class_name'     => 'wp-block-mypreview-flash-form',
+			'dir_path'       => untrailingslashit( plugin_dir_path( __FILE__ ) ),
+			'dir_url'        => untrailingslashit( plugin_dir_url( __FILE__ ) ),
+			'nonce'          => 'mypreview_flash_form_nonce',
+			'rest_namespace' => 'mypreview-flash-form/v1',
+			'slug'           => 'flash-form',
 		),
 		get_file_data(
 			__FILE__,
