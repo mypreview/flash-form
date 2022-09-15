@@ -9,7 +9,7 @@ Stable tag: 1.0.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Build a form to be limitless, in a flash &#9889;
+Create a form as easily as editing a block.
 
 == Description ==
 Remember you used to waste your time trying to come up with a solution to have a simple form or survey on your website? It takes a support ticket, an engineer, and a few hours to just “replace a text input with a dropdown menu instead!” Huh?
@@ -83,7 +83,7 @@ Professional engineer and independent creative technologist in tech · over 6 ye
 == Screenshots ==
 1. Form submission via HTTP "GET" method.
 2. Honeypot trap settings.
-3. Support form field types.
+3. Supported form field types.
 
 == Changelog ==
 = 1.0.0 =
