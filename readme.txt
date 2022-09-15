@@ -5,7 +5,7 @@ Donate link: https://www.buymeacoffee.com/mahdiyazdani
 Requires at least: 5.5
 Tested up to: 6.0
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -86,5 +86,8 @@ Professional engineer and independent creative technologist in tech · over 6 ye
 3. Supported form field types.
 
 == Changelog ==
+= 1.1.0 =
+Added basic integration with Google reCaptcha V2.
+
 = 1.0.0 =
 * Initial release.
