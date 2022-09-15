@@ -14,6 +14,7 @@ namespace Flash_Form\Frontend;
 
 use const Flash_Form\PLUGIN as PLUGIN;
 use Flash_Form\Frontend\Honeypot as Honeypot;
+use Flash_Form\Frontend\ReCaptcha as ReCaptcha;
 use Flash_Form\Frontend\Render as Render;
 use Flash_Form\Dashboard\Cache_Data as Cache_Data;
 use Flash_Form\Includes\Utils as Utils;
@@ -35,6 +36,7 @@ if ( ! class_exists( Core::class ) ) :
 		 */
 		public function __construct() {
 			new Honeypot();
+			new ReCaptcha();
 		}
 
 		/**
