@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-09-15T20:46:24+00:00\n"
+"POT-Creation-Date: 2022-09-15T22:55:07+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: flash-form\n"
@@ -107,6 +107,15 @@ msgstr ""
 
 #: frontend/class-honeypot.php:147
 msgid "You filled out a form field that was created to stop spammers. Please go back and try again or contact the site administrator if you feel this was an error."
+msgstr ""
+
+#. translators: 1: Open heading tag, 2: Open anchor tag, 3: Close anchor and heading tags.
+#: frontend/class-recaptcha.php:181
+msgid "%1$sAre you a human being? %2$s(go back)%3$s"
+msgstr ""
+
+#: frontend/class-recaptcha.php:182
+msgid "We apologize for the confusion, but we can’t quite tell if you’re a person or a script. Please don’t take this personally. Next time, click the captcha box, and we’ll get out of your hair. Contact the site administrator if you feel this was an error."
 msgstr ""
 
 #: src/classes/FreezeUI.js:35
