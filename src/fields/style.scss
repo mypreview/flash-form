@@ -1,6 +1,7 @@
 @use "sass:math";
 @import "~@mypreview/unicorn-style-utils/src/mixins/hidden";
 @import "~@mypreview/unicorn-style-utils/src/mixins/flexbox";
+@import "~@mypreview/unicorn-style-utils/src/base/breakpoints";
 
 .wp-block-mypreview-flash-form {
 
@@ -8,6 +9,10 @@
 		$i: 25;
 
 		&.has-custom-width {
+
+			.button {
+				width: 100%;
+			}
 
 			@while $i <= 100 {
 				&--#{$i} {
@@ -47,7 +52,6 @@
 
 			select {
 				max-width: none;
-				width: auto;
 			}
 			$types:text, date, email, number, tel, textarea, time, url;
 
@@ -60,7 +64,7 @@
 
 		&--checkbox {
 
-			@include box(bottom, wrap);
+			@include box(left);
 
 			>[class$="__label"] {
 				margin: {
@@ -74,8 +78,8 @@
 			}
 		}
 
-		.button {
-			width: 100%;
+		@include mobile {
+			flex-basis: 100%;
 		}
 	}
 
