@@ -35,7 +35,7 @@ function Inspector( { attributes, setAttributes } ) {
 			<PanelDisplaySettings onChange={ ( value ) => setAttributes( { ...value } ) } value={ noLabel } />
 			<PanelHoneypotSettings doRender={ isPostMethod } onChange={ ( value ) => setAttributes( { ...value } ) } value={ honeypot } />
 			<PanelReCaptchaSettings doRender={ isPostMethod } onChange={ () => setAttributes( { isCaptcha: ! isCaptcha } ) } value={ isCaptcha } />
-			<PanelUpsell pluginSlug="flash-form" />
+			<PanelUpsell initialOpen={ false } pluginSlug="flash-form" />
 		</InspectorControls>
 	);
 }
