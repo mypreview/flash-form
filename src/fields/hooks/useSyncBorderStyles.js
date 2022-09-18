@@ -2,7 +2,12 @@
  * External dependencies
  */
 import { useDidUpdate } from '@mypreview/unicorn-react-hooks';
-import { merge, defaultTo } from 'lodash';
+import defaultTo from 'lodash/defaultTo';
+
+/**
+ * WordPress dependencies
+ */
+import { useCallback } from '@wordpress/element';
 
 /**
  * Synchronizes border styles defined at the form block level.
@@ -17,23 +22,26 @@ import { merge, defaultTo } from 'lodash';
  * @param     {Function}       setAttributes    	  Function to update individual attributes based on user interactions.
  * @return    {void}
  */
-export default ( { style: styles }, { borderColor, style: formStyles }, setAttributes ) => {
-	const block = defaultTo( styles, {} );
-	const { color, radius, style, width } = defaultTo( formStyles?.border, {} );
+export default ( { style: blockStyles }, { borderColor, style: formStyles }, setAttributes ) => {
+	const block = defaultTo( blockStyles, {} );
+	const border = defaultTo( blockStyles?.border, {} );
+	const form = defaultTo( formStyles?.border, {} );
+	const { color, radius, style, width } = form;
+	const setStyle = useCallback( ( prop ) => ( { style: { ...block, border: { ...border, ...prop } } } ), [ block, border ] );
 
 	useDidUpdate( () => {
 		setAttributes( { borderColor } );
 	}, [ borderColor ] );
 	useDidUpdate( () => {
-		setAttributes( { style: merge( {}, styles, { border: { ...block, color } } ) } );
+		setAttributes( setStyle( { color } ) );
 	}, [ color ] );
 	useDidUpdate( () => {
-		setAttributes( { style: merge( {}, styles, { border: { ...block, radius } } ) } );
+		setAttributes( setStyle( { radius } ) );
 	}, [ radius ] );
 	useDidUpdate( () => {
-		setAttributes( { style: merge( {}, styles, { border: { ...block, style } } ) } );
+		setAttributes( setStyle( { style } ) );
 	}, [ style ] );
 	useDidUpdate( () => {
-		setAttributes( { style: merge( {}, styles, { border: { ...block, width } } ) } );
+		setAttributes( setStyle( { width } ) );
 	}, [ width ] );
 };
