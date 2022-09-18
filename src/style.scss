@@ -11,7 +11,7 @@
 		@include box(wrap, space-between);
 		gap: var(--gap);
 
-		&#{&}>* {
+		> * {
 			width: 100%;
 			margin: 0;
 		}
