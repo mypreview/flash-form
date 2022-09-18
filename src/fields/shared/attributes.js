@@ -45,6 +45,5 @@ export default Object.freeze( {
 	},
 	width: {
 		type: 'number',
-		default: 100,
 	},
 } );
