@@ -10,7 +10,7 @@
 
 		&.has-custom-width {
 
-			.button {
+			.wp-block-button__link {
 				width: 100%;
 			}
 
@@ -27,6 +27,13 @@
 				}
 
 				$i: $i + 25;
+			}
+		}
+
+		&:not(.has-custom-width) {
+
+			.wp-block-button__link {
+				width: auto;
 			}
 		}
 
