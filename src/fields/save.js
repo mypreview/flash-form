@@ -12,6 +12,7 @@ import {
 	useBlockProps,
 	__experimentalGetBorderClassesAndStyles as getBorderClassesAndStyles,
 	__experimentalGetColorClassesAndStyles as getColorClassesAndStyles,
+	__experimentalGetSpacingClassesAndStyles as getSpacingClassesAndStyles,
 } from '@wordpress/block-editor';
 
 /**
@@ -34,8 +35,11 @@ function save( { attributes } ) {
 	const { defaultValue, formId, id, identifier, isRequired, label, name, noLabel, placeholder, width } = attributes;
 	const borderProps = getBorderClassesAndStyles( attributes );
 	const colorProps = getColorClassesAndStyles( attributes );
+	const spacingProps = getSpacingClassesAndStyles( attributes );
 	const blockProps = useBlockProps.save( {
-		className: classnames( 'has-custom-width', `has-custom-width--${ defaultTo( width, 100 ) }`, 'form-field', {
+		className: classnames( 'form-field', {
+			'has-custom-width': width,
+			[ `has-custom-width--${ width }` ]: width,
 			[ `form-field--${ slugify( identifier ) }` ]: identifier,
 		} ),
 	} );
@@ -73,6 +77,7 @@ function save( { attributes } ) {
 				style={ {
 					...colorProps.style,
 					...borderProps.style,
+					...spacingProps.style,
 				} }
 				type={ defaultTo( inputType, inputIdentifier ) }
 				value={ defaultValue }

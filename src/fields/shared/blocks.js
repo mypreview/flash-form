@@ -66,6 +66,11 @@ export default applyFilters(
 				},
 				keywords: [ __( 'confirm', 'flash-form' ), __( 'accept', 'flash-form' ) ],
 				name: 'checkbox',
+				supports: {
+					spacing: {
+						padding: false,
+					},
+				},
 				title: __( 'Checkbox', 'flash-form' ),
 			},
 			{
@@ -77,6 +82,11 @@ export default applyFilters(
 				},
 				keywords: [ __( 'choose', 'flash-form' ), __( 'option', 'flash-form' ), __( 'multiple', 'flash-form' ) ],
 				name: 'checkboxes',
+				supports: {
+					spacing: {
+						padding: false,
+					},
+				},
 				title: __( 'Checkbox Group', 'flash-form' ),
 			},
 			{
@@ -143,6 +153,11 @@ export default applyFilters(
 				},
 				keywords: [ __( 'choose', 'flash-form' ), __( 'option', 'flash-form' ), __( 'select', 'flash-form' ) ],
 				name: 'radio',
+				supports: {
+					spacing: {
+						padding: false,
+					},
+				},
 				title: __( 'Radio', 'flash-form' ),
 			},
 			{
@@ -152,6 +167,11 @@ export default applyFilters(
 				},
 				keywords: [ __( 'dropdown', 'flash-form' ), __( 'option', 'flash-form' ), __( 'select', 'flash-form' ) ],
 				name: 'select',
+				supports: {
+					spacing: {
+						padding: false,
+					},
+				},
 				title: __( 'Select', 'flash-form' ),
 			},
 			{

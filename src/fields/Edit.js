@@ -9,7 +9,12 @@ import { defaultTo, isString, isUndefined } from 'lodash';
 /**
  * WordPress dependencies
  */
-import { useBlockProps, __experimentalUseBorderProps as useBorderProps, __experimentalUseColorProps as useColorProps } from '@wordpress/block-editor';
+import {
+	useBlockProps,
+	__experimentalUseBorderProps as useBorderProps,
+	__experimentalUseColorProps as useColorProps,
+	__experimentalGetSpacingClassesAndStyles as useSpacingProps,
+} from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -37,9 +42,12 @@ function Edit( { attributes, clientId, context, isSelected, setAttributes } ) {
 	const { inputClassName, InputComponent, inputIdentifier, inputProps, inputType, inputWrapperClassName } = usePrepareInputProps( clientId, setAttributes );
 	const borderProps = useBorderProps( attributes );
 	const colorProps = useColorProps( attributes );
+	const spacingProps = useSpacingProps( attributes );
 	const { defaultValue, formId, isRequired, label, noLabel, placeholder, width } = attributes;
 	const blockProps = useBlockProps( {
-		className: classnames( 'has-custom-width', `has-custom-width--${ defaultTo( width, 100 ) }`, 'form-field', {
+		className: classnames( 'form-field', {
+			'has-custom-width': width,
+			[ `has-custom-width--${ width }` ]: width,
 			[ `form-field--${ slugify( inputIdentifier ) }` ]: inputIdentifier,
 		} ),
 	} );
@@ -76,6 +84,7 @@ function Edit( { attributes, clientId, context, isSelected, setAttributes } ) {
 				style={ {
 					...colorProps.style,
 					...borderProps.style,
+					...spacingProps.style,
 				} }
 				type={ defaultTo( inputType, inputIdentifier ) }
 				value={ defaultValue || placeholder || '' }
