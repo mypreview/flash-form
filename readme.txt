@@ -42,14 +42,33 @@ The manual installation method requires downloading the plugin and uploading it 
 Automatic updates should work smoothly, but we still recommend you back up your site.
 
 == Frequently Asked Questions ==
-= How is data privacy (GDPR) being ensured? =
-To ensure the plugin is as privacy focused as possible it:
+= What is “Flash Form”? =
+“Flash Form” is a block-first, dependency-free form builder and automation tool designed for high-performance teams. In addition to creating forms and surveys using the native WordPress editor interface, developers can leverage the Gutenberg API and React.js to fully integrate their custom fields and customize the out-of-the-box offering of the block to meet their application or website needs using React components.
 
-* Does not use cookies.
-* Does not track your usage of the plugin.
-* Does not write any user personal data to the database.
-* Does not phone out. No data is shared with third parties.
-* Does not add generator comments, or secret comments to your site’s HTML.
+= How is “Flash Form” different than other plugins? =
+“Flash Form” is purpose-built with the needs of developers in mind. The block interface decouples the traditional form builder into its independent offerings.
+Most well-known form builder plugins would register a custom post type on your dashboard upon plugin activation and require you to publish your form or survey as an individual post with an interface usually cluttered and bloated with nested options often not used at all. As soon as you publish the form post, a unique shortcode will be generated, allowing you to place the form in your post or page content of your choosing.
+
+With “Flash Form,” you create and customize simultaneously with a live preview of how your form will look even before hitting the publish button.
+
+This allows for limitless customization and control, native performance, air-tight security (honeypot, captcha, etc.), and better end-user experience while saving countless hours of manual, error-prone hand coding.
+
+= How is spam protection being ensured? =
+“Flash Form” has a built-in Honeypot feature and integrates with Google reCAPTCHA V2 service to offer spam protection for messages.
+
+= The form block won't load! What to do? Help! =
+That’s almost always a clash with another plugin. We always work hard to make “Flash Form” compatible with the whole plugin-verse. As it turns out, there are many possible combinations, and it’s not humanly achievable to test every one of them. We’re sorry!
+
+To rule out those conflicts, try deactivating all plugins except “Flash Form” on the Plugins screen.
+
+If that didn’t help, double-check if there’s an error printed out on your [browser console](https://wordpress.org/support/article/using-your-browser-to-diagnose-javascript-errors/ "Using Your Browser to Diagnose JavaScript Errors") while editing a page or post with “Gutenberg” editor support.
+
+Feel free to start a new topic [here](https://wordpress.org/support/plugin/flash-form "Flash Form Support Forum") and share a screenshot or copy-pasted error message. We’ll be happy to help!
+
+= Can I request a feature? =
+Sure thing. We’re always open to hearing ways you think we can improve and evolve. To make a request, start a new support topic [here](https://wordpress.org/support/plugin/flash-form "Flash Form Support Forum").
+
+Please include an example or specific use case so we can understand exactly what you’re after and whether others share your needs.
 
 = How do I get help with the plugin? =
 The easiest way to receive support is to “Create a new topic” by visiting Community Forums page [here](https://wordpress.org/support/plugin/flash-form "Flash Form Support Forum").
@@ -76,7 +95,7 @@ If you or your company use any of my projects or like what I’m doing, please c
 Please share your experience by leaving this plugin [5 shining stars](https://wordpress.org/support/plugin/flash-form/reviews/ "Rate Flash Form 5 stars") if you like it, thanks!
 
 = I need help customizing this plugin? =
-Professional engineer and independent creative technologist in tech · over 6 years experience working from prototype to production · developing WordPress products, services, and eCommerce solutions.
+Professional engineer and independent creative technologist in tech · over 7 years experience working from prototype to production · developing WordPress products, services, and eCommerce solutions.
 
 [Available for hire &#8594;](https://mahdiyazdani.com "Mahdi Yazdani’s personal website")
 
