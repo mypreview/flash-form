@@ -32,7 +32,9 @@ export default {
 		reusable: false,
 		spacing: {
 			margin: [ 'bottom', 'top' ],
+			padding: true,
 			units: [ 'px', 'em', 'rem' ],
+			__experimentalSkipSerialization: true,
 		},
 		__experimentalBorder: {
 			color: true,
