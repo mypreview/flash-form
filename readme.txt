@@ -90,14 +90,12 @@ Here’s the [GitHub development repository &#8594;](https://github.com/myprevie
 = Did you like the idea behind this plugin? =
 If you or your company use any of my projects or like what I’m doing, please consider [making a donation](https://www.buymeacoffee.com/mahdiyazdani) so I can continue maintaining and evolving all my projects and new ones. I’m in this for the long run.
 
---AND/OR--
-
-Please share your experience by leaving this plugin [5 shining stars](https://wordpress.org/support/plugin/flash-form/reviews/ "Rate Flash Form 5 stars") if you like it, thanks!
+Share your experience by leaving this plugin [5 shining stars](https://wordpress.org/support/plugin/flash-form/reviews/ "Rate Flash Form 5 stars") if you like it.
 
 = I need help customizing this plugin? =
-Professional engineer and independent creative technologist in tech · over 7 years experience working from prototype to production · developing WordPress products, services, and eCommerce solutions.
+Get free of charge advice on what could be done or how complex different approaches are.
 
-[Available for hire &#8594;](https://mahdiyazdani.com "Mahdi Yazdani’s personal website")
+[Start a consultation &#8594;](https://mahdiyazdani.com "Mahdi Yazdani’s personal website")
 
 == Screenshots ==
 1. Form submission via HTTP "GET" method.
