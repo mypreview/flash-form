@@ -16,6 +16,7 @@ import { __ } from '@wordpress/i18n';
 import icons from '../assets/icons.json';
 import { ButtonControl, CheckboxesControl, RadioControl, SelectControl } from '../components';
 import { attributes, settings } from '.';
+import { transforms } from '../utils';
 
 /**
  * The form block comes with a set of nested blocks and contains
@@ -88,6 +89,9 @@ export default applyFilters(
 					},
 				},
 				title: __( 'Checkbox Group', 'flash-form' ),
+				transforms: {
+					blocks: [ 'select', 'radio' ],
+				},
 			},
 			{
 				description: __( 'The best way to set a date. Add a date picker.', 'flash-form' ),
@@ -97,6 +101,9 @@ export default applyFilters(
 				keywords: [ __( 'calendar', 'flash-form' ), __( 'date month year', 'flash-form' ) ],
 				name: 'date',
 				title: __( 'Date Picker', 'flash-form' ),
+				transforms: {
+					blocks: [ 'email', 'name', 'number', 'tel', 'text', 'textarea', 'url' ],
+				},
 			},
 			{
 				description: __( 'Want to reply to folks? Add an email address input.', 'flash-form' ),
@@ -106,6 +113,9 @@ export default applyFilters(
 				keywords: [ __( 'e-mail', 'flash-form' ), __( 'mail', 'flash-form' ) ],
 				name: 'email',
 				title: __( 'Email', 'flash-form' ),
+				transforms: {
+					blocks: [ 'date', 'name', 'number', 'tel', 'text', 'textarea', 'url' ],
+				},
 			},
 			{
 				description: __( 'Let folks speak their mind. This text box is great for longer responses.', 'flash-form' ),
@@ -117,6 +127,9 @@ export default applyFilters(
 				keywords: [ __( 'textarea', 'flash-form' ), __( 'multiline text', 'flash-form' ) ],
 				name: 'textarea',
 				title: __( 'Message', 'flash-form' ),
+				transforms: {
+					blocks: [ 'date', 'email', 'name', 'number', 'tel', 'text', 'url' ],
+				},
 			},
 			{
 				description: __( 'Introductions are important. Add an input for folks to add their name.', 'flash-form' ),
@@ -127,15 +140,18 @@ export default applyFilters(
 				keywords: [ __( 'first name', 'flash-form' ), __( 'last name', 'flash-form' ) ],
 				name: 'name',
 				title: __( 'Name', 'flash-form' ),
+				transforms: {
+					blocks: [ 'date', 'email', 'number', 'tel', 'text', 'textarea', 'url' ],
+				},
 			},
 			{
 				description: __( 'Numeric input element used to let the user enter a number.', 'flash-form' ),
-				extraProps: {
-					type: 'number',
-				},
 				keywords: [ __( 'integer', 'flash-form' ), __( 'numeric', 'flash-form' ) ],
 				name: 'number',
 				title: __( 'Number', 'flash-form' ),
+				transforms: {
+					blocks: [ 'date', 'email', 'name', 'tel', 'text', 'textarea', 'url' ],
+				},
 			},
 			{
 				description: __( 'Add a phone number input.', 'flash-form' ),
@@ -145,6 +161,9 @@ export default applyFilters(
 				keywords: [ __( 'phone', 'flash-form' ), __( 'cellular', 'flash-form' ), __( 'mobile', 'flash-form' ) ],
 				name: 'tel',
 				title: __( 'Phone Number', 'flash-form' ),
+				transforms: {
+					blocks: [ 'date', 'email', 'name', 'number', 'text', 'textarea', 'url' ],
+				},
 			},
 			{
 				description: __( 'Add several radio button items. Only one radio item can be selected at a time.', 'flash-form' ),
@@ -159,6 +178,9 @@ export default applyFilters(
 					},
 				},
 				title: __( 'Radio', 'flash-form' ),
+				transforms: {
+					blocks: [ 'checkboxes', 'select' ],
+				},
 			},
 			{
 				description: __( 'Compact, but powerful. Add a select box with several items.', 'flash-form' ),
@@ -173,12 +195,18 @@ export default applyFilters(
 					},
 				},
 				title: __( 'Select', 'flash-form' ),
+				transforms: {
+					blocks: [ 'checkboxes', 'radio' ],
+				},
 			},
 			{
 				description: __( 'When you need just a small amount of text, add a text input.', 'flash-form' ),
 				keywords: [ __( 'input', 'flash-form' ), __( 'generic', 'flash-form' ) ],
 				name: 'text',
 				title: __( 'Text', 'flash-form' ),
+				transforms: {
+					blocks: [ 'date', 'email', 'name', 'number', 'tel', 'textarea', 'url' ],
+				},
 			},
 			{
 				description: __( 'Add an address input for a website.', 'flash-form' ),
@@ -188,6 +216,9 @@ export default applyFilters(
 				keywords: [ __( 'url', 'flash-form' ), __( 'internet page', 'flash-form' ) ],
 				name: 'url',
 				title: __( 'Website', 'flash-form' ),
+				transforms: {
+					blocks: [ 'date', 'email', 'name', 'number', 'tel', 'text', 'textarea' ],
+				},
 			},
 		],
 		( block ) => {
@@ -197,6 +228,10 @@ export default applyFilters(
 
 			if ( ! has( block, [ 'attributes' ] ) ) {
 				block.attributes = attributes;
+			}
+
+			if ( has( block, [ 'transforms' ] ) ) {
+				block.transforms = transforms( block.name, block.transforms );
 			}
 
 			return merge( {}, settings, merge( {}, block, { extraProps: { identifier } } ) );
