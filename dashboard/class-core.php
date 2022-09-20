@@ -63,22 +63,6 @@ if ( ! class_exists( Core::class ) ) :
 		}
 
 		/**
-		 * Display additional links in plugins table page.
-		 * Filters the list of action links displayed for a specific plugin in the Plugins list table.
-		 *
-		 * @since     1.0.0
-		 * @param     array $links    Plugin table/item action links.
-		 * @return    array
-		 */
-		public function add_action_links( array $links ): array {
-			$plugin_links = array();
-			/* translators: 1: Open anchor tag, 2: Close anchor tag. */
-			$plugin_links[] = sprintf( _x( '%1$sHire Me!%2$s', 'plugin link', 'flash-form' ), sprintf( '<a href="%s" class="button-link-delete" target="_blank" rel="noopener noreferrer nofollow" title="%s">', esc_url( PLUGIN['author_uri'] ), esc_attr_x( 'Looking for help? Hire Me!', 'plugin link', 'flash-form' ) ), '</a>' );
-
-			return array_merge( $plugin_links, $links );
-		}
-
-		/**
 		 * Add additional helpful links to the plugin’s metadata.
 		 *
 		 * @since     1.0.0

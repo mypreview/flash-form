@@ -91,7 +91,6 @@ if ( ! class_exists( 'Core' ) ) :
 
 			$this->loader->add_action( 'init', $plugin_dashboard, 'register_block' );
 			$this->loader->add_action( 'rest_api_init', $plugin_dashboard, 'rest_api' );
-			$this->loader->add_filter( 'plugin_action_links_' . PLUGIN['basename'], $plugin_dashboard, 'add_action_links' );
 			$this->loader->add_filter( 'plugin_row_meta', $plugin_dashboard, 'add_meta_links', 10, 2 );
 		}
 
