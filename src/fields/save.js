@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import { blockClassName, slugify } from '@mypreview/unicorn-js-utils';
+import { blockClassName, reducer, slugify } from '@mypreview/unicorn-js-utils';
 import classnames from 'classnames';
 import { defaultTo, isEmpty } from 'lodash';
 
@@ -19,7 +19,7 @@ import {
  * Internal dependencies
  */
 import { InputControl, LabelControl } from './components';
-import { extraPropsFinder } from './utils';
+import { dynamicProps, extraPropsFinder } from './utils';
 
 /**
  * The save function defines the way in which the different attributes should
@@ -28,11 +28,11 @@ import { extraPropsFinder } from './utils';
  *
  * @see 	  https://developer.wordpress.org/block-editor/developers/block-api/block-edit-save/#save
  * @param 	  {Object} 		   props               Block meta-data properties.
- * @param 	  {Object} 		   props.attributes    Block attributes.
+ * @param 	  {Object} 		   props.attributes    Available block attributes and their corresponding values.
  * @return    {JSX.Element} 					   Field element to render.
  */
 function save( { attributes } ) {
-	const { defaultValue, formId, id, identifier, isRequired, label, name, noLabel, placeholder, width } = attributes;
+	const { defaultValue, id, identifier, isRequired, label, name, noLabel, placeholder, width } = attributes;
 	const borderProps = getBorderClassesAndStyles( attributes );
 	const colorProps = getColorClassesAndStyles( attributes );
 	const spacingProps = getSpacingClassesAndStyles( attributes );
@@ -48,11 +48,13 @@ function save( { attributes } ) {
 	const {
 		className: inputClassName,
 		Component: InputComponent,
+		dynamic: InputDynamicProps,
 		identifier: inputIdentifier,
 		type: inputType,
 		wrapperClassName: inputWrapperClassName,
-		...inputProps
+		...otherProps
 	} = extraProps;
+	const inputProps = reducer( otherProps, dynamicProps( InputDynamicProps, attributes ) );
 
 	return (
 		<div { ...blockProps }>
@@ -68,7 +70,6 @@ function save( { attributes } ) {
 			<InputControl
 				className={ classnames( inputClassName, borderProps.className, colorProps.className ) }
 				Component={ InputComponent }
-				form={ formId }
 				id={ name || id }
 				isSave
 				name={ name || id }

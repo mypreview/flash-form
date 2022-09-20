@@ -51,6 +51,7 @@ export default applyFilters(
 				extraProps: {
 					className: 'button wp-block-button__link',
 					Component: ButtonControl,
+					dynamic: { form: 'formId' },
 					type: 'submit',
 				},
 				keywords: [ __( 'submit', 'flash-form' ), __( 'send', 'flash-form' ) ],

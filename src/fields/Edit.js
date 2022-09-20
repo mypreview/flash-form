@@ -39,11 +39,15 @@ import { usePrepareInputProps, useSyncBorderStyles, useSyncContextValues } from 
 function Edit( { attributes, clientId, context, isSelected, setAttributes } ) {
 	useSyncContextValues( context, setAttributes );
 	useSyncBorderStyles( attributes, context, setAttributes );
-	const { inputClassName, InputComponent, inputIdentifier, inputProps, inputType, inputWrapperClassName } = usePrepareInputProps( clientId, setAttributes );
+	const { inputClassName, InputComponent, inputIdentifier, inputProps, inputType, inputWrapperClassName } = usePrepareInputProps(
+		attributes,
+		clientId,
+		setAttributes
+	);
 	const borderProps = useBorderProps( attributes );
 	const colorProps = useColorProps( attributes );
 	const spacingProps = useSpacingProps( attributes );
-	const { defaultValue, formId, isRequired, label, noLabel, placeholder, width } = attributes;
+	const { defaultValue, isRequired, label, noLabel, placeholder, width } = attributes;
 	const blockProps = useBlockProps( {
 		className: classnames( 'form-field', {
 			'has-custom-width': width,
@@ -76,7 +80,6 @@ function Edit( { attributes, clientId, context, isSelected, setAttributes } ) {
 			<InputControl
 				className={ classnames( 'components-text-control__input', inputClassName, borderProps.className, colorProps.className ) }
 				Component={ InputComponent }
-				form={ formId }
 				id={ clientId }
 				isSelected={ isSelected }
 				onChange={ handleOnChangeInput }
