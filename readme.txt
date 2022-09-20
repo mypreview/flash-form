@@ -104,7 +104,8 @@ Get free of charge advice on what could be done or how complex different approac
 
 == Changelog ==
 = 1.1.0 =
-Added basic integration with Google reCaptcha V2.
+* Feature: Added basic integration with Google reCaptcha V2.
+* Feature: Allow form field blocks to be transformed where applicable.
 
 = 1.0.0 =
 * Initial release.
