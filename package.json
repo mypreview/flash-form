@@ -43,7 +43,7 @@
 	"dependencies": {
 		"@mypreview/unicorn-js-upsell": "1.0.1",
 		"@mypreview/unicorn-js-utils": "1.4.0",
-		"@mypreview/unicorn-react-components": "1.6.2",
+		"@mypreview/unicorn-react-components": "1.6.3",
 		"@mypreview/unicorn-react-hooks": "1.4.0",
 		"@mypreview/unicorn-style-utils": "1.1.1",
 		"@wordpress/block-editor": "10.0.0",
