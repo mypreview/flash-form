@@ -93,9 +93,11 @@ if ( ! class_exists( Core::class ) ) :
 			// Only print-out additional fields when the submission method set to be "POST".
 			if ( 'post' === $attributes['method'] ?? 'post' && \apply_filters( 'mypreview_flash_form_post_method_nonce_layer', true ) ) {
 				$form_id  = $attributes['formId'] ?? '';
+				$hash     = $attributes['_hash'] ?? '';
 				$nonce    = Utils::get_nonce_key( $form_id );
 				$content .= \wp_nonce_field( PLUGIN['nonce'], $nonce, true, false );
 				$content .= '<input type="hidden" name="form_id" value="' . \esc_html( $form_id ) . '" />';
+				$content .= '<input type="hidden" name="hash" value="' . $hash . '" />';
 				$content .= '<input type="hidden" name="timestamp" value="' . strtotime( 'now' ) . '" />';
 			}
 

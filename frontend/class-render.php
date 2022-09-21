@@ -35,6 +35,7 @@ if ( ! class_exists( Render::class ) ) :
 		 * @return    string
 		 */
 		public static function callback( array $attributes = array(), string $content ): ?string {
+			$attributes['_hash'] = \sha1( \wp_json_encode( $attributes ) . $content );
 			// Look for the form response, if there is any!
 			$return = self::process( $attributes, $content );
 
@@ -116,9 +117,11 @@ if ( ! class_exists( Render::class ) ) :
 
 				// Make sure that the response is null and nothing before this
 				// conditional statement is not meant to be displayed on the page.
-				if ( is_null( $response ) ) {
+				// // // // // // // // // // // // // // // // // // // // // // /
+				// Avoid timing attack with ensuring safe string (hash) comparison.
+				if ( \is_null( $response ) && \hash_equals( $attributes['_hash'] ?? '', \wp_unslash( $data['hash'] ?? '' ) ) ) {
 					// Remove security specific key/values.
-					$unset_fields = \apply_filters( 'mypreview_flash_form_submit_unset_fields', array( '_wp_http_referer', 'action', 'form_id', 'timestamp', $nonce ), $attributes, $form_id );
+					$unset_fields = \apply_filters( 'mypreview_flash_form_submit_unset_fields', array( '_wp_http_referer', 'action', 'form_id', 'hash', 'timestamp', $nonce ), $attributes, $form_id );
 					foreach ( $unset_fields as $unset_field ) {
 						if ( isset( $data[ $unset_field ] ) ) {
 							unset( $data[ $unset_field ] );
@@ -129,8 +132,14 @@ if ( ! class_exists( Render::class ) ) :
 					$dom->loadHTML( mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' ), LIBXML_HTML_NODEFDTD | LIBXML_HTML_NOIMPLIED );
 					$xpath         = new \DomXPath( $dom );
 					$send_email    = new Send_Email();
-					$prepare_email = $send_email->prepare( $to, $subject, $data, $xpath, $referer );
-					$has_fired     = $send_email->fire( ...$prepare_email );
+					$prepare_email = array();
+					$has_fired     = false;
+
+					// Filter to choose whether an email should be sent after each successful form submission.
+					if ( \apply_filters( 'mypreview_flash_form_should_send_email', true, $form_id, $post->ID ) ) {
+						$prepare_email = $send_email->prepare( $to, $subject, $data, $xpath, $referer );
+						$has_fired     = $send_email->fire( ...$prepare_email );
+					}
 
 					/**
 					 * Allow third-party resources to extend the block content.
