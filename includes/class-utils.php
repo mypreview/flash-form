@@ -94,6 +94,40 @@ if ( ! class_exists( 'Utils' ) ) :
 		}
 
 		/**
+		 * Determines whether the variable is a valid array and has at least one item within it.
+		 *
+		 * @since     1.1.0
+		 * @param     array $input    The array to check.
+		 * @return    bool
+		 */
+		public static function if_array( array $input ): bool {
+			if ( is_array( $input ) && ! empty( $input ) ) {
+				return true;
+			}
+
+			return false;
+		}
+
+		/**
+		 * Sanitizes content for allowed HTML tags for post content.
+		 *
+		 * @since     1.1.0
+		 * @param     string $input      The context for which to retrieve tags.
+		 * @param     string $context    The context for which to retrieve tags. Allowed values are "post", "strip", "data", "entities".
+		 * @param     bool   $echo       Optional. Echo the string or return it.
+		 * @return    string
+		 */
+		public static function safe_html( string $input, string $context = 'post', bool $echo = true ): string {
+			$return = \wp_kses( $input, \wp_kses_allowed_html( $context ) );
+
+			if ( $echo ) {
+				echo $return; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			}
+
+			return $return;
+		}
+
+		/**
 		 * Returns whether the current user has the specified capability.
 		 *
 		 * @since     1.0.0
