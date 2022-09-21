@@ -90,6 +90,7 @@ if ( ! class_exists( 'Core' ) ) :
 			$plugin_dashboard = new Dashboard();
 
 			$this->loader->add_action( 'init', $plugin_dashboard, 'register_block' );
+			$this->loader->add_action( 'init', $plugin_dashboard, 'register_entries' );
 			$this->loader->add_action( 'rest_api_init', $plugin_dashboard, 'rest_api' );
 			$this->loader->add_filter( 'plugin_row_meta', $plugin_dashboard, 'add_meta_links', 10, 2 );
 		}
