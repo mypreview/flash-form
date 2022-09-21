@@ -34,10 +34,10 @@ if ( ! class_exists( Honeypot::class ) ) :
 		 * @return    void
 		 */
 		public function __construct() {
-			add_filter( 'mypreview_flash_form_nonce_layer', array( $this, 'time_check' ), 10, 2 );
-			add_filter( 'mypreview_flash_form_nonce_layer', array( $this, 'inline_css' ), 20, 2 );
-			add_filter( 'mypreview_flash_form_submit_unset_fields', array( $this, 'unset' ), 10, 3 );
-			add_action( 'mypreview_flash_form_submit_before_response', array( $this, 'validate' ), 10, 3 );
+			\add_filter( 'mypreview_flash_form_nonce_layer', array( $this, 'time_check' ), 10, 2 );
+			\add_filter( 'mypreview_flash_form_nonce_layer', array( $this, 'inline_css' ), 20, 2 );
+			\add_filter( 'mypreview_flash_form_submit_unset_fields', array( $this, 'unset' ), 10, 3 );
+			\add_action( 'mypreview_flash_form_submit_before_response', array( $this, 'validate' ), 10, 3 );
 		}
 
 		/**
