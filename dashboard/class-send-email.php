@@ -35,14 +35,14 @@ if ( ! class_exists( Send_Email::class ) ) :
 		 * @return    array
 		 */
 		public function prepare( array $to, string $subject, array $data, object $xpath, string $referer ): array {
-			$headers              = array();
-			$message              = array();
-			$comment_author       = $this->input_node( $xpath, 'input', 'autocomplete', 'given-name', $data );
-			$comment_author_email = $this->input_node( $xpath, 'input', 'autocomplete', 'username', $data );
+			$headers      = array();
+			$message      = array();
+			$author       = $this->input_node( $xpath, 'input', 'autocomplete', 'given-name', $data );
+			$author_email = $this->input_node( $xpath, 'input', 'autocomplete', 'username', $data );
 
-			if ( \is_email( $comment_author_email ) ) {
-				$headers[] = 'From: "' . $comment_author . '" <' . $comment_author_email . ">\r\n";
-				$headers[] = 'Reply-To: "' . $comment_author . '" <' . $comment_author_email . ">\r\n";
+			if ( \is_email( $author_email ) ) {
+				$headers[] = 'From: "' . $author . '" <' . $author_email . ">\r\n";
+				$headers[] = 'Reply-To: "' . $author . '" <' . $author_email . ">\r\n";
 			}
 
 			foreach ( $data as $id => $value ) {
@@ -52,23 +52,27 @@ if ( ! class_exists( Send_Email::class ) ) :
 				$message[]  = \sprintf( '<b>%1$s</b>: %2$s%3$s', Utils::clean( $label ), Utils::clean( $value ), '<br />' );
 			}
 
+			$site_name    = isset( \get_current_site()->site_name ) && \get_current_site()->site_name ? \get_current_site()->site_name : '"' . \get_option( 'blogname' ) . '"';
+			$is_logged_in = \is_user_logged_in();
+			$timestamp    = self::get_timestamp();
+			$ip_address   = self::get_ip_address();
+
 			array_push(
 				$message,
 				'<br />',
 				'<hr />',
-				__( 'Time:', 'flash-form' ) . ' ' . self::get_timestamp() . '<br />',
-				__( 'IP Address:', 'flash-form' ) . ' ' . self::get_ip_address() . '<br />',
-				__( 'Contact Form URL:', 'flash-form' ) . ' ' . $referer . '<br />'
+				__( 'Time:', 'flash-form' ) . ' ' . $timestamp . '<br />',
+				__( 'IP Address:', 'flash-form' ) . ' ' . $ip_address . '<br />',
+				__( 'Form URL:', 'flash-form' ) . ' ' . \esc_url( $referer ) . '<br />'
 			);
 
-			if ( \is_user_logged_in() ) {
+			if ( $is_logged_in ) {
 				array_push(
 					$message,
 					sprintf(
 						/* translators: %s: Current website’s name. */
 						'<p>' . __( 'Sent by a verified %s user.', 'flash-form' ) . '</p>',
-						isset( $GLOBALS['current_site']->site_name ) && $GLOBALS['current_site']->site_name ?
-						$GLOBALS['current_site']->site_name : '"' . \get_option( 'blogname' ) . '"'
+						$site_name
 					)
 				);
 			} else {
@@ -80,14 +84,45 @@ if ( ! class_exists( Send_Email::class ) ) :
 			 *
 			 * @param    string $message    Feedback email message.
 			 */
-			$message = \apply_filters( 'mypreview_flash_form_prepare_email_message', $message );
-			$message = $this->wrap_in_html( join( '', $message ) );
+			$message_raw = \apply_filters( 'mypreview_flash_form_prepare_email_message', $message );
+			$message     = $this->wrap_in_html( join( '', $message_raw ) );
 			/**
 			 * Filters the headers sent via email after a successful form submission.
 			 *
 			 * @param    array $headers    Additional headers.
 			 */
 			$headers = \apply_filters( 'mypreview_flash_form_prepare_email_headers', $headers );
+
+			/**
+			 * Additional tasks can be executed here before preparing the email to be sent.
+			 */
+			do_action(
+				'mypreview_flash_form_before_prepare_email',
+				\apply_filters(
+					'mypreview_flash_form_before_prepare_email_args',
+					array(
+						'headers' => array(
+							'raw'      => array(
+								'author'       => $author,
+								'author_email' => $author_email,
+								'subject'      => $subject,
+								'to'           => $to,
+							),
+							'rendered' => $headers,
+						),
+						'message' => array(
+							'raw'      => $message_raw,
+							'rendered' => $message,
+						),
+						'extras' => array(
+							'ip_address'   => $ip_address,
+							'is_logged_in' => $is_logged_in,
+							'referer'      => $referer,
+							'timestamp'    => $timestamp,
+						),
+					)
+				)
+			);
 
 			return \apply_filters( 'mypreview_flash_form_prepare_email_args', array( $to, $subject, $message, $headers ) );
 		}
