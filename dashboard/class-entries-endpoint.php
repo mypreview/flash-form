@@ -22,13 +22,23 @@ if ( ! class_exists( Entries_Endpoint::class ) && class_exists( 'WP_REST_Posts_C
 	class Entries_Endpoint extends \WP_REST_Posts_Controller {
 
 		/**
+		 * Convert the object to a string.
+		 *
+		 * @since     1.0.0
+		 * @return    string
+		 */
+		public function __toString(): string {
+			return __NAMESPACE__ . '\Entries_Endpoint';
+		}
+
+		/**
 		 * Check whether a given request has proper authorization to view form submission entries.
 		 *
 		 * @since     1.0.0
 		 * @param     \WP_REST_Request $request    Full details about the request.
 		 * @return    \WP_Error|boolean
 		 */
-		public function get_items_permissions_check( \WP_REST_Request $request ) {
+		public function get_items_permissions_check( $request ) {
 			if ( ! \is_user_member_of_blog( \get_current_user_id(), \get_current_blog_id() ) ) {
 				return new \WP_Error(
 					'rest_cannot_view',
@@ -47,7 +57,7 @@ if ( ! class_exists( Entries_Endpoint::class ) && class_exists( 'WP_REST_Posts_C
 		 * @param     \WP_REST_Request $request    Full details about the request.
 		 * @return    \WP_Error|boolean
 		 */
-		public function get_item_permissions_check( \WP_REST_Request $request ) {
+		public function get_item_permissions_check( $request ) {
 			if ( ! \is_user_member_of_blog( \get_current_user_id(), \get_current_blog_id() ) ) {
 				return new \WP_Error(
 					'rest_cannot_view',
