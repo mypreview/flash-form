@@ -100,7 +100,6 @@ if ( ! class_exists( Core::class ) ) :
 				$content .= '<input type="hidden" name="form_id" value="' . \esc_attr( $form_id ) . '" />';
 				$content .= '<input type="hidden" name="post_id" value="' . \esc_attr( $post_id ) . '" />';
 				$content .= '<input type="hidden" name="hash" value="' . \esc_attr( $hash ) . '" />';
-				$content .= '<input type="hidden" name="timestamp" value="' . \esc_attr( strtotime( 'now' ) ) . '" />';
 			}
 
 			return \apply_filters( 'mypreview_flash_form_nonce_layer', $content, $attributes );
