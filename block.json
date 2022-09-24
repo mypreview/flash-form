@@ -91,5 +91,6 @@
 		}
 	},
 	"textdomain": "flash-form",
-	"title": "Flash Form"
+	"title": "Flash Form",
+	"usesContext": [ "postId", "postType" ]
 }
