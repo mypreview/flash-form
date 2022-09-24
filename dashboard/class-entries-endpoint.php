@@ -24,8 +24,9 @@ if ( ! class_exists( Entries_Endpoint::class ) && class_exists( 'WP_REST_Posts_C
 		/**
 		 * Check whether a given request has proper authorization to view form submission entries.
 		 *
-		 * @param  \WP_REST_Request $request    Full details about the request.
-		 * @return \WP_Error|boolean
+		 * @since     1.0.0
+		 * @param     \WP_REST_Request $request    Full details about the request.
+		 * @return    \WP_Error|boolean
 		 */
 		public function get_items_permissions_check( \WP_REST_Request $request ) {
 			if ( ! \is_user_member_of_blog( \get_current_user_id(), \get_current_blog_id() ) ) {
@@ -42,8 +43,9 @@ if ( ! class_exists( Entries_Endpoint::class ) && class_exists( 'WP_REST_Posts_C
 		/**
 		 * Check whether a given request has proper authorization to view form submission entry.
 		 *
-		 * @param  \WP_REST_Request $request     Full details about the request.
-		 * @return \WP_Error|boolean
+		 * @since     1.0.0
+		 * @param     \WP_REST_Request $request    Full details about the request.
+		 * @return    \WP_Error|boolean
 		 */
 		public function get_item_permissions_check( \WP_REST_Request $request ) {
 			if ( ! \is_user_member_of_blog( \get_current_user_id(), \get_current_blog_id() ) ) {
