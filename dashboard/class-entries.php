@@ -60,7 +60,7 @@ if ( ! class_exists( Entries::class ) ) :
 			$this->register( $args );
 			\add_action( 'admin_menu', array( $this, 'add_admin_page' ) );
 			\add_action( 'mypreview_flash_form_before_prepare_email', array( $this, 'save' ) );
-			\add_action( 'mypreview_flash_form_response_inserted', array( $this, 'save_meta' ), 10, 2 );
+			\add_action( 'mypreview_flash_form_entry_inserted', array( $this, 'save_meta' ), 10, 2 );
 			\add_action( 'current_screen', array( $this, 'update_unread_edit' ) );
 			\add_action( 'after_delete_post', array( $this, 'update_unread_delete' ), 10, 2 );
 			\add_action( 'manage_' . self::$post_type . '_posts_columns', array( $this, 'custom_columns' ) );
@@ -83,13 +83,13 @@ if ( ! class_exists( Entries::class ) ) :
 					$args,
 					array(
 						'labels'                => array(
-							'name'               => __( 'Form Responses', 'flash-form' ),
-							'singular_name'      => __( 'Form Responses', 'flash-form' ),
-							'search_items'       => __( 'Search Responses', 'flash-form' ),
-							'not_found'          => __( 'No responses found', 'flash-form' ),
-							'not_found_in_trash' => __( 'No responses found', 'flash-form' ),
+							'name'               => __( 'Form Entries', 'flash-form' ),
+							'singular_name'      => __( 'Form Entries', 'flash-form' ),
+							'search_items'       => __( 'Search Entries', 'flash-form' ),
+							'not_found'          => __( 'No entries found', 'flash-form' ),
+							'not_found_in_trash' => __( 'No entries found', 'flash-form' ),
 						),
-						'menu_icon'             => 'dashicons-feedback',
+						'menu_icon'             => self::svg_icon_url(),
 						'show_ui'               => true,
 						'show_in_menu'          => false,
 						'show_in_admin_bar'     => false,
@@ -136,7 +136,7 @@ if ( ! class_exists( Entries::class ) ) :
 				// Callback.
 				null,
 				// Icon.
-				'dashicons-feedback',
+				self::svg_icon_url(),
 				// Position.
 				45
 			);
@@ -145,9 +145,9 @@ if ( ! class_exists( Entries::class ) ) :
 				// Parent slug.
 				PLUGIN['slug'],
 				// Page title.
-				__( 'Responses', 'flash-form' ),
+				__( 'Entries', 'flash-form' ),
 				// Menu title.
-				__( 'Responses', 'flash-form' ),
+				__( 'Entries', 'flash-form' ),
 				// Capability.
 				'edit_pages',
 				// Menu slug.
@@ -174,16 +174,16 @@ if ( ! class_exists( Entries::class ) ) :
 		 * @return    void
 		 */
 		public function save( array $args ): void {
-			global $post;
-
-			$author       = (string) $args['headers']['raw']['author'] ?? '';
-			$author_email = (string) $args['headers']['raw']['author_email'] ?? '';
-			$subject      = (string) $args['headers']['raw']['subject'] ?? '';
-			$message      = (string) $args['message']['rendered'] ?? '';
-			$ip_address   = (string) $args['extras']['ip_address'] ?? '';
-			$timestamp    = (string) $args['extras']['timestamp'] ?? '';
-			$post_title   = "{$author} - {$timestamp}";
-			$post_status  = 'publish';
+			$author          = (string) $args['headers']['raw']['author'] ?? '';
+			$author_email    = (string) $args['headers']['raw']['author_email'] ?? '';
+			$subject         = (string) $args['headers']['raw']['subject'] ?? '';
+			$message         = (string) $args['message']['rendered'] ?? '';
+			$ip_address      = (string) $args['extras']['ip_address'] ?? '';
+			$referer_post_id = (int) $args['extras']['post_id'] ?? 0;
+			$timestamp       = (string) $args['extras']['timestamp'] ?? '';
+			$post_name       = "{$author} - {$timestamp}";
+			$post_title      = \sanitize_text_field( \wp_kses( $subject, \wp_kses_allowed_html( 'post' ) ) );
+			$post_status     = 'publish';
 
 			\add_filter( 'wp_insert_post_data', array( $this, 'nullify_post_author' ), 11, 2 );
 
@@ -192,10 +192,10 @@ if ( ! class_exists( Entries::class ) ) :
 					'post_date'    => \sanitize_text_field( \current_time( 'mysql' ) ),
 					'post_type'    => self::$post_type,
 					'post_status'  => $post_status,
-					'post_parent'  => $post ? (int) $post->ID : 0,
-					'post_title'   => \sanitize_text_field( \wp_kses( $subject, \wp_kses_allowed_html( 'post' ) ) ),
+					'post_parent'  => $referer_post_id,
+					'post_title'   => $subject ? $post_title : $post_name,
 					'post_content' => \wp_kses( "$message\n<!--more-->", \wp_kses_allowed_html( 'post' ) ), // Search is going to pick the data captured here.
-					'post_name'    => \md5( "{$author} - {$timestamp}" ),
+					'post_name'    => \md5( $post_name ),
 				)
 			);
 
@@ -203,15 +203,15 @@ if ( ! class_exists( Entries::class ) ) :
 			\remove_filter( 'wp_insert_post_data', array( $this, 'nullify_post_author' ), 11 );
 
 			if ( 'publish' === $post_status ) {
-				// Increase count of unread responses.
+				// Increase count of unread entries.
 				$unread = (array) \get_option( self::$unread_option, array() );
 				\update_option( self::$unread_option, array( ...$unread, (int) $post_id ) );
 			}
 
 			/**
-			 * Allow third-party resources to modify response post that is being inserted.
+			 * Allow third-party resources to modify form entry post that is being inserted.
 			 */
-			\do_action( 'mypreview_flash_form_response_inserted', $post_id, $args );
+			\do_action( 'mypreview_flash_form_entry_inserted', $post_id, $args );
 		}
 
 		/**
@@ -382,6 +382,19 @@ if ( ! class_exists( Entries::class ) ) :
 			}
 
 			return $return;
+		}
+
+		/**
+		 * Returns a base64-encoded SVG using a data URI, which will be colored to match the color scheme.
+		 * "base64_encode()" function is used to obfuscate the SVG icon to generate data-URI, as recommended by the core.
+		 *
+		 * @see       http://developer.wordpress.org/reference/functions/add_menu_page
+		 * @since     1.1.0
+		 * @return    string
+		 * @phpcs:disable WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
+		 */
+		public static function svg_icon_url(): string {
+			return 'data:image/svg+xml;base64,' . base64_encode( '<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="black" d="m.11 11.905c0-6.567 5.324-11.891 11.89-11.891.04 0 .096-.002.165-.005.51-.018 1.725-.063 1.639.512l-1.101 7.337a.1.1 0 00.088.114l7.387.821a.353.353 0 01.261.539l-1.816 2.905a.353.353 0 01-.35.163l-11.727-1.675a.353.353 0 01-.24-.551l6-8.67c-5.782-.166-10.71 4.61-10.71 10.4 0 1.181.197 2.316.56 3.374.187.55-.117.962-.421 1.375l-.096.13a.292.292 0 01-.506-.046 11.85 11.85 0 01-1.023-4.832zm8.347-2.25a.1.1 0 01-.069-.156l3.006-4.342c.12-.172.39-.067.363.14l-.368 2.764c-.12.802.053 1.142.858 1.232l6.084.633a.1.1 0 01.074.152l-.538.861a.1.1 0 01-.099.046l-9.311-1.33zm15.435 2.448c0 6.679-5.48 11.736-11.995 11.893-.441.01-1.767.042-1.683-.515l1.1-7.337a.1.1 0 00-.087-.114l-7.388-.821a.353.353 0 01-.26-.539l1.816-2.906a.353.353 0 01.35-.162l11.727 1.675c.26.037.39.335.24.551l-6.006 8.675c5.78.16 10.7-4.615 10.7-10.4 0-1.18-.197-2.315-.56-3.373-.188-.55.117-.962.421-1.376l.096-.13a.292.292 0 01.506.047 11.849 11.849 0 011.023 4.832zm-8.33 2.244a.1.1 0 01.067.155l-3.006 4.342c-.12.173-.39.068-.362-.14l.368-2.764c.12-.801-.053-1.142-.859-1.231l-6.083-.633a.1.1 0 01-.074-.152l.538-.862a.1.1 0 01.099-.046l9.311 1.33zm1.208-9.527a.267.267 0 00-.465-.144l-1.805 2.028a.267.267 0 00.175.444l2.088.19c.17.015.311-.13.29-.3l-.283-2.218zm-9.54 14.37a.267.267 0 00.465.144l1.805-2.026a.267.267 0 00-.176-.444l-2.088-.19a.267.267 0 00-.29.3l.285 2.218z"/></svg>' );
 		}
 
 		/**
