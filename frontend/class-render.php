@@ -164,7 +164,7 @@ if ( ! class_exists( Render::class ) ) :
 					}
 				}
 
-				$return = \sprintf( '<div class="contact-form-submission">%s</div>', $response );
+				$return = \sprintf( '<div class="%s__submission">%s</div>', sanitize_html_class( PLUGIN['class_name'] ), $response );
 			}
 
 			return \apply_filters( 'mypreview_flash_form_submit_response', $return );
