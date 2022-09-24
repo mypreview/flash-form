@@ -4,7 +4,7 @@
  *
  * @link          https://mypreview.github.io/flash-form
  * @author        MyPreview (Github: @mahdiyazdani, @gooklani, @mypreview)
- * @since         1.0.0
+ * @since         1.1.0
  *
  * @package       flash-form
  * @subpackage    flash-form/frontend
@@ -84,7 +84,7 @@ if ( ! class_exists( Core::class ) ) :
 		 * came from the location on the current site and not somewhere else.
 		 * The nonce does not offer absolute protection, but should protect against most cases.
 		 *
-		 * @since     1.0.0
+		 * @since     1.1.0
 		 * @param     string $content       The block content.
 		 * @param     array  $attributes    The block attributes.
 		 * @return    string
@@ -92,13 +92,15 @@ if ( ! class_exists( Core::class ) ) :
 		public function nonce_layer( string $content, array $attributes ): string {
 			// Only print-out additional fields when the submission method set to be "POST".
 			if ( 'post' === $attributes['method'] ?? 'post' && \apply_filters( 'mypreview_flash_form_post_method_nonce_layer', true ) ) {
-				$form_id  = $attributes['formId'] ?? '';
-				$hash     = $attributes['_hash'] ?? '';
+				$form_id  = (string) $attributes['formId'] ?? '';
+				$hash     = (string) $attributes['_hash'] ?? '';
+				$post_id  = (string) $attributes['_postId'] ?? '';
 				$nonce    = Utils::get_nonce_key( $form_id );
 				$content .= \wp_nonce_field( PLUGIN['nonce'], $nonce, true, false );
-				$content .= '<input type="hidden" name="form_id" value="' . \esc_html( $form_id ) . '" />';
-				$content .= '<input type="hidden" name="hash" value="' . $hash . '" />';
-				$content .= '<input type="hidden" name="timestamp" value="' . strtotime( 'now' ) . '" />';
+				$content .= '<input type="hidden" name="form_id" value="' . \esc_attr( $form_id ) . '" />';
+				$content .= '<input type="hidden" name="post_id" value="' . \esc_attr( $post_id ) . '" />';
+				$content .= '<input type="hidden" name="hash" value="' . \esc_attr( $hash ) . '" />';
+				$content .= '<input type="hidden" name="timestamp" value="' . \esc_attr( strtotime( 'now' ) ) . '" />';
 			}
 
 			return \apply_filters( 'mypreview_flash_form_nonce_layer', $content, $attributes );

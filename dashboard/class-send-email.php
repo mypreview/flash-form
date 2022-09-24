@@ -32,9 +32,10 @@ if ( ! class_exists( Send_Email::class ) ) :
 		 * @param     array  $data       Submitted form data.
 		 * @param     object $xpath      The DOMDocument associated with the DOMXPath.
 		 * @param     string $referer    Referer from the "_wp_http_referer".
+		 * @param     int    $post_id    The current post ID.
 		 * @return    array
 		 */
-		public function prepare( array $to, string $subject, array $data, object $xpath, string $referer ): array {
+		public function prepare( array $to, string $subject, array $data, object $xpath, string $referer, int $post_id ): array {
 			$headers      = array();
 			$message      = array();
 			$author       = $this->input_node( $xpath, 'input', 'autocomplete', 'given-name', $data );
@@ -103,22 +104,23 @@ if ( ! class_exists( Send_Email::class ) ) :
 					array(
 						'headers' => array(
 							'raw'      => array(
-								'author'       => $author,
-								'author_email' => $author_email,
-								'subject'      => $subject,
-								'to'           => $to,
+								'author'       => (string) $author,
+								'author_email' => (string) $author_email,
+								'subject'      => (string) $subject,
+								'to'           => (array) $to,
 							),
-							'rendered' => $headers,
+							'rendered' => (array) $headers,
 						),
 						'message' => array(
-							'raw'      => $message_raw,
-							'rendered' => $message,
+							'raw'      => (array) $message_raw,
+							'rendered' => (string) $message,
 						),
 						'extras' => array(
-							'ip_address'   => $ip_address,
-							'is_logged_in' => $is_logged_in,
-							'referer'      => $referer,
-							'timestamp'    => $timestamp,
+							'ip_address'   => (string) $ip_address,
+							'is_logged_in' => (bool) $is_logged_in,
+							'post_id'      => (int) $post_id,
+							'referer'      => (string) $referer,
+							'timestamp'    => (string) $timestamp,
 						),
 					)
 				)
