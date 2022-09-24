@@ -31,9 +31,12 @@ const flashForm = {
 		this.vars.action = 'mypreview_flash_form_submit';
 		this.vars.$loading = `<svg height="24" viewBox="0 0 24 24" width="24"><path d="${ icons.loading }" /></svg>`;
 		this.els.$ajaxForms = document.querySelectorAll( `.${ this.vars.block } form.is-ajax` );
+		this.els.$history = window.history;
+		this.els.$submission = document.querySelector( `.${ baseClassName }__submission` );
 	},
 	ready() {
 		this.cache();
+		this.afterSubmit();
 
 		if ( this.els.$ajaxForms ) {
 			this.onSubmit();
@@ -73,6 +76,13 @@ const flashForm = {
 			$button.disabled = false;
 			/* translators: %s: Error message returned from the API response. */
 			throw new Error( sprintf( __( 'The form cannot be submitted because of an error. %s', 'flash-form' ), message ) );
+		}
+	},
+	afterSubmit() {
+		// Only purge history when form submission is confirmed.
+		if ( this.els.$submission && this.els.$history.replaceState ) {
+			// Prevent a resubmit on refresh and back button press/click.
+			this.els.$history.replaceState( null, null, window.location.href );
 		}
 	},
 };
