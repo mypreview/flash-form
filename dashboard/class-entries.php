@@ -31,7 +31,7 @@ if ( ! class_exists( Entries::class ) ) :
 		 * @since    1.1.0
 		 * @var      string    $post_type
 		 */
-		public static $post_type = 'flash-form';
+		public static $post_type = 'flash-form-entries';
 
 		/**
 		 * Name of the option for storing number of unread entries.
@@ -65,6 +65,9 @@ if ( ! class_exists( Entries::class ) ) :
 			\add_action( 'after_delete_post', array( $this, 'update_unread_delete' ), 10, 2 );
 			\add_action( 'manage_' . self::$post_type . '_posts_columns', array( $this, 'custom_columns' ) );
 			\add_action( 'manage_' . self::$post_type . '_posts_custom_column', array( $this, 'custom_column' ), 10, 2 );
+			\add_action( 'add_meta_boxes_' . self::$post_type, array( $this, 'meta_boxes' ) );
+			\add_filter( 'wp_editor_settings', array( $this, 'disable_tinymce_editor' ), 10, 2 );
+			\add_filter( 'post_row_actions', array( $this, 'post_row_actions' ), 10, 2 );
 			\add_filter( 'use_block_editor_for_post_type', array( $this, 'disable_block_editor' ), 10, 2 );
 			\add_filter( 'rest_api_allowed_post_types', array( $this, 'allow_for_rest_api' ) );
 		}
@@ -278,7 +281,6 @@ if ( ! class_exists( Entries::class ) ) :
 				'title'      => __( 'Subject', 'flash-form' ),
 				'given-name' => __( 'Name', 'flash-form' ),
 				'referer'    => __( 'Referer URL', 'flash-form' ),
-				'ip_address' => __( 'IP Address', 'flash-form' ),
 				'date'       => $columns['date'],
 			);
 
@@ -299,22 +301,12 @@ if ( ! class_exists( Entries::class ) ) :
 			$author_email      = $post_meta['headers']['raw']['author_email'] ?? '';
 			$author_email_line = '';
 			$avatar            = \get_avatar( $author_email, 32, '', '', array( 'extra_attr' => 'style="float:left;margin-right:10px;margin-top:3px"' ) );
-			$ip_address        = $post_meta['extras']['ip_address'] ?? '';
-			$is_logged_in      = $post_meta['extras']['is_logged_in'] ?? false;
-			$ip_address_line   = '';
-			$is_logged_in_line = '';
 			$referer           = $post_meta['extras']['referer'] ?? '';
 			$referer_post_id   = \wp_get_post_parent_id( $post_id );
 			$referer_line      = '';
 
 			if ( ! empty( $author_email ) ) {
 				$author_email_line = sprintf( '<a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s</a><br/>', \esc_url( 'mailto:' . $author_email ), \esc_html( $author_email ) );
-			}
-
-			if ( ! empty( $ip_address ) ) {
-				/* translators: 1: Dashicon. */
-				$is_logged_in_line = $is_logged_in ? sprintf( \esc_html__( '%1$s Sent by a verified user', 'flash-form' ), '<span class="dashicons dashicons-yes"></span>' ) : sprintf( \esc_html__( '%1$s Sent by an unverified visitor', 'flash-form' ), '<span class="button-link-delete dashicons dashicons-no"></span>' );
-				$ip_address_line   = sprintf( '<a href="https://ipinfo.io/%1$s" target="_blank" target="_blank" rel="noopener noreferrer nofollow">%2$s<br/>%1$s</a><br/>', \esc_html( $ip_address ), \wp_kses_post( $is_logged_in_line ) );
 			}
 
 			if ( ! empty( $referer ) ) {
@@ -325,14 +317,71 @@ if ( ! class_exists( Entries::class ) ) :
 				case 'given-name':
 					Utils::safe_html( '<div>' . $avatar . '<strong>' . $author . '</strong><br/>' . $author_email_line . '</div>' );
 					break;
-				case 'ip_address':
-					Utils::safe_html( $ip_address_line );
-					break;
 				case 'referer':
 					Utils::safe_html( $referer_line );
 					break;
 
 			}
+		}
+
+		/**
+		 * Adds a few meta box to post edit screen contextually for the entries post type.
+		 *
+		 * @since     1.1.0
+		 * @return    void
+		 */
+		public function meta_boxes(): void {
+			add_meta_box( 'entriesdiv', __( 'Entries', 'flash-form' ), array( $this, 'entriesdiv_callback' ), null, 'normal', 'core' );
+			add_meta_box( 'extrasdiv', __( 'Extras', 'flash-form' ), array( $this, 'extrasdiv_callback' ), null, 'normal', 'core' );
+		}
+
+		/**
+		 * Function that fills the "Entries" meta-box with the desired content.
+		 * This function echos its output.
+		 *
+		 * @since     1.1.0
+		 * @param     \WP_Post $post    The post object.
+		 * @return    void
+		 */
+		public function entriesdiv_callback( \WP_Post $post ): void {
+			$post_id   = Utils::get_localized_post_id( $post->ID );
+			$post_meta = \get_post_meta( $post_id, self::$meta_key, true );
+			$entries   = (array) $post_meta['message']['raw'] ?? array();
+
+			Utils::safe_html( Utils::get_template_html( 'edit/wrapper-start' ) );
+			Utils::safe_html( Utils::get_template_html( 'edit/entries', array( 'entries' => $entries ) ) );
+			Utils::safe_html( Utils::get_template_html( 'edit/wrapper-end' ) );
+		}
+
+		/**
+		 * Function that fills the "Entries" meta-box with the desired content.
+		 * This function echos its output.
+		 *
+		 * @since     1.1.0
+		 * @param     \WP_Post $post    The post object.
+		 * @return    void
+		 */
+		public function extrasdiv_callback( \WP_Post $post ): void {
+			$entries         = array();
+			$post_id         = Utils::get_localized_post_id( $post->ID );
+			$post_meta       = \get_post_meta( $post_id, self::$meta_key, true );
+			$referer_post_id = \wp_get_post_parent_id( $post_id );
+			$entries[]       = array(
+				'label' => __( 'IP address', 'flash-form' ),
+				'value' => $post_meta['extras']['ip_address'] ?? '',
+			);
+			$entries[]       = array(
+				'label' => __( 'User status', 'flash-form' ),
+				'value' => Send_Email::get_user_status( $post_meta['extras']['is_logged_in'] ?? false ),
+			);
+			$entries[]       = array(
+				'label' => __( 'Referrer', 'flash-form' ),
+				'value' => sprintf( '<a href="%1$s" target="_blank" rel="noopener noreferrer">%1$s</a>', \esc_url( $post_meta['extras']['referer'] ?? '' ) ),
+			);
+
+			Utils::safe_html( Utils::get_template_html( 'edit/wrapper-start' ) );
+			Utils::safe_html( Utils::get_template_html( 'edit/entries', array( 'entries' => $entries ) ) );
+			Utils::safe_html( Utils::get_template_html( 'edit/wrapper-end' ) );
 		}
 
 		/**
@@ -350,6 +399,59 @@ if ( ! class_exists( Entries::class ) ) :
 			}
 
 			return $data;
+		}
+
+		/**
+		 * Disable "TinyMCE" HTML Editor for entries post edit screen.
+		 *
+		 * @since     1.1.0
+		 * @param     array  $settings     Array of editor arguments.
+		 * @param     string $editor_id    Unique editor identifier. e.g. "content". Accepts "classic-block" when called from block editor's Classic block.
+		 * @return    array
+		 */
+		public function disable_tinymce_editor( array $settings, string $editor_id ): array {
+			global $current_screen;
+
+			// Ensure entries post-type is the only match.
+			if ( 'content' !== $editor_id || ! function_exists( 'get_current_screen' ) || ! isset( get_current_screen()->post_type ) || get_current_screen()->post_type !== self::$post_type ) {
+				return $settings;
+			}
+
+			$settings['tinymce']       = false;
+			$settings['quicktags']     = false;
+			$settings['media_buttons'] = false;
+			$settings['editor_css']    = '<style>#postdivrich{pointer-events:none;display:none;}</style>';
+
+			return $settings;
+		}
+
+		/**
+		 * Alter the default row action links on the "Posts" list table.
+		 *
+		 * @since     1.1.0
+		 * @param     array    $actions    An array of row action links.
+		 * @param     \WP_Post $post       The post object.
+		 * @return    array
+		 */
+		public function post_row_actions( array $actions, \WP_Post $post ): array {
+			// Ensure entries post-type is the only match.
+			if ( self::$post_type !== $post->post_type ) {
+				return $actions;
+			}
+
+			$post_id        = Utils::get_localized_post_id( $post->ID );
+			$custom_actions = array(
+				'edit'  => sprintf(
+					'<a href="%s" aria-label="%s">%s</a>',
+					esc_url( get_edit_post_link( $post_id ) ),
+					/* translators: %s: Post title. */
+					esc_attr( sprintf( __( 'Edit &#8220;%s&#8221;', 'flash-form' ), wp_kses_post( get_the_title( $post_id ) ) ) ),
+					__( 'View', 'flash-form' )
+				),
+				'trash' => $actions['trash'],
+			);
+
+			return $custom_actions;
 		}
 
 		/**
