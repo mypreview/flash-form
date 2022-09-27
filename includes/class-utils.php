@@ -12,6 +12,8 @@
 
 namespace Flash_Form\Includes;
 
+use const Flash_Form\PLUGIN as PLUGIN;
+
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
 if ( ! class_exists( 'Utils' ) ) :
@@ -41,6 +43,16 @@ if ( ! class_exists( 'Utils' ) ) :
 		 */
 		public static function get_referer( ?string $referer ): string {
 			return isset( $referer ) && ! empty( $referer ) ? \set_url_scheme( \wp_guess_url() . $referer ) : '';
+		}
+
+		/**
+		 * Retrieve the current site (network) name.
+		 *
+		 * @since     1.0.0
+		 * @return    string
+		 */
+		public static function get_sitename(): string {
+			return isset( \get_current_site()->site_name ) && \get_current_site()->site_name ? \get_current_site()->site_name : '"' . \get_option( 'blogname' ) . '"';
 		}
 
 		/**
@@ -200,6 +212,36 @@ if ( ! class_exists( 'Utils' ) ) :
 		}
 
 		/**
+		 * Implode and escape HTML attributes for output.
+		 *
+		 * @since     1.1.0
+		 * @param     array $raw_attributes    Attribute name value pairs.
+		 * @return    string
+		 */
+		public static function implode_html_attributes( array $raw_attributes ): string {
+			$attributes = array();
+			foreach ( $raw_attributes as $name => $value ) {
+				$attributes[] = \esc_attr( $name ) . '="' . \esc_attr( $value ) . '"';
+			}
+			return implode( ' ', $attributes );
+		}
+
+		/**
+		 * Implodes given array elements using the "glue" of defined "tag" closed/open,
+		 * and wraps it so the first and last items have their beginning/ending tags.
+		 *
+		 * @since     1.1.0
+		 * @param     array  $elements    Array of elements to render.
+		 * @param     string $glue        HTML tag specified as glue.
+		 * @return    string
+		 */
+		public static function implode_wrap_html_tag( array $elements, string $glue = 'span' ): string {
+			$elements = array_map( 'wp_kses_post', $elements );
+
+			return "<$glue>" . implode( "</$glue><$glue>", $elements ) . "</$glue>";
+		}
+
+		/**
 		 * Sanitizes content for allowed HTML tags for post content.
 		 *
 		 * @since     1.1.0
@@ -226,6 +268,45 @@ if ( ! class_exists( 'Utils' ) ) :
 		 */
 		public static function rest_editor_permission_callback(): bool {
 			return \current_user_can( 'edit_posts' );
+		}
+
+		/**
+		 * Returns the template file name without extension being added to it.
+		 *
+		 * @since     1.1.0
+		 * @param     string $file    Template file name (filename).
+		 * @return    string
+		 */
+		public static function get_template_filename( string $file ): string {
+			return preg_replace( '/\\.[^.\\s]{3,4}$/', '', $file );
+		}
+
+		/**
+		 * Returns the template file directory and relative file path.
+		 *
+		 * @since     1.1.0
+		 * @param     string $file    File path.
+		 * @return    string
+		 */
+		public static function get_template_path( string $file ): string {
+			return PLUGIN['dir_path'] . '/templates/' . self::get_template_filename( $file ) . '.php';
+		}
+
+		/**
+		 * Returns the HTML template instead of outputting.
+		 *
+		 * @since     1.1.0
+		 * @param     string $template_name    Template name.
+		 * @param     array  $args             Arguments. (default: array).
+		 * @return    string
+		 */
+		public static function get_template_html( string $template_name, array $args = array() ): string {
+			// Start remembering everything that would normally be outputted,
+			// but don't quite do anything with it yet.
+			ob_start();
+
+			\load_template( self::get_template_path( $template_name ), false, $args );
+			return ob_get_clean();
 		}
 
 	}
