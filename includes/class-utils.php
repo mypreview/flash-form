@@ -52,7 +52,7 @@ if ( ! class_exists( 'Utils' ) ) :
 		 * @return    string
 		 */
 		public static function get_sitename(): string {
-			return isset( \get_current_site()->site_name ) && \get_current_site()->site_name ? \get_current_site()->site_name : '"' . \get_option( 'blogname' ) . '"';
+			return function_exists( 'get_current_site' ) && isset( \get_current_site()->site_name ) && \get_current_site()->site_name ? \get_current_site()->site_name : '"' . \get_option( 'blogname' ) . '"';
 		}
 
 		/**

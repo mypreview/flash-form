@@ -331,8 +331,24 @@ if ( ! class_exists( Entries::class ) ) :
 		 * @return    void
 		 */
 		public function meta_boxes(): void {
-			add_meta_box( 'entriesdiv', __( 'Entries', 'flash-form' ), array( $this, 'entriesdiv_callback' ), null, 'normal', 'core' );
-			add_meta_box( 'extrasdiv', __( 'Extras', 'flash-form' ), array( $this, 'extrasdiv_callback' ), null, 'normal', 'core' );
+			remove_meta_box( 'submitdiv', null, 'side', 'core' );
+			add_meta_box( PLUGIN['slug'] . '-summarydiv', __( 'Summary', 'flash-form' ), array( $this, 'summarydiv_callback' ), null, 'side', 'core' );
+			add_meta_box( PLUGIN['slug'] . '-entriesdiv', __( 'Entries', 'flash-form' ), array( $this, 'entriesdiv_callback' ), null, 'normal', 'core' );
+			add_meta_box( PLUGIN['slug'] . '-extrasdiv', __( 'Extras', 'flash-form' ), array( $this, 'extrasdiv_callback' ), null, 'normal', 'core' );
+		}
+
+		/**
+		 * Function that fills the "Summary" meta-box with the desired content.
+		 * This function echos its output.
+		 *
+		 * @since     1.1.0
+		 * @param     \WP_Post $post    The post object.
+		 * @return    void
+		 */
+		public function summarydiv_callback( \WP_Post $post ): void {
+			$post_id = Utils::get_localized_post_id( $post->ID );
+
+			Utils::safe_html( Utils::get_template_html( 'edit/summary', array( 'post_id' => $post_id ) ) );
 		}
 
 		/**
