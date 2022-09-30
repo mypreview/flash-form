@@ -9,14 +9,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-09-24T18:01:49+00:00\n"
+"POT-Creation-Date: 2022-09-30T13:22:18+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: flash-form\n"
 
 #. Plugin Name of the plugin
-#: dashboard/class-entries.php:129
-#: dashboard/class-entries.php:131
+#: dashboard/class-entries.php:137
+#: dashboard/class-entries.php:139
 msgid "Flash Form"
 msgstr ""
 
@@ -53,36 +53,37 @@ msgstr ""
 msgid "Donate to support this plugin"
 msgstr ""
 
-#: dashboard/class-entries-endpoint.php:34
-#: dashboard/class-entries-endpoint.php:52
+#: dashboard/class-entries-endpoint.php:45
+#: dashboard/class-entries-endpoint.php:64
 msgid "Sorry, you cannot view this resource."
-msgstr ""
-
-#: dashboard/class-entries.php:86
-#: dashboard/class-entries.php:87
-msgid "Form Entries"
-msgstr ""
-
-#: dashboard/class-entries.php:88
-msgid "Search Entries"
 msgstr ""
 
 #: dashboard/class-entries.php:89
 #: dashboard/class-entries.php:90
+msgid "Form Entries"
+msgstr ""
+
+#: dashboard/class-entries.php:91
+msgid "Search Entries"
+msgstr ""
+
+#: dashboard/class-entries.php:92
+#: dashboard/class-entries.php:93
 msgid "No entries found"
 msgstr ""
 
-#: dashboard/class-entries.php:148
-#: dashboard/class-entries.php:150
+#: dashboard/class-entries.php:156
+#: dashboard/class-entries.php:158
+#: dashboard/class-entries.php:336
 msgid "Entries"
 msgstr ""
 
-#: dashboard/class-entries.php:268
+#: dashboard/class-entries.php:281
 #: src/components/PostMethodSettings.js:51
 msgid "Subject"
 msgstr ""
 
-#: dashboard/class-entries.php:269
+#: dashboard/class-entries.php:282
 #: src/fields/shared/blocks.js:143
 #: src/variations.js:31
 #: src/variations.js:43
@@ -92,67 +93,82 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: dashboard/class-entries.php:270
+#: dashboard/class-entries.php:283
 msgid "Referer URL"
 msgstr ""
 
-#: dashboard/class-entries.php:271
-msgid "IP Address"
+#: dashboard/class-entries.php:335
+msgid "Summary"
 msgstr ""
 
-#. translators: 1: Dashicon.
-#: dashboard/class-entries.php:306
-msgid "%1$s Sent by a verified user"
+#: dashboard/class-entries.php:337
+msgid "Extras"
 msgstr ""
 
-#. translators: 1: Dashicon.
-#: dashboard/class-entries.php:306
-msgid "%1$s Sent by an unverified visitor"
+#: dashboard/class-entries.php:386
+msgid "IP address"
 msgstr ""
 
-#: dashboard/class-send-email.php:51
-#: dashboard/class-send-email.php:297
+#: dashboard/class-entries.php:390
+msgid "User status"
+msgstr ""
+
+#: dashboard/class-entries.php:394
+msgid "Referrer"
+msgstr ""
+
+#. translators: %s: Post title.
+#: dashboard/class-entries.php:464
+msgid "Edit &#8220;%s&#8221;"
+msgstr ""
+
+#: dashboard/class-entries.php:465
+msgid "View"
+msgstr ""
+
+#: dashboard/class-send-email.php:52
+#: dashboard/class-send-email.php:314
 msgid "Unlabeled"
 msgstr ""
 
-#: dashboard/class-send-email.php:65
+#: dashboard/class-send-email.php:71
 msgid "Time:"
 msgstr ""
 
-#: dashboard/class-send-email.php:66
+#: dashboard/class-send-email.php:72
 msgid "IP Address:"
 msgstr ""
 
-#: dashboard/class-send-email.php:67
+#: dashboard/class-send-email.php:73
 msgid "Form URL:"
 msgstr ""
 
-#. translators: %s: Current website’s name.
-#: dashboard/class-send-email.php:75
-msgid "Sent by a verified %s user."
-msgstr ""
-
-#: dashboard/class-send-email.php:80
-msgid "Sent by an unverified visitor to your site."
-msgstr ""
-
 #. translators: 1: "date_format" placeholder, 2: "time_format" placeholder.
-#: dashboard/class-send-email.php:251
+#: dashboard/class-send-email.php:245
 msgctxt "{$date_format} \\a\\t {$time_format}"
 msgid "%1$s \\a\\t %2$s"
 msgstr ""
 
+#. translators: %s: Current website’s name.
+#: dashboard/class-send-email.php:287
+msgid "Sent by a verified %s user."
+msgstr ""
+
+#: dashboard/class-send-email.php:291
+msgid "Sent by an unverified visitor to your site."
+msgstr ""
+
 #. translators: 1: Open heading tag, 2: Open anchor tag, 3: Close anchor and heading tags.
-#: dashboard/class-send-email.php:292
+#: dashboard/class-send-email.php:309
 msgid "%1$sMessage sent! %2$s(go back)%3$s"
 msgstr ""
 
 #. translators: 1: Open heading tag, 2: Open anchor tag, 3: Close anchor and heading tags.
-#: frontend/class-honeypot.php:146
+#: frontend/class-honeypot.php:148
 msgid "%1$sSomething is stuck in the honey! %2$s(go back)%3$s"
 msgstr ""
 
-#: frontend/class-honeypot.php:147
+#: frontend/class-honeypot.php:149
 msgid "You filled out a form field that was created to stop spammers. Please go back and try again or contact the site administrator if you feel this was an error."
 msgstr ""
 
@@ -163,6 +179,36 @@ msgstr ""
 
 #: frontend/class-recaptcha.php:182
 msgid "We apologize for the confusion, but we can’t quite tell if you’re a person or a script. Please don’t take this personally. Next time, click the captcha box, and we’ll get out of your hair. Contact the site administrator if you feel this was an error."
+msgstr ""
+
+#: templates/edit/summary.php:36
+msgid "Delete permanently"
+msgstr ""
+
+#: templates/edit/summary.php:36
+msgid "Move to Trash"
+msgstr ""
+
+#. translators: %s: message submission date
+#: templates/edit/timestamp.php:23
+msgid "Submitted on: %s"
+msgstr ""
+
+#. translators: Publish box date string. 1: Date, 2: Time. See https://www.php.net/manual/datetime.format.php
+#: templates/edit/timestamp.php:26
+msgid "%1$s at %2$s"
+msgstr ""
+
+#. translators: Publish box date format, see https://www.php.net/manual/datetime.format.php
+#: templates/edit/timestamp.php:29
+msgctxt "publish box date format"
+msgid "M j, Y"
+msgstr ""
+
+#. translators: Publish box time format, see https://www.php.net/manual/datetime.format.php
+#: templates/edit/timestamp.php:34
+msgctxt "publish box time format"
+msgid "H:i"
 msgstr ""
 
 #: src/classes/FreezeUI.js:35
@@ -669,7 +715,7 @@ msgid "Website"
 msgstr ""
 
 #. translators: %s: Error message returned from the API response.
-#: src/script.js:75
+#: src/script.js:78
 msgid "The form cannot be submitted because of an error. %s"
 msgstr ""
 
