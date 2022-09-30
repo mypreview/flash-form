@@ -86,11 +86,12 @@ if ( ! class_exists( Entries::class ) ) :
 					$args,
 					array(
 						'labels'                => array(
-							'name'               => __( 'Form Entries', 'flash-form' ),
-							'singular_name'      => __( 'Form Entries', 'flash-form' ),
-							'search_items'       => __( 'Search Entries', 'flash-form' ),
-							'not_found'          => __( 'No entries found', 'flash-form' ),
-							'not_found_in_trash' => __( 'No entries found', 'flash-form' ),
+							'name'               => _x( 'Form Entries', 'post type', 'flash-form' ),
+							'singular_name'      => _x( 'Form Entries', 'post type', 'flash-form' ),
+							'edit_item'          => _x( 'View Submission', 'post type', 'flash-form' ),
+							'search_items'       => _x( 'Search Entries', 'post type', 'flash-form' ),
+							'not_found'          => _x( 'No entries found', 'post type', 'flash-form' ),
+							'not_found_in_trash' => _x( 'No entries found', 'post type', 'flash-form' ),
 						),
 						'menu_icon'             => self::svg_icon_url(),
 						'show_ui'               => true,
