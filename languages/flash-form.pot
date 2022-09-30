@@ -9,14 +9,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-09-30T13:22:18+00:00\n"
+"POT-Creation-Date: 2022-09-30T13:28:15+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: flash-form\n"
 
 #. Plugin Name of the plugin
-#: dashboard/class-entries.php:137
-#: dashboard/class-entries.php:139
+#: dashboard/class-entries.php:138
+#: dashboard/class-entries.php:140
 msgid "Flash Form"
 msgstr ""
 
@@ -60,30 +60,38 @@ msgstr ""
 
 #: dashboard/class-entries.php:89
 #: dashboard/class-entries.php:90
+msgctxt "post type"
 msgid "Form Entries"
 msgstr ""
 
 #: dashboard/class-entries.php:91
-msgid "Search Entries"
+msgctxt "post type"
+msgid "View Submission"
 msgstr ""
 
 #: dashboard/class-entries.php:92
+msgctxt "post type"
+msgid "Search Entries"
+msgstr ""
+
 #: dashboard/class-entries.php:93
+#: dashboard/class-entries.php:94
+msgctxt "post type"
 msgid "No entries found"
 msgstr ""
 
-#: dashboard/class-entries.php:156
-#: dashboard/class-entries.php:158
-#: dashboard/class-entries.php:336
+#: dashboard/class-entries.php:157
+#: dashboard/class-entries.php:159
+#: dashboard/class-entries.php:337
 msgid "Entries"
 msgstr ""
 
-#: dashboard/class-entries.php:281
+#: dashboard/class-entries.php:282
 #: src/components/PostMethodSettings.js:51
 msgid "Subject"
 msgstr ""
 
-#: dashboard/class-entries.php:282
+#: dashboard/class-entries.php:283
 #: src/fields/shared/blocks.js:143
 #: src/variations.js:31
 #: src/variations.js:43
@@ -93,36 +101,36 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: dashboard/class-entries.php:283
+#: dashboard/class-entries.php:284
 msgid "Referer URL"
 msgstr ""
 
-#: dashboard/class-entries.php:335
+#: dashboard/class-entries.php:336
 msgid "Summary"
 msgstr ""
 
-#: dashboard/class-entries.php:337
+#: dashboard/class-entries.php:338
 msgid "Extras"
 msgstr ""
 
-#: dashboard/class-entries.php:386
+#: dashboard/class-entries.php:387
 msgid "IP address"
 msgstr ""
 
-#: dashboard/class-entries.php:390
+#: dashboard/class-entries.php:391
 msgid "User status"
 msgstr ""
 
-#: dashboard/class-entries.php:394
+#: dashboard/class-entries.php:395
 msgid "Referrer"
 msgstr ""
 
 #. translators: %s: Post title.
-#: dashboard/class-entries.php:464
+#: dashboard/class-entries.php:465
 msgid "Edit &#8220;%s&#8221;"
 msgstr ""
 
-#: dashboard/class-entries.php:465
+#: dashboard/class-entries.php:466
 msgid "View"
 msgstr ""
 
