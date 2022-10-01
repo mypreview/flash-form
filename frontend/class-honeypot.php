@@ -34,10 +34,10 @@ if ( ! class_exists( Honeypot::class ) ) :
 		 * @return    void
 		 */
 		public function __construct() {
-			add_filter( 'mypreview_flash_form_nonce_layer', array( $this, 'time_check' ), 10, 2 );
-			add_filter( 'mypreview_flash_form_nonce_layer', array( $this, 'inline_css' ), 20, 2 );
-			add_filter( 'mypreview_flash_form_submit_unset_fields', array( $this, 'unset' ), 10, 3 );
-			add_action( 'mypreview_flash_form_submit_before_response', array( $this, 'validate' ), 10, 3 );
+			\add_filter( 'mypreview_flash_form_nonce_layer', array( $this, 'time_check' ), 10, 2 );
+			\add_filter( 'mypreview_flash_form_nonce_layer', array( $this, 'inline_css' ), 20, 2 );
+			\add_filter( 'mypreview_flash_form_submit_unset_fields', array( $this, 'unset' ), 10, 3 );
+			\add_action( 'mypreview_flash_form_submit_before_response', array( $this, 'validate' ), 10, 3 );
 		}
 
 		/**
@@ -54,7 +54,8 @@ if ( ! class_exists( Honeypot::class ) ) :
 			$time_check = $honeypot['timeCheck'] ?? false;
 
 			if ( self::is_enabled( $honeypot ) && $time_check && is_numeric( $time_check ) ) {
-				$time_check_field = '<input type="hidden" name="time_check" value="' . $time_check . '" />';
+				$time_check_field = '<input type="hidden" name="time_check" value="' . esc_attr( $time_check ) . '" />';
+				$time_check_field = '<input type="hidden" name="timestamp" value="' . esc_attr( strtotime( 'now' ) ) . '" />';
 				$return          .= $time_check_field;
 			}
 
@@ -101,6 +102,7 @@ if ( ! class_exists( Honeypot::class ) ) :
 
 				if ( $time_check && is_numeric( $time_check ) ) {
 					$fields[] = 'time_check';
+					$fields[] = 'timestamp';
 				}
 			}
 

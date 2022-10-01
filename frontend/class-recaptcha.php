@@ -46,10 +46,10 @@ if ( ! class_exists( ReCaptcha::class ) ) :
 		 * @return    void
 		 */
 		public function __construct() {
-			add_action( 'mypreview_flash_form_enqueue_scripts', array( $this, 'enqueue' ) );
-			add_filter( 'mypreview_flash_form_render_callback_content', array( $this, 'widget' ), 99, 2 );
-			add_filter( 'mypreview_flash_form_submit_unset_fields', array( $this, 'unset' ), 20, 2 );
-			add_action( 'mypreview_flash_form_submit_before_response', array( $this, 'validate' ), 20, 3 );
+			\add_action( 'mypreview_flash_form_enqueue_scripts', array( $this, 'enqueue' ) );
+			\add_filter( 'mypreview_flash_form_render_callback_content', array( $this, 'widget' ), 99, 2 );
+			\add_filter( 'mypreview_flash_form_submit_unset_fields', array( $this, 'unset' ), 20, 2 );
+			\add_action( 'mypreview_flash_form_submit_before_response', array( $this, 'validate' ), 20, 3 );
 		}
 
 		/**

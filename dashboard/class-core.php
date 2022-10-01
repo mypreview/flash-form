@@ -13,8 +13,10 @@
 namespace Flash_Form\Dashboard;
 
 use const Flash_Form\PLUGIN as PLUGIN;
+use Flash_Form\Dashboard\Entries as Entries;
 use Flash_Form\Dashboard\ReCaptcha as ReCaptcha;
 use Flash_Form\Includes\Utils as Utils;
+use PostTypes\PostType as PostType;
 
 defined( 'ABSPATH' ) || exit; // Exit if accessed directly.
 
@@ -50,6 +52,16 @@ if ( ! class_exists( Core::class ) ) :
 					'render_callback' => 'Flash_Form\Frontend\Render::callback',
 				)
 			);
+		}
+
+		/**
+		 * Register "Entries" post-type.
+		 *
+		 * @since     1.1.0
+		 * @return    void
+		 */
+		public function register_entries(): void {
+			new Entries();
 		}
 
 		/**

@@ -47,7 +47,7 @@ if ( ! class_exists( Cache_Data::class ) ) :
 		 * @return    string
 		 */
 		public static function get_key( string $form_id ): string {
-			return sprintf( 'mypreview_flash_form_cache_storage_%s', esc_html( $form_id ) );
+			return 'mypreview_flash_form_cache_storage_' . \esc_html( $form_id );
 		}
 
 		/**
@@ -59,7 +59,7 @@ if ( ! class_exists( Cache_Data::class ) ) :
 		 */
 		public static function get_data( string $form_id ): array {
 			$key = self::get_key( $form_id );
-			return (array) get_transient( $key );
+			return (array) \get_transient( $key );
 		}
 
 		/**
@@ -83,7 +83,7 @@ if ( ! class_exists( Cache_Data::class ) ) :
 				'attributes' => $attributes,
 				'content'    => $content,
 			);
-			set_transient( $key, $data, $expire );
+			\set_transient( $key, $data, $expire );
 		}
 	}
 endif;

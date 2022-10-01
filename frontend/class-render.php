@@ -30,11 +30,17 @@ if ( ! class_exists( Render::class ) ) :
 		 * Renders the block on server.
 		 *
 		 * @since     1.0.0
-		 * @param     array  $attributes    The block attributes.
-		 * @param     string $content       The block content.
+		 * @param     array     $attributes    The block attributes.
+		 * @param     string    $content       The block content.
+		 * @param     \WP_Block $block         Block object.
 		 * @return    string
 		 */
-		public static function callback( array $attributes = array(), string $content ): ?string {
+		public static function callback( array $attributes = array(), string $content, \WP_Block $block ): ?string {
+			// Add private (internal) attributes.
+			$post_id               = $block->context['postId'] ?? Utils::get_post_id();
+			$attributes['_hash']   = \sha1( \wp_json_encode( $attributes ) . $content );
+			$attributes['_postId'] = Utils::get_localized_post_id( $post_id );
+
 			// Look for the form response, if there is any!
 			$return = self::process( $attributes, $content );
 
@@ -90,7 +96,6 @@ if ( ! class_exists( Render::class ) ) :
 		 * @return    string
 		 */
 		public static function process( array $attributes, string $content, ?array $form_data = null ): ?string {
-			global $post;
 			$return  = null;
 			$form_id = $attributes['formId'] ?? '';
 
@@ -98,15 +103,10 @@ if ( ! class_exists( Render::class ) ) :
 			$nonce = Utils::get_nonce_key( $form_id );
 			// Verifies the request to prevent processing unauthorized external requests.
 			if ( \wp_verify_nonce( filter_input( INPUT_POST, $nonce, FILTER_SANITIZE_SPECIAL_CHARS ), PLUGIN['nonce'] ) ) {
-				$response                 = null;
-				$raw_data                 = is_null( $form_data ) ? \wp_unslash( $_POST ) : \wp_unslash( $form_data );
-				$data                     = \stripslashes_from_strings_only( $raw_data );
-				$referer                  = Utils::get_referer( $data['_wp_http_referer'] ?? '' );
-				$to                       = isset( $attributes['to'] ) ? explode( ',', $attributes['to'] ) : array( \sanitize_email( \get_option( 'admin_email' ) ) );
-				$subject                  = isset( $attributes['subject'] ) ? $attributes['subject'] : \sprintf( '[%s] %s', \esc_html( \get_bloginfo( 'name' ) ), \wp_kses_post( \get_the_title( $post ) ) );
-				$custom_thankyou          = $attributes['customThankyou'] ?? '';
-				$custom_thankyou_message  = $attributes['customThankyouMessage'] ?? '';
-				$custom_thankyou_redirect = $attributes['customThankyouRedirect'] ?? '';
+				$response = null;
+				$raw_data = is_null( $form_data ) ? \wp_unslash( $_POST ) : \wp_unslash( $form_data );
+				$data     = \stripslashes_from_strings_only( $raw_data );
+				$referer  = Utils::get_referer( $data['_wp_http_referer'] ?? '' );
 
 				/**
 				 * Allow third-party resources to extend the block submission response.
@@ -116,26 +116,42 @@ if ( ! class_exists( Render::class ) ) :
 
 				// Make sure that the response is null and nothing before this
 				// conditional statement is not meant to be displayed on the page.
-				if ( is_null( $response ) ) {
+				// // // // // // // // // // // // // // // // // // // // // // /
+				// Avoid timing attack with ensuring safe string (hash) comparison.
+				if ( \is_null( $response ) && \hash_equals( $attributes['_hash'] ?? '', \wp_unslash( $data['hash'] ?? '' ) ) ) {
+					$dom = new \DOMDocument();
+					$dom->loadHTML( mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' ), LIBXML_HTML_NODEFDTD | LIBXML_HTML_NOIMPLIED );
+					$xpath         = new \DomXPath( $dom );
+					$post_id       = isset( $data['post_id'] ) && Utils::is_post_exists( (int) $data['post_id'] ) ? (int) $data['post_id'] : 0;
+					$send_email    = new Send_Email();
+					$prepare_email = array();
+					$has_fired     = false;
+
 					// Remove security specific key/values.
-					$unset_fields = \apply_filters( 'mypreview_flash_form_submit_unset_fields', array( '_wp_http_referer', 'action', 'form_id', 'timestamp', $nonce ), $attributes, $form_id );
+					$unset_fields = \apply_filters( 'mypreview_flash_form_submit_unset_fields', array( '_wp_http_referer', 'action', 'form_id', 'post_id', 'hash', 'timestamp', $nonce ), $attributes, $form_id );
 					foreach ( $unset_fields as $unset_field ) {
 						if ( isset( $data[ $unset_field ] ) ) {
 							unset( $data[ $unset_field ] );
 						}
 					}
 
-					$dom = new \DOMDocument();
-					$dom->loadHTML( mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' ), LIBXML_HTML_NODEFDTD | LIBXML_HTML_NOIMPLIED );
-					$xpath         = new \DomXPath( $dom );
-					$send_email    = new Send_Email();
-					$prepare_email = $send_email->prepare( $to, $subject, $data, $xpath, $referer );
-					$has_fired     = $send_email->fire( ...$prepare_email );
+					// Filter to choose whether an email should be sent after each successful form submission.
+					if ( \apply_filters( 'mypreview_flash_form_should_send_email', true, $form_id, $post_id ) ) {
+						$to            = isset( $attributes['to'] ) ? explode( ',', $attributes['to'] ) : array( \sanitize_email( \get_option( 'admin_email' ) ) );
+						$subject       = isset( $attributes['subject'] ) ? $attributes['subject'] : \sprintf( '[%s] %s', \esc_html( \get_bloginfo( 'name' ) ), \wp_kses_post( \get_the_title( $post ) ) );
+						$prepare_email = $send_email->prepare( $to, $subject, $data, $xpath, $referer, $post_id );
+						$has_fired     = $send_email->fire( ...$prepare_email );
+					}
 
 					/**
 					 * Allow third-party resources to extend the block content.
 					 */
 					\do_action( 'mypreview_flash_form_submit_after_send_email', $has_fired, $prepare_email, $attributes );
+
+					// Determine what should happen when form submitted.
+					$custom_thankyou          = $attributes['customThankyou'] ?? '';
+					$custom_thankyou_message  = $attributes['customThankyouMessage'] ?? '';
+					$custom_thankyou_redirect = $attributes['customThankyouRedirect'] ?? '';
 
 					// Determine the action when the form is being submitted.
 					if ( 'redirect' === $custom_thankyou ) {
@@ -148,7 +164,7 @@ if ( ! class_exists( Render::class ) ) :
 					}
 				}
 
-				$return = \sprintf( '<div class="contact-form-submission">%s</div>', $response );
+				$return = \sprintf( '<div class="%s__submission">%s</div>', sanitize_html_class( PLUGIN['class_name'] ), $response );
 			}
 
 			return \apply_filters( 'mypreview_flash_form_submit_response', $return );

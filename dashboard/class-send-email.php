@@ -32,48 +32,47 @@ if ( ! class_exists( Send_Email::class ) ) :
 		 * @param     array  $data       Submitted form data.
 		 * @param     object $xpath      The DOMDocument associated with the DOMXPath.
 		 * @param     string $referer    Referer from the "_wp_http_referer".
+		 * @param     int    $post_id    The current post ID.
 		 * @return    array
 		 */
-		public function prepare( array $to, string $subject, array $data, object $xpath, string $referer ): array {
-			$headers              = array();
-			$message              = array();
-			$comment_author       = $this->input_node( $xpath, 'input', 'autocomplete', 'given-name', $data );
-			$comment_author_email = $this->input_node( $xpath, 'input', 'autocomplete', 'username', $data );
+		public function prepare( array $to, string $subject, array $data, object $xpath, string $referer, int $post_id ): array {
+			$headers      = array();
+			$message      = array();
+			$message_raw  = array();
+			$author       = $this->input_node( $xpath, 'input', 'autocomplete', 'given-name', $data );
+			$author_email = $this->input_node( $xpath, 'input', 'autocomplete', 'username', $data );
 
-			if ( \is_email( $comment_author_email ) ) {
-				$headers[] = 'From: "' . $comment_author . '" <' . $comment_author_email . ">\r\n";
-				$headers[] = 'Reply-To: "' . $comment_author . '" <' . $comment_author_email . ">\r\n";
+			if ( \is_email( $author_email ) ) {
+				$headers[] = 'From: "' . $author . '" <' . $author_email . ">\r\n";
+				$headers[] = 'Reply-To: "' . $author . '" <' . $author_email . ">\r\n";
 			}
 
 			foreach ( $data as $id => $value ) {
-				$label_node = $this->input_node( $xpath, 'label', 'for', $id );
-				$label      = isset( $label_node->item( 0 )->nodeValue ) ? $label_node->item( 0 )->nodeValue : __( 'Unlabeled', 'flash-form' );
-				$value      = is_array( $value ) ? implode( ', ', $value ) : $value;
-				$message[]  = \sprintf( '<b>%1$s</b>: %2$s%3$s', Utils::clean( $label ), Utils::clean( $value ), '<br />' );
+				$label_node    = $this->input_node( $xpath, 'label', 'for', $id );
+				$_label        = isset( $label_node->item( 0 )->nodeValue ) ? $label_node->item( 0 )->nodeValue : __( 'Unlabeled', 'flash-form' );
+				$_value        = is_array( $value ) ? implode( ', ', $value ) : $value;
+				$label         = Utils::clean( $_label );
+				$value         = Utils::clean( $_value );
+				$message[]     = \sprintf( '<b>%1$s</b>: %2$s%3$s', $label, $value, '<br />' );
+				$message_raw[] = array(
+					'label' => $label,
+					'value' => $value,
+				);
 			}
+
+			$is_logged_in = \is_user_logged_in();
+			$timestamp    = self::get_timestamp();
+			$ip_address   = self::get_ip_address();
 
 			array_push(
 				$message,
 				'<br />',
 				'<hr />',
-				__( 'Time:', 'flash-form' ) . ' ' . self::get_timestamp() . '<br />',
-				__( 'IP Address:', 'flash-form' ) . ' ' . self::get_ip_address() . '<br />',
-				__( 'Contact Form URL:', 'flash-form' ) . ' ' . $referer . '<br />'
+				__( 'Time:', 'flash-form' ) . ' ' . $timestamp . '<br />',
+				__( 'IP Address:', 'flash-form' ) . ' ' . $ip_address . '<br />',
+				__( 'Form URL:', 'flash-form' ) . ' ' . \esc_url( $referer ) . '<br />',
+				Utils::implode_wrap_html_tag( array( self::get_user_status( $is_logged_in ) ), 'p' ),
 			);
-
-			if ( \is_user_logged_in() ) {
-				array_push(
-					$message,
-					sprintf(
-						/* translators: %s: Current website’s name. */
-						'<p>' . __( 'Sent by a verified %s user.', 'flash-form' ) . '</p>',
-						isset( $GLOBALS['current_site']->site_name ) && $GLOBALS['current_site']->site_name ?
-						$GLOBALS['current_site']->site_name : '"' . \get_option( 'blogname' ) . '"'
-					)
-				);
-			} else {
-				array_push( $message, '<p>' . __( 'Sent by an unverified visitor to your site.', 'flash-form' ) . '</p>' );
-			}
 
 			/**
 			 * Filters the message sent via email after a successful form submission.
@@ -88,6 +87,38 @@ if ( ! class_exists( Send_Email::class ) ) :
 			 * @param    array $headers    Additional headers.
 			 */
 			$headers = \apply_filters( 'mypreview_flash_form_prepare_email_headers', $headers );
+
+			/**
+			 * Additional tasks can be executed here before preparing the email to be sent.
+			 */
+			do_action(
+				'mypreview_flash_form_before_prepare_email',
+				\apply_filters(
+					'mypreview_flash_form_before_prepare_email_args',
+					array(
+						'headers' => array(
+							'raw'      => array(
+								'author'       => (string) $author,
+								'author_email' => (string) $author_email,
+								'subject'      => (string) $subject,
+								'to'           => (array) $to,
+							),
+							'rendered' => (array) $headers,
+						),
+						'message' => array(
+							'raw'      => (array) $message_raw,
+							'rendered' => (string) $message,
+						),
+						'extras' => array(
+							'ip_address'   => (string) $ip_address,
+							'is_logged_in' => (bool) $is_logged_in,
+							'post_id'      => (int) $post_id,
+							'referer'      => (string) $referer,
+							'timestamp'    => (string) $timestamp,
+						),
+					)
+				)
+			);
 
 			return \apply_filters( 'mypreview_flash_form_prepare_email_args', array( $to, $subject, $message, $headers ) );
 		}
@@ -238,6 +269,29 @@ if ( ! class_exists( Send_Email::class ) ) :
 			}
 
 			return \apply_filters( 'mypreview_flash_form_email_ip_address', $ip );
+		}
+
+		/**
+		 * Returns a status text determining whether the user was logged in or not.
+		 *
+		 * @since     1.0.0
+		 * @param     bool $is_logged_in    Whether the user was logged in.
+		 * @return    string
+		 */
+		public static function get_user_status( $is_logged_in = false ): string {
+			// True if user was logged in, false if not logged in.
+			if ( $is_logged_in ) {
+				$return =
+					sprintf(
+						/* translators: %s: Current website’s name. */
+						__( 'Sent by a verified %s user.', 'flash-form' ),
+						Utils::get_sitename()
+					);
+			} else {
+				$return = __( 'Sent by an unverified visitor to your site.', 'flash-form' );
+			}
+
+			return $return;
 		}
 
 		/**
