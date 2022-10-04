@@ -49,7 +49,7 @@ Automatic updates should work smoothly, but we still recommend you back up your 
 “Flash Form” is purpose-built with the needs of developers in mind. The block interface decouples the traditional form builder into its independent offerings.
 Most well-known form builder plugins would register a custom post type on your dashboard upon plugin activation and require you to publish your form or survey as an individual post with an interface usually cluttered and bloated with nested options often not used at all. As soon as you publish the form post, a unique shortcode will be generated, allowing you to place the form in your post or page content of your choosing.
 
-With “Flash Form,” you create and customize simultaneously with a live preview of how your form will look even before hitting the publish button.
+With “Flash Form,” you create and customize simultaneously with a live preview of your form's appearance even before hitting the publish button.
 
 This allows for limitless customization and control, native performance, air-tight security (honeypot, captcha, etc.), and better end-user experience while saving countless hours of manual, error-prone hand coding.
 
@@ -71,19 +71,19 @@ Sure thing. We’re always open to hearing ways you think we can improve and evo
 Please include an example or specific use case so we can understand exactly what you’re after and whether others share your needs.
 
 = How do I get help with the plugin? =
-The easiest way to receive support is to “Create a new topic” by visiting Community Forums page [here](https://wordpress.org/support/plugin/flash-form "Flash Form Support Forum").
+The easiest way to receive support is to “Create a new topic” by visiting the Community Forums page [here](https://wordpress.org/support/plugin/flash-form "Flash Form Support Forum").
 
-Make sure to check the “Notify me of follow-up replies via email” checkbox to receive notifications, as soon as a reply posted to your question or inquiry.
+Make sure to check the “Notify me of follow-up replies via email” checkbox to receive notifications as soon as a reply is posted to your question or inquiry.
 
-*Please note that this is an opensource 100% volunteer project, and it’s not unusual to get reply days or even weeks later.*
+*Please note that this is an open source 100% volunteer project, and it’s not unusual to get reply days or weeks later.*
 
-= Can I help in translating this plugin into a new language? =
+= Can I help translate this plugin into a new language? =
 The plugin is fully translation-ready and localized using the GNU framework, and translators are welcome to contribute to the plugin.
 
 Here’s the the [WordPress translation website &#8594;](https://translate.wordpress.org/projects/wp-plugins/flash-form "WordPress translation website")
 
 = How do I contribute to this plugin? =
-We welcome contributions in any form, and you can help reporting, testing, and detailing bugs.
+We welcome contributions in any form, and you can help report, test, and detail bugs.
 
 Here’s the [GitHub development repository &#8594;](https://github.com/mypreview/flash-form "GitHub development repository")
 
