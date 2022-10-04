@@ -4,6 +4,7 @@
 			"!/build",
 			"!/languages",
 			"!vendor/*",
+			"/@mypreview",
 			"/src",
 			"node_modules",
 			"CONTRIBUTING.md",
