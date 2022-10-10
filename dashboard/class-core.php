@@ -43,7 +43,10 @@ if ( ! class_exists( Core::class ) ) :
 		 */
 		public function register_block(): void {
 			// Clean (erase) and start the output buffer.
-			ob_clean();
+			if ( ob_get_length() ) {
+				ob_clean();
+			}
+
 			ob_start();
 
 			register_block_type_from_metadata(
