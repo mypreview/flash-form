@@ -35,7 +35,7 @@ if ( ! class_exists( Render::class ) ) :
 		 * @param     \WP_Block $block         Block object.
 		 * @return    string
 		 */
-		public static function callback( array $attributes = array(), string $content, \WP_Block $block ): ?string {
+		public static function callback( array $attributes, string $content, \WP_Block $block ): ?string {
 			// Add private (internal) attributes.
 			$post_id               = $block->context['postId'] ?? Utils::get_post_id();
 			$attributes['_hash']   = \sha1( \wp_json_encode( $attributes ) . $content );
