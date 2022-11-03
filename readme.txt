@@ -3,9 +3,9 @@ Contributors: mahdiyazdani, mypreview, gookaani
 Tags: contact, contact form, email, feedback, gutenberg
 Donate link: https://www.buymeacoffee.com/mahdiyazdani
 Requires at least: 5.5
-Tested up to: 6.0
+Tested up to: 6.1
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -103,6 +103,9 @@ Get free of charge advice on what could be done or how complex different approac
 3. Supported form field types.
 
 == Changelog ==
+= 1.1.1 =
+* Compatibility with WordPress 6.1
+
 = 1.1.0 =
 * Feature: Added basic integration with Google reCaptcha V2.
 * Feature: Allow form field blocks to be transformed where applicable.

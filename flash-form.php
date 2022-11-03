@@ -23,7 +23,7 @@
  * Plugin Name:         Flash Form
  * Plugin URI:          https://mypreview.github.io/flash-form
  * Description:         Create a form as easily as editing a block.
- * Version:             1.1.0
+ * Version:             1.1.1
  * Requires at least:   5.5
  * Requires PHP:        7.4
  * Author:              Mahdi Yazdani
